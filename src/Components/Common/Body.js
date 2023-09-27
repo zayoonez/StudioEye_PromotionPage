@@ -2,6 +2,9 @@ import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import Header from "./header";
 
+// const Spacer = styled.div`
+//   height: 4rem;
+// `;
 /**
  * 헤더가 fixed로 되어 있기 때문에 페이지의 콘텐츠가 4rem 아래에 나타나도록 해 주는 컴포넌트
  */
@@ -16,9 +19,6 @@ const SideDiv = styled.div`
 
 const RealBody = styled.div`
   width: ${props => props.mainWidth}px;
-`;
-const Spacer = styled.div`
-  height: 4rem;
 `;
 
 const Body = function({children}) {
@@ -59,7 +59,7 @@ const Body = function({children}) {
   return (
     <>
         <Header />
-        <Spacer />
+        {/*<Spacer />*/}
         <PageBody>
             <SideDiv additionalWidth={additionalWidth}/>
             <RealBody mainWidth={mainWidth}>
