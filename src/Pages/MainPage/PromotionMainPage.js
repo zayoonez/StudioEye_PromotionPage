@@ -7,6 +7,7 @@ const MainBody = styled.div`
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    height: 110vh;
 
 
 `;
@@ -27,7 +28,7 @@ const PromotionMainpage = () => {
         return (
             <>
                 <MainBody>
-
+                    dafasdsd
                 </MainBody>
             </>
         )

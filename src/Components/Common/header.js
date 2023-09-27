@@ -13,9 +13,15 @@ const HeaderBlock = styled.div`
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
 `;
 
-const AnimatedOffcanvas = styled(Offcanvas)` 
-  height: 80vh;
+const AnimatedOffcanvas = styled(Offcanvas)`
   background-color: white;
+  margin-top: 4rem;
+  width: 100%;
+  z-index: 999;
+  position: fixed;
+  top: 0; 
+  left: 0; 
+  
 `;
 
 const OffcanvasBody = styled(Offcanvas.Body)`
@@ -35,26 +41,6 @@ const CanvasDiv = styled.div`
     padding: 0rem;
     }
 `;
-
-const CanvasSubDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding-left: 1rem;
-  background-color: red;
-  width: 100%;
-  text-align: center;
-  font-size: 5rem;
-  font-weight: 500;
-  margin: auto;
-
-  @media(max-width: 870px){
-    font-size: 2rem;
-    }
-  @media(max-width: 870px){
-  font-size: 1.5rem;
-  }
-`;
-
 /**
  * Responsive 컴포넌트의 속성에 스타일을 추가해서 새로운 컴포넌트 생성
  */
@@ -135,13 +121,6 @@ const letterVariant: Variants = {
     }
 };
 
-const Spacer = styled.div`
-  height: 4rem;
-`;
-/**
- * 헤더가 fixed로 되어 있기 때문에 페이지의 콘텐츠가 4rem 아래에 나타나도록 해 주는 컴포넌트
- */
-
 const MenuButtons = ({ children }) => {
     const buttonVariants = {
         initial: { opacity: 0, x: 0, y: 0 },
@@ -171,11 +150,15 @@ const StyledLetter = styled(motion.span)`
   color: blue;
 `;
 
+const Spacer = styled.div`
+  height: 4rem;
+`;
+
 const Header = () => {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
-    const handleShow = () => setShow(!show);
+    const handleShow = () => setShow(true);
 
     const text = "STUDIO I";
     return (
@@ -183,34 +166,35 @@ const Header = () => {
             <HeaderBlock>
                 <Wrapper>
                     <div className="logo">STUDIO I</div>
-                    <div className="menu" onClick={handleShow}>
-                        {show?<StyledHiX className="MenuIcon" onClick={handleShow} />:<StyledHiMenu className="MenuIcon" onClick={handleShow} />}
+                    <div className="menu">
+                        {show?<StyledHiX className="MenuIcon" onClick={handleClose} />:<StyledHiMenu className="MenuIcon" onClick={handleShow}/>}
                     </div>
-                    <AnimatedOffcanvas  show={show} onHide={handleClose} >
-                        <Offcanvas.Header />
-                        <OffcanvasBody>
-                            <CanvasDiv>
-                                <MenuButtons>ABOUT</MenuButtons>
-                                <MenuButtons>InFo</MenuButtons>
-                                <MenuButtons>ARTWORK</MenuButtons>
-                                <MenuButtons>QnA</MenuButtons>
-                            </CanvasDiv>
-                            <motion.h1
-                                whileInView="visible"
-                                initial="hidden"
-                                variants={containerVariant}
-                            >
-                                {Array.from(text).map((letter, index) => (
-                                    <StyledLetter key={index} variants={letterVariant}>
-                                        {letter === " " ? "\u00A0" : letter}
-                                    </StyledLetter>
-                                ))}
-                            </motion.h1>
-                        </OffcanvasBody>
-                    </AnimatedOffcanvas >
                 </Wrapper>
-
             </HeaderBlock>
+
+            <AnimatedOffcanvas show={show} onHide={handleClose} placement="top">
+                <Offcanvas.Header/>
+                <OffcanvasBody>
+                    <CanvasDiv>
+                        <MenuButtons>ABOUT</MenuButtons>
+                        <MenuButtons>InFo</MenuButtons>
+                        <MenuButtons>ARTWORK</MenuButtons>
+                        <MenuButtons>QnA</MenuButtons>
+                    </CanvasDiv>
+                    <motion.h1
+                        whileInView="visible"
+                        initial="hidden"
+                        variants={containerVariant}
+                    >
+                        {Array.from(text).map((letter, index) => (
+                            <StyledLetter key={index} variants={letterVariant}>
+                                {letter === " " ? "\u00A0" : letter}
+                            </StyledLetter>
+                        ))}
+                    </motion.h1>
+                </OffcanvasBody>
+            </AnimatedOffcanvas>
+
             <Spacer />
         </>
     );
