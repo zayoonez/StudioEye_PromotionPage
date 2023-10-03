@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import Header from "./header";
-import Footer from "./Footer";
+import SideBar from "./SideBar";
+import { motion } from "framer-motion";
 
 // const Spacer = styled.div`
 //   height: 4rem;
@@ -26,7 +27,9 @@ const RealBody = styled.div`
   background-color: skyblue;
 `;
 
-
+const Spacer = styled.div`
+  height: 4rem;
+`;
 
 const Body = function({children}) {
     const [additionalWidth, setAdditionalWidth] = useState(0);
@@ -62,21 +65,38 @@ const Body = function({children}) {
         };
     }, []);
 
+    const bodyChange = {
+        initial: { opacity: 0 },
+        animate: { opacity: 1 },
+        out: {opacity: 0},
+        transition: { duration: 3, delay: 0.3}
+    };
+
   return (
     <>
+    <motion.div
+        variants={bodyChange}
+        initial="initial"
+        animate="animate"
+        exit="out"
+        transition="transition"
+    >
         <Header />
         <ScrollDiv>
+            <Spacer />
         <PageBody>
             <SideDiv additionalWidth={additionalWidth}/>
+
             <RealBody mainWidth={mainWidth}>
                 {children}
             </RealBody>
+
+            <SideBar />
             <SideDiv additionalWidth={additionalWidth}/>
         </PageBody>
-            {/*<div>*/}
-            {/*    <Footer/>*/}
-            {/*</div>*/}
+
         </ScrollDiv>
+    </motion.div>
     </>
   );
 };
