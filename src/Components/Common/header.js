@@ -5,12 +5,14 @@ import { HiMenu,HiX } from "react-icons/hi";
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import {motion} from "framer-motion";
 import {Variants} from "framer-motion";
+import { useNavigate } from "react-router-dom";
+import studioi from '../../assets/studioi.png'
 
 const HeaderBlock = styled.div`
   position: fixed;
   width: 100%;
-  background: white;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
+  background-color: transparent;
+  // box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
 `;
 
 const AnimatedOffcanvas = styled(Offcanvas)`
@@ -93,7 +95,7 @@ const MenuButton = styled(motion.button)`
 const containerVariant: Variants = {
     visible: {
         opacity: 1,
-        transition: { staggerChildren: 0.1, delayChildren: 0.1 }
+        transition: {staggerChildren: 0.2, delayChildren: 0.2}
     },
     hidden: {
         opacity: 0
@@ -122,16 +124,25 @@ const letterVariant: Variants = {
 };
 
 const MenuButtons = ({ children }) => {
+    const navigate = useNavigate();
+
+    const goToAbout = (go) => {
+        console.log("이동")
+        navigate(`/${go}`);
+    };
+
     const buttonVariants = {
         initial: { opacity: 0, x: 0, y: 0 },
         animate: { opacity: 1, x: 40, y: 0 },
         transition: {type: "spring", duration: 0.5, bounce: 0.5},
-        hover: {scale: 1.2},
+        hover: {scale: 1.2, color: "blue"},
         tab: {scale: 0.9},
     };
 
     return (
         <MenuButton
+            onClick={() => goToAbout(children)}
+
             variants={buttonVariants}
             initial="initial"
             animate="animate"
@@ -150,22 +161,27 @@ const StyledLetter = styled(motion.span)`
   color: blue;
 `;
 
-const Spacer = styled.div`
-  height: 4rem;
-`;
+
 
 const Header = () => {
+    const navigate = useNavigate();
+
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const goMain = () => {
+        console.log("이동")
+        navigate(`/`);
+    };
 
     const text = "STUDIO I";
     return (
         <>
             <HeaderBlock>
                 <Wrapper>
-                    <div className="logo">STUDIO I</div>
+                    <div className="logo"><img src={studioi} alt='logo image' className="SocoaLogo" onClick={goMain}/></div>
                     <div className="menu">
                         {show?<StyledHiX className="MenuIcon" onClick={handleClose} />:<StyledHiMenu className="MenuIcon" onClick={handleShow}/>}
                     </div>
@@ -195,7 +211,7 @@ const Header = () => {
                 </OffcanvasBody>
             </AnimatedOffcanvas>
 
-            <Spacer />
+
         </>
     );
 };
