@@ -58,6 +58,7 @@ const Wrapper = styled(Responsive)`
     font-weight: 600;
     letter-spacing: 2px;
     white-space: nowrap;
+    cursor: pointer;
     
     @media(max-width: 390px){
     font-size: 1.625rem;
@@ -69,9 +70,11 @@ const Wrapper = styled(Responsive)`
 `;
 const StyledHiX = styled(motion(HiX))`
   font-size: 2.25rem; 
+  cursor: pointer;
 `;
 const StyledHiMenu = styled(motion(HiMenu))`
   font-size: 2.25rem; 
+  cursor: pointer;
 `;
 
 const MenuButton = styled(motion.button)`
@@ -197,17 +200,17 @@ const Header = () => {
                         <MenuButtons>ARTWORK</MenuButtons>
                         <MenuButtons>QnA</MenuButtons>
                     </CanvasDiv>
-                    <motion.h1
-                        whileInView="visible"
-                        initial="hidden"
-                        variants={containerVariant}
-                    >
-                        {Array.from(text).map((letter, index) => (
-                            <StyledLetter key={index} variants={letterVariant}>
-                                {letter === " " ? "\u00A0" : letter}
-                            </StyledLetter>
-                        ))}
-                    </motion.h1>
+                    {/*<motion.h1*/}
+                    {/*    whileInView="visible"*/}
+                    {/*    initial="hidden"*/}
+                    {/*    variants={containerVariant}*/}
+                    {/*>*/}
+                    {/*    {Array.from(text).map((letter, index) => (*/}
+                    {/*        <StyledLetter key={index} variants={letterVariant}>*/}
+                    {/*            {letter === " " ? "\u00A0" : letter}*/}
+                    {/*        </StyledLetter>*/}
+                    {/*    ))}*/}
+                    {/*</motion.h1>*/}
                 </OffcanvasBody>
             </AnimatedOffcanvas>
 
