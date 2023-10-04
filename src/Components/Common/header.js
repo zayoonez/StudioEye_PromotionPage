@@ -136,9 +136,8 @@ const MenuButtons = ({ children }) => {
 
     const buttonVariants = {
         initial: { opacity: 0, x: 0, y: 0 },
-        animate: { opacity: 1, x: 40, y: 0 },
-        transition: {type: "spring", duration: 0.5, bounce: 0.5},
-        hover: {scale: 1.2, color: "blue"},
+        animate: { opacity: 1, x: 40, y: 0, transition:{type: "spring", duration: 1, bounce: 0.5} },
+        hover: {scale: 1.2, color: "blue", transition:{type: "spring", duration: 1, bounce: 0.5}},
         tab: {scale: 0.9},
     };
 
@@ -163,6 +162,11 @@ const StyledLetter = styled(motion.span)`
   font-weight: 600;
   color: blue;
 `;
+
+const canvasanimation = {
+    initial: { opacity: 0, x: 0, y: 0 },
+    animate: { opacity: 1, x: 0, y: 0, transition:{type: "spring", duration: 1, bounce: 0.5} },
+};
 
 
 
@@ -191,7 +195,11 @@ const Header = () => {
                 </Wrapper>
             </HeaderBlock>
 
-            <AnimatedOffcanvas show={show} onHide={handleClose} placement="top">
+            <motion.div
+                variants={canvasanimation}
+                initial="initial"
+                animate="animate">
+            <AnimatedOffcanvas show={show} onHide={handleClose} placement="top" >
                 <Offcanvas.Header/>
                 <OffcanvasBody>
                     <CanvasDiv>
@@ -213,6 +221,7 @@ const Header = () => {
                     {/*</motion.h1>*/}
                 </OffcanvasBody>
             </AnimatedOffcanvas>
+            </motion.div>
 
 
         </>

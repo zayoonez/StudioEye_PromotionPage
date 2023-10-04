@@ -47,7 +47,7 @@ function App() {
                   }
               />
               <Route path="/About"  element={<AboutMainpage />}/>
-              <Route path="*" element={<Navigate to="/" replace />} />
+
           </Routes>
           </AnimatePresence>
       </BrowserRouter>

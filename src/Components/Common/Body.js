@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import Header from "./header";
 import SideBar from "./SideBar";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 // const Spacer = styled.div`
 //   height: 4rem;
@@ -24,17 +24,36 @@ const SideDiv = styled.div`
 
 const RealBody = styled.div`
   width: ${props => props.mainWidth}px;
-  background-color: skyblue;
+  // background-color: skyblue;
 `;
 
 const Spacer = styled.div`
   height: 4rem;
 `;
 
+const bodyChange = {
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+    out: {opacity: 0 },
+};
+
+const headermotion = {
+    initial: { y: 20, opacity: 0 },
+    animate: { y:0, opacity: 1, transition:{delay: 0.5, duration: 1 }},
+    out: {opacity: 0, transition: { duration: 1 } },
+};
+
+const bodymotion = {
+    initial: { opacity: 0 },
+    animate: { opacity: 1, transition:{delay: 0.1, duration: 1 }},
+    out: {opacity: 0, transition: { duration: 1 } },
+};
+
 const Body = function({children}) {
     const [additionalWidth, setAdditionalWidth] = useState(0);
     const [mainWidth, setMainWidth] = useState(0);
     const [mainHeight, setMainHeight] = useState(0);
+    const [showing, setShowing] = useState(true);
 
     useEffect(() => {
         // 화면 크기확인
@@ -42,10 +61,10 @@ const Body = function({children}) {
             const screenWidth = window.innerWidth;
             const screenHeight = window.innerHeight;
             console.log(screenWidth)
-            if (screenWidth > 1440) {
+            if (screenWidth > 1180) {
                 // 추가 너비를 설정
-                setAdditionalWidth((screenWidth - 1440)/2);
-                setMainWidth(1440);
+                setAdditionalWidth((screenWidth - 1180)/2);
+                setMainWidth(1180);
 
             } else {
                 // 1184px 이하일 경우 추가 너비를 0으로 설정
@@ -65,13 +84,6 @@ const Body = function({children}) {
         };
     }, []);
 
-    const bodyChange = {
-        initial: { opacity: 0 },
-        animate: { opacity: 1 },
-        out: {opacity: 0},
-        transition: { duration: 3, delay: 0.3}
-    };
-
   return (
     <>
     <motion.div
@@ -79,22 +91,40 @@ const Body = function({children}) {
         initial="initial"
         animate="animate"
         exit="out"
-        transition="transition"
     >
-        <Header />
+        <motion.div
+            variants={headermotion}
+            initial="initial"
+            animate="animate"
+            exit="out"
+        >
+            <Header />
+        </motion.div>
         <ScrollDiv>
             <Spacer />
         <PageBody>
             <SideDiv additionalWidth={additionalWidth}/>
 
+            <motion.div
+                variants={bodymotion}
+                initial="initial"
+                animate="animate"
+                exit="out"
+            >
             <RealBody mainWidth={mainWidth}>
                 {children}
             </RealBody>
-
-            <SideBar />
+            </motion.div>
+            <motion.div
+                variants={headermotion}
+                initial="initial"
+                animate="animate"
+                exit="out"
+            >
+                <SideBar />
+            </motion.div>
             <SideDiv additionalWidth={additionalWidth}/>
         </PageBody>
-
         </ScrollDiv>
     </motion.div>
     </>
