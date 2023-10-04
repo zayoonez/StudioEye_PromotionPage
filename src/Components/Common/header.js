@@ -23,6 +23,7 @@ const AnimatedOffcanvas = styled(Offcanvas)`
   position: fixed;
   top: 0; 
   left: 0; 
+  height: 93vh;
   
 `;
 

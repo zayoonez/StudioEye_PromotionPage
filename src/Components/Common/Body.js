@@ -43,6 +43,12 @@ const headermotion = {
     out: {opacity: 0, transition: { duration: 1 } },
 };
 
+const sidebarmotion = {
+    initial: { opacity: 0 },
+    animate: { opacity: 1, transition:{delay: 0.5, duration: 1 }},
+    out: {opacity: 0, transition: { duration: 1 } },
+};
+
 const bodymotion = {
     initial: { opacity: 0 },
     animate: { opacity: 1, transition:{delay: 0.1, duration: 1 }},
@@ -116,7 +122,7 @@ const Body = function({children}) {
             </RealBody>
             </motion.div>
             <motion.div
-                variants={headermotion}
+                variants={sidebarmotion}
                 initial="initial"
                 animate="animate"
                 exit="out"
