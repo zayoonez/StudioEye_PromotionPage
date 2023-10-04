@@ -47,6 +47,7 @@ const boxVariant = {
   const Image = ({ id }) => {
     const control = useAnimation();
     const [ref, inView] = useInView();
+
   
     useEffect(() => {
       if (inView) {
@@ -66,6 +67,7 @@ const boxVariant = {
           initial="hidden"
           animate={control}>
             <Thumbnail src={imageSrc} alt = {'thumnail${id}'}></Thumbnail>
+
           </Item>      
 
     );
@@ -77,6 +79,7 @@ const boxVariant = {
         {[1, 2, 3, 4, 5].map((image) => (
             <Image key = {image} id={image}/>   
         ))}
+
         {/* <Box num={1} />
         <Box num={2} />
         <Box num={3} /> */}

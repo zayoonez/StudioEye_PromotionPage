@@ -24,7 +24,7 @@ const SideDiv = styled.div`
 
 const RealBody = styled.div`
   width: ${props => props.mainWidth}px;
-  background-color: skyblue;
+  background-color: white;
 `;
 
 const Spacer = styled.div`
