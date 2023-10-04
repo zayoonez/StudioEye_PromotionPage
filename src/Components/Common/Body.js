@@ -1,10 +1,18 @@
 import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import Header from "./header";
+import SideBar from "./SideBar";
+import { motion } from "framer-motion";
 
+// const Spacer = styled.div`
+//   height: 4rem;
+// `;
 /**
  * 헤더가 fixed로 되어 있기 때문에 페이지의 콘텐츠가 4rem 아래에 나타나도록 해 주는 컴포넌트
  */
+const ScrollDiv = styled.div`
+  overflow-y: auto;
+`;
 const PageBody = styled.div`
   display: flex;
   background-color: #E9E9E9;
@@ -16,13 +24,14 @@ const SideDiv = styled.div`
 
 const RealBody = styled.div`
   width: ${props => props.mainWidth}px;
+  background-color: skyblue;
 `;
+
 const Spacer = styled.div`
   height: 4rem;
 `;
 
 const Body = function({children}) {
-
     const [additionalWidth, setAdditionalWidth] = useState(0);
     const [mainWidth, setMainWidth] = useState(0);
     const [mainHeight, setMainHeight] = useState(0);
@@ -56,17 +65,38 @@ const Body = function({children}) {
         };
     }, []);
 
+    const bodyChange = {
+        initial: { opacity: 0 },
+        animate: { opacity: 1 },
+        out: {opacity: 0},
+        transition: { duration: 3, delay: 0.3}
+    };
+
   return (
     <>
+    <motion.div
+        variants={bodyChange}
+        initial="initial"
+        animate="animate"
+        exit="out"
+        transition="transition"
+    >
         <Header />
-        <Spacer />
+        <ScrollDiv>
+            <Spacer />
         <PageBody>
             <SideDiv additionalWidth={additionalWidth}/>
+
             <RealBody mainWidth={mainWidth}>
                 {children}
             </RealBody>
+
+            <SideBar />
             <SideDiv additionalWidth={additionalWidth}/>
         </PageBody>
+
+        </ScrollDiv>
+    </motion.div>
     </>
   );
 };
