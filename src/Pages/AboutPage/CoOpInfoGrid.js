@@ -1,88 +1,92 @@
-import React from "react";
+import React, {useEffect} from "react";
 import styled from "styled-components";
 import { motion, useAnimation } from "framer-motion";
 
-import { useInView } from "react-intersection-observer";
-
-import { useEffect } from "react";
-import image1 from "../../assets/images/1.jpeg";
-import image2 from "../../assets/images/2.jpeg";
-import image3 from "../../assets/images/3.jpeg";
-import image4 from "../../assets/images/4.jpeg";
-import image5 from "../../assets/images/5.jpeg";
+import AboutTitle from "./Components/AboutTitle";
+import studioi from "../../assets/studioi.png";
+import {useInView} from "react-intersection-observer";
 
 const BoxContainer = styled(motion.div)`
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    border: 1px solid red;
+    padding: 5%;
 `;
 
-
-const Item = styled(motion.div)`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 50%;
-    width: 300px;
-    /* background-color: gray; */
-    margin: 100px;
-
-    /* position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0; */
+const TableWidth = styled(motion.ul)`
+  width: 90%;
+  height: 30vh;
+  display: flex;
+  padding: 2%;
 `;
-const Thumbnail  = styled.img`
-    width: 700px;
-    height: 600px;
+
+const TableVertical = styled(motion.li)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  list-style-type: none;
+  width: 26%;
+  margin-left: 5%;
+  margin- right: 5%; 
+`;
+
+const Img = styled(motion.img)`
+    width: 100%;
 `;
 
 const boxVariant = {
-  visible: { opacity: 1, scale: 1, transition : {duration : 0.7} },
-  hidden: { opacity: 0, scale: 0},
+    visible: { opacity: 1, scale: 1, transition : {duration : 1, delay: 0.7 } },
+    hidden: { opacity: 0, scale: 1},
 }
 
-const Image = ({ id }) => {
-  const control = useAnimation();
-  const [ref, inView] = useInView();
-
-
-  useEffect(() => {
-    if (inView) {
-      control.start("visible");
-    } else {
-      control.start("hidden");
-    }
-  }, [control, inView]);
-
-  const imageSrc = require(`../../assets/images/${id}.jpeg`);
-
-  return (
-      <Item
-          ref = {ref}
-          src={imageSrc}
-          variants={boxVariant}
-          initial="hidden"
-          animate={control}>
-        <Thumbnail src={imageSrc} alt = {'thumnail${id}'}></Thumbnail>
-
-      </Item>
-
-  );
-};
-
 export default function CoOpInfoGrid() {
+    const control = useAnimation();
+    const [ref, inView] = useInView();
+    const control2 = useAnimation();
+    const [ref2, inView2] = useInView();
+
+    useEffect(() => {
+        if (inView) {
+            control.start("visible");
+        } else {
+            control.start("hidden");
+        }
+
+    }, [control, inView]);
+
+    useEffect(() => {
+        if (inView2) {
+            control2.start("visible");
+        } else {
+            control2.start("hidden");
+        }
+
+    }, [control2, inView2]);
+
   return (
       <BoxContainer>
-        {[1, 2, 3, 4, 5].map((image) => (
-            <Image key = {image} id={image}/>
-        ))}
-
-        {/* <Box num={1} />
-        <Box num={2} />
-        <Box num={3} /> */}
+        <AboutTitle title={"WITH US"}/>
+        <TableWidth
+            ref = {ref}
+            variants={boxVariant}
+            initial="hidden"
+            animate={control}>
+          <TableVertical><Img src={studioi} alt='logo image' /></TableVertical>
+          <TableVertical><Img src={studioi} alt='logo image' /></TableVertical>
+          <TableVertical><Img src={studioi} alt='logo image' /></TableVertical>
+        </TableWidth>
+        <TableWidth
+            ref = {ref2}
+            variants={boxVariant}
+            initial="hidden"
+            animate={control2}>
+          <TableVertical><Img src={studioi} alt='logo image' /></TableVertical>
+          <TableVertical><Img src={studioi} alt='logo image' /></TableVertical>
+          <TableVertical><Img src={studioi} alt='logo image' /></TableVertical>
+        </TableWidth>
 
       </BoxContainer>
   );

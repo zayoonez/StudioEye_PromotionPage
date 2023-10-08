@@ -11,24 +11,19 @@ const Sector = styled(motion.div)`
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 30vh;
-    width: 40vw;
+    height: 10vh;
+    width: 20vw;
     padding: 4vh;
-    border: 1px solid white;
+    border: 1px solid black;
 `;
-
-const boxVariant = {
-    visible: { opacity: 1, scale: 1.5, y: -80, transition : {duration : 1} },
-    hidden: { opacity: 0, scale: 1},
-}
 
 const Title = styled(motion.div)`
     display: flex;
     align-items: center;
     justify-content: center;
-    /* background-color: gray; */
-    color: white;
+    color: black;
     font-size: 2rem;
+    margin-bottom: 5vh;
 `;
 
 const Content = styled(motion.div)`
@@ -36,7 +31,7 @@ const Content = styled(motion.div)`
     align-items: center;
     justify-content: center;
     /* background-color: gray; */
-    color: white;
+    color: black;
     font-size: 1rem;
 `;
 

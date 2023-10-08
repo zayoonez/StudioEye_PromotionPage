@@ -7,7 +7,7 @@ import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
 
 const boxVariant = {
-    visible: { opacity: 1, scale: 1.5, y: -80, transition : {duration : 1} },
+    visible: { opacity: 1, scale: 1.5, transition : {duration : 1, delay: 0.3} },
     hidden: { opacity: 0, scale: 1},
 }
 
@@ -18,9 +18,10 @@ const Title = styled(motion.div)`
     height: 50%;
     width: 300px;
     /* background-color: gray; */
-    margin: 100px;
-    color: white;
+    margin-top: 100px;
+    color: blue;
     font-size: 2rem;
+    font-weight: 600;
     
 `;
 
