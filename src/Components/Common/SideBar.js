@@ -25,7 +25,7 @@ const Wrapper = styled(Responsive)`
   display: flex;
   flex-direction: column;
   background-color: transparent;
-  margin-top: 40vh;
+  margin-top: 10vh;
   padding-top: 1.25vh;
   padding-bottom: 1.25vh;
   justify-content: space-between; 
