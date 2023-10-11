@@ -15,12 +15,10 @@ const Title = styled(motion.div)`
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 50%;
     width: 300px;
-    /* background-color: gray; */
     margin-top: 100px;
-    color: blue;
-    font-size: 2rem;
+    margin-bottom: 100px;
+    font-size: 4rem;
     font-weight: 600;
     
 `;

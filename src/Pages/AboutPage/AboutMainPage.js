@@ -6,6 +6,8 @@ import HistoryGrid from "./HistoryGrid";
 import CoOpInfoGrid from "./CoOpInfoGrid";
 import {motion} from "framer-motion";
 import {ReactComponent as LogoIcon} from "../../assets/logo/STUDIO-I.svg";
+import GreetingGrid from "./GreetingGrid";
+import NaverMapGrid from "./NaverMapGrid";
 
 
 const AboutMainpage = () => {
@@ -14,8 +16,10 @@ const AboutMainpage = () => {
         return (
             <>
                 <BasicInfoGrid />
-                <HistoryGrid />
+                <GreetingGrid />
+                {/*<HistoryGrid />*/}
                 <CoOpInfoGrid />
+                <NaverMapGrid/>
             </>
         )
     }

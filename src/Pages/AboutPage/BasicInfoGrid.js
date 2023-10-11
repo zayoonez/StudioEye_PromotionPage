@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import {motion, useAnimation, Variants} from "framer-motion";
+import {BsChevronDoubleDown} from "react-icons/bs";
 
 const BoxContainer = styled(motion.div)`
     display: flex;
@@ -8,9 +9,20 @@ const BoxContainer = styled(motion.div)`
     align-items: center;
     flex-direction: column;
     background-color: white;
-    border: 1px solid gray;
-    height: 90vh;
+    height: 95vh;
 `;
+
+// const Background = styled(motion.div)`
+//     display: fixed;
+//     justify-content: center;
+//     align-items: center;
+//     flex-direction: column;
+//     background-color: gray;
+//     background-size: 100%;
+//     width: 100%;
+//     background-attachment: scroll;
+//     background-repeat: no-repeat;
+// `;
 const TextWelcome = styled(motion.div)`
   font-size: 2rem;
   font-weight: 600;
@@ -34,9 +46,11 @@ const Div = styled(motion.div)`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  position: absolute;
+  bottom: 10vh;
 `;
 
-const TextVariant: Variants = {
+const TextVariant = {
   visible: {
     opacity: 1,
     transition: {delay:3}
@@ -45,7 +59,7 @@ const TextVariant: Variants = {
     opacity: 0
   }
 };
-const WelcomeVariant: Variants = {
+const WelcomeVariant = {
   visible: {
     opacity: 1,
     transition: {staggerChildren: 0.2, delayChildren: 0.2}
@@ -54,7 +68,7 @@ const WelcomeVariant: Variants = {
     opacity: 0
   }
 };
-const letterVariant: Variants = {
+const letterVariant = {
   visible: {
     opacity: 1,
     y: 0,
@@ -66,7 +80,6 @@ const letterVariant: Variants = {
   },
   hidden: {
     opacity: 0,
-    y: 0,
     transition: {
       type: "spring",
       damping: 15,
@@ -74,9 +87,20 @@ const letterVariant: Variants = {
     }
   }
 };
+
+
+
+const GoDown = styled(motion.div)`
+  font-size: 5rem; 
+`;
+
+const DownVariant =  {
+  animatego: { opacity: 1, y:20},
+  initialgo: { opacity: 0, y:-20},
+};
   
   export default function BasicInfoGrid() {
-    const welcome = "원하는 문구를 입력하세요";
+    const welcome = "원하는 문구 입력";
     const text = "STUDIO I";
 
     return (
@@ -104,7 +128,20 @@ const letterVariant: Variants = {
             ))}
         </Text>
         <Div>
-
+          <GoDown
+              variants={DownVariant}
+              initial="initialgo"
+              animate="animatego"
+              transition={{
+                ease: "easeInOut",
+                duration: 1.5,
+                repeatType: "loop",
+                repeat: Infinity,
+                repeatDelay: 0.5,
+              }}
+          >
+            <BsChevronDoubleDown />
+          </GoDown>
         </Div>
       </BoxContainer>
     );

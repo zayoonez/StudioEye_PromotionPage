@@ -11,7 +11,6 @@ const BoxContainer = styled(motion.div)`
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    border: 1px solid red;
     padding: 5%;
 `;
 
@@ -68,7 +67,7 @@ export default function CoOpInfoGrid() {
 
   return (
       <BoxContainer>
-        <AboutTitle title={"WITH US"}/>
+        <AboutTitle title={"CoOp.Company"}/>
         <TableWidth
             ref = {ref}
             variants={boxVariant}

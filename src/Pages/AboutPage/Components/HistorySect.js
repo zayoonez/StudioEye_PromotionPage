@@ -8,22 +8,33 @@ import { useEffect } from "react";
 
 
 const Sector = styled(motion.div)`
-    justify-content: center;
+    display: flex;
     align-items: center;
-    flex-direction: column;
+    
     height: 10vh;
-    width: 20vw;
-    padding: 4vh;
+    width: 70%;
+    margin-bottom: 4vh;
     border: 1px solid black;
+    
+`;
+
+const Line = styled(motion.div)`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5vh;
+    height: 1%;
+    width: 40%;
+    background-color: gray;
 `;
 
 const Title = styled(motion.div)`
     display: flex;
     align-items: center;
     justify-content: center;
-    color: black;
     font-size: 2rem;
     margin-bottom: 5vh;
+    background-color: gray;
 `;
 
 const Content = styled(motion.div)`
@@ -31,8 +42,8 @@ const Content = styled(motion.div)`
     align-items: center;
     justify-content: center;
     /* background-color: gray; */
-    color: black;
     font-size: 1rem;
+    background-color: gray;vbackground-color: gray;
 `;
 
 export default function HistorySect({title, content}) {
@@ -50,6 +61,7 @@ export default function HistorySect({title, content}) {
 
     return (
         <Sector>
+            <Line/>
             <Title>
                 {title}
             </Title>
