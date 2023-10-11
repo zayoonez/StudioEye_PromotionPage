@@ -1,35 +1,25 @@
 import React from "react";
 import styled from "styled-components";
 import Body from "../../Components/Common/Body";
+import BasicInfoGrid from "./BasicInfoGrid";
+import HistoryGrid from "./HistoryGrid";
+import CoOpInfoGrid from "./CoOpInfoGrid";
+import {motion} from "framer-motion";
+import {ReactComponent as LogoIcon} from "../../assets/logo/STUDIO-I.svg";
+import GreetingGrid from "./GreetingGrid";
+import NaverMapGrid from "./NaverMapGrid";
 
-const MainBody = styled.div`
-    display : flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    height: 110vh;
-
-
-`;
-
-const Wrapper = styled.div`
-    display : flex;
-    flex-direction: row;
-    align-items: center;
-    width: 80%;
-    justify-content: space-between;
-    /* max-width: 100%; */
-    flex-wrap: wrap; /* 화면 크기가 작아지면 아래로 내려갈 수 있도록 설정 */
-`;
 
 const AboutMainpage = () => {
 
     const AboutMainpageContent=()=>{
         return (
             <>
-                <MainBody>
-                    about 페이지
-                </MainBody>
+                <BasicInfoGrid />
+                <GreetingGrid />
+                {/*<HistoryGrid />*/}
+                <CoOpInfoGrid />
+                <NaverMapGrid/>
             </>
         )
     }

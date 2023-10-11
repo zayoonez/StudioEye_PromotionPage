@@ -52,6 +52,7 @@ function App() {
               />
             <Route path="/About"  element={<AboutMainpage />}/>
             <Route path="/detail" element= {<DetailPage />}/>
+
           </Routes>
           </AnimatePresence>
       </BrowserRouter>
