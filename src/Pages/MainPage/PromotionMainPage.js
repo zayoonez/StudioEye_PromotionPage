@@ -1,11 +1,27 @@
-import React from "react";
-import styled from "styled-components";
+import React, { useEffect, useState } from "react";
+import styled, {keyframes} from "styled-components";
 import Body from "../../Components/Common/Body";
 import PortfolioGrid from "./PortfolioGrid"
 import {motion, useScroll, useSpring} from "framer-motion"
-import {ReactComponent as LogoIcon} from '../../assets/logo/STUDIO-I.svg'
+import {ReactComponent as LogoIcon} from '../../assets/logo/STUDIO-I_1.svg'
+import CustomCursor from "../../Components/Common/CustomCursor";
+import MainAnimation from "./MainAnimation";
 
 
+const rotate = keyframes`
+  100% {
+    transform: rotate(360deg);
+  }
+`;
+
+const RotatingCircle = styled.div`
+    height: 50px;
+    width: 50px;
+    background-color: red;
+    border-radius: 50%;
+    animation: ${rotate} 6s linear infinite;
+    transform-origin: 50% 50%;
+`;
 const MainBody = styled.div`
     display : flex;
     align-items: center;
@@ -13,9 +29,15 @@ const MainBody = styled.div`
     flex-direction: column;
     background-color : white; 
     height: 110vh;
-
-
 `;
+
+const AnimatedText = styled.div`
+    font-size: 100px;
+    width: 500px;
+    height: 200px;
+    font-weight: bold;
+`;
+
 const ProgressBar = styled(motion.div)`
     position: fixed;
     bottom: 50px;
@@ -25,11 +47,9 @@ const ProgressBar = styled(motion.div)`
     background-color: gray;
     /* transform-origin: 0%; */
     /* background: var(--accent); */
-
-
 `;
-const StyledLogoIcon = styled(LogoIcon)`
 
+const StyledLogoIcon = styled(LogoIcon)`
     width: 500px;
     height: 200px;
     background-color: white;
@@ -37,11 +57,8 @@ const StyledLogoIcon = styled(LogoIcon)`
 const LogoContainer = styled.div`
     height: auto;
     display: flex;
-    /* background-color: white; */
+    background-color: white;
 `;
-
-// const MainLogo = styled.
-
 const Wrapper = styled.div`
     display : flex;
     flex-direction: row;
@@ -55,8 +72,8 @@ const Wrapper = styled.div`
 //     start: { pathLength: 0, fill: "rgba(255, 255, 255,0)" },
 //     end: { pathLength: 1, fill: "rgba(255, 255, 255, 1)" }
 //   };
-
 const PromotionMainpage = () => {
+
     const {scrollYProgress} = useScroll();
     
     const scaleX = useSpring(scrollYProgress, {
@@ -69,28 +86,27 @@ const PromotionMainpage = () => {
         start: { pathLength: 0, fill: "rgba(255, 255, 255,0)" },
         end: { pathLength: 1, fill: "rgba(255, 255, 255, 1)" }
       };
+
+    
     const PromotionMainpageContent=()=>{
         return (
-            <>
+            <>            
                 <MainBody>
                     <LogoContainer>
-                        <StyledLogoIcon>
-                            <motion.path
-                              initial="start"
-                              animate="end"
-                              variants={variants}
-                              transition={{
-                                  default: { duration: 1.8 },
-                                  fill: { duration: 1, delay: 1.1 }
-                                }}
-                            
-                            />
-                        </StyledLogoIcon>
+                        {/* <StyledLogoIcon>
+                        </StyledLogoIcon> */}
+                        {/* <AnimatedText >
+                            STUDIO i
+                        </AnimatedText> */}
+                        <MainAnimation/>
+                        {/* <RotatingCircle></RotatingCircle> */}
+                        
+
                     </LogoContainer>
                     
                 </MainBody>
-                <ProgressBar style = {{scaleX}}></ProgressBar>
                 <PortfolioGrid/>
+                <ProgressBar style = {{scaleX}}></ProgressBar>
 
 
             </>
@@ -100,7 +116,9 @@ const PromotionMainpage = () => {
 
     return(
         <Body>
+
             <PromotionMainpageContent/>
+            <CustomCursor />
 
         </Body>
     )

@@ -1,89 +1,134 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import styled from "styled-components";
-import { motion, useAnimation } from "framer-motion";
+import { AnimatePresence, motion, useScroll, useSpring, useTransform } from "framer-motion";
+import { Link } from "react-router-dom";
+import DetailTransition from "../../Components/Common/DetailTransition";
 
-import { useInView } from "react-intersection-observer";
-
-import { useEffect } from "react";
-import image1 from "../../assets/images/1.jpeg";
-import image2 from "../../assets/images/2.jpeg";
-import image3 from "../../assets/images/3.jpeg";
-import image4 from "../../assets/images/4.jpeg";
-import image5 from "../../assets/images/5.jpeg";
-
-const BoxContainer = styled(motion.div)`
+const Section = styled.div`
+    /* height: 100vh; */
     display: flex;
-    justify-content: center;
-    align-items: center;
+    /* justify-content: center;
+    align-items: center; */
+    position: relative;
+    scroll-snap-align: center;
+    perspective: 500px;
     flex-direction: column;
+    margin-left: 30px;
 `;
-
-
-const Item = styled(motion.div)`
+const VideoSection = styled.div`
+    padding-top : 10px;
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 50%;
-    width: 300px;
-    /* background-color: gray; */
-    margin: 100px;
-
+`;
+const ThumbnailImage = styled(motion.img)`
     /* position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0; */
+    width: 70%;
+    /* height: 80%; */
+    border-radius : 20px;
+    margin-bottom: 20px;
 `;
-const Thumbnail  = styled.img`
-    width: 700px;
-    height: 600px;
+const Year = styled.div`
+    font-size: 90px;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-left: 50px;
+    
+`
+const Box = styled.div`
+  width: 600px;
+  height: 400px;
+  position: relative;
+  max-height: 90vh;
+  margin: 20px;
+  background: var(--white);
+  overflow: hidden;
 `;
 
-const boxVariant = {
-    visible: { opacity: 1, scale: 1, transition : {duration : 0.7} },
-    hidden: { opacity: 0, scale: 0},
-  }
+const NumThumbnail = styled(motion.h2)`
+  margin: 0;
+  color: var(--accent);
+  left: calc(50% + 130px);
+  font-size: 56px;
+  font-weight: 700;
+  letter-spacing: -3px;
+  line-height: 1.2;
+  position: absolute;
+`;
 
-  const Image = ({ id }) => {
-    const control = useAnimation();
-    const [ref, inView] = useInView();
+function useParallax(value, distance) {
+    return useTransform(value, [0, 1], [-distance, distance]);
+}
 
-  
-    useEffect(() => {
-      if (inView) {
-        control.start("visible");
-      } else {
-        control.start("hidden");
-      }
-    }, [control, inView]);
-  
+function Image({ id }) {
+    const ref = useRef(null);
+    const { scrollYProgress } = useScroll({ target: ref });
+    const y = useParallax(scrollYProgress, 300);
+
     const imageSrc = require(`../../assets/images/${id}.jpeg`);
 
     return (
-         <Item
-          ref = {ref}
-          src={imageSrc}
-          variants={boxVariant}
-          initial="hidden"
-          animate={control}>
-            <Thumbnail src={imageSrc} alt = {'thumnail${id}'}></Thumbnail>
+        <Section>
+            <Box ref={ref}>
+                <Link to={'/detail'}>
+                    <ThumbnailImage src={imageSrc} alt={`thumbnail${id}`} />
+                </Link>
+            </Box>
+            <NumThumbnail ref={ref} style={{ y }}>{`#00${id}`}</NumThumbnail>
+        </Section>
 
-          </Item>      
 
     );
-  };
-  
-  export default function PortfolioGrid() {
+}
+const PortfolioGrid = () => {
+    const [isTransitioning, setIsTransitioning] = useState(false);
+
+
+    const handlePageTransition = () => {
+        setIsTransitioning(true);
+    };
     return (
-      <BoxContainer>
-        {[1, 2, 3, 4, 5].map((image) => (
-            <Image key = {image} id={image}/>   
-        ))}
+        <>
+            <Section>
+                <Year>2023</Year>
+                    <Link to={'/detail'} onClick={handlePageTransition}>
+                    <VideoSection >
+                        <ThumbnailImage src="https://img.youtube.com/vi/bcOO4bu7Alc/maxresdefault.jpg"/>
+                    </VideoSection>
 
-        {/* <Box num={1} />
-        <Box num={2} />
-        <Box num={3} /> */}
-        
-      </BoxContainer>
-    );
-  }
+                    </Link>
+
+            </Section>
+
+            <Section>
+                <Year>2022</Year>
+                <VideoSection>
+                    <ThumbnailImage src="https://img.youtube.com/vi/HegtBR9-5Po/maxresdefault.jpg" />
+
+                </VideoSection>
+                <VideoSection>
+                    <ThumbnailImage src="https://img.youtube.com/vi/xil70dCTCBk/maxresdefault.jpg" />
+                </VideoSection>
+                <VideoSection>
+                    <ThumbnailImage src="https://img.youtube.com/vi/MxMsTmmuWU0/maxresdefault.jpg" />
+                </VideoSection>
+            </Section>
+            <Section>
+                <Year>2021</Year>
+                <VideoSection>
+                <ThumbnailImage src="https://img.youtube.com/vi/bcOO4bu7Alc/maxresdefault.jpg" />
+                </VideoSection>
+            </Section>
+        </>
+
+
+    )
+}
+
+
+export default PortfolioGrid;

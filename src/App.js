@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
 import './App.css';
+import styled, {createGlobalStyle} from "styled-components";
 import {Routes, Route, BrowserRouter, Navigate} from "react-router-dom";
 import PromotionMainpage from "./Pages/MainPage/PromotionMainPage";
 import AboutMainpage from "./Pages/AboutPage/AboutMainPage";
 import { AnimatePresence, motion } from 'framer-motion';
 import InsertPage from "./Pages/InsertPage/InsertPage";
+import DetailPage from './Pages/DetailPage/DetailPage';
 
 function App() {
     const [showInsertPage, setShowInsertPage] = React.useState(true);
@@ -20,8 +22,10 @@ function App() {
     }, []);
 
   return (
+    <>
       <BrowserRouter>
           <AnimatePresence>
+
           <Routes>
               <Route
                   path="/"
@@ -46,11 +50,12 @@ function App() {
                       )
                   }
               />
-              <Route path="/About"  element={<AboutMainpage />}/>
-
+            <Route path="/About"  element={<AboutMainpage />}/>
+            <Route path="/detail" element= {<DetailPage />}/>
           </Routes>
           </AnimatePresence>
       </BrowserRouter>
+      </>
   );
 }
 
