@@ -59,6 +59,7 @@ const Body = function({children}) {
     const [additionalWidth, setAdditionalWidth] = useState(0);
     const [mainWidth, setMainWidth] = useState(0);
     const [mainHeight, setMainHeight] = useState(0);
+    const [showing, setShowing] = useState(true);
 
     useEffect(() => {
         // 화면 크기확인
@@ -66,10 +67,10 @@ const Body = function({children}) {
             const screenWidth = window.innerWidth;
             const screenHeight = window.innerHeight;
             console.log(screenWidth)
-            if (screenWidth > 1440) {
+            if (screenWidth > 1180) {
                 // 추가 너비를 설정
-                setAdditionalWidth((screenWidth - 1440)/2);
-                setMainWidth(1440);
+                setAdditionalWidth((screenWidth - 1180)/2);
+                setMainWidth(1180);
 
             } else {
                 // 1184px 이하일 경우 추가 너비를 0으로 설정
