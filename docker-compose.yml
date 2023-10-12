@@ -1,11 +1,16 @@
-version: '3.8'
+version: '3.7'
 
 services:
-
-  ubuntu: ## Service Name
-
-    container_name: promotionPage  ## Container Name
-
+  movie_app:
+    container_name: movie_app
     build:
-      context: . ## build Docker file location
-      dockerfile: Dockerfile ## build file name
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - '.:/app'
+      - '/app/node_modules'
+    ports:
+      - '3001:3000'
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
