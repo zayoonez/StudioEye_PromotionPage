@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import {motion, useAnimation, Variants} from "framer-motion";
-import YouTube from 'react-youtube';
 
 const BoxContainer = styled(motion.div)`
     display: flex;
