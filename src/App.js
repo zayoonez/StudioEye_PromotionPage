@@ -7,6 +7,7 @@ import AboutMainpage from "./Pages/AboutPage/AboutMainPage";
 import { AnimatePresence, motion } from 'framer-motion';
 import InsertPage from "./Pages/InsertPage/InsertPage";
 import DetailPage from './Pages/DetailPage/DetailPage';
+import ArtworkMainpage from "./Pages/ArtworkPage/ArtworkMainPage";
 
 function App() {
     const [showInsertPage, setShowInsertPage] = React.useState(true);
@@ -51,6 +52,7 @@ function App() {
                   }
               />
             <Route path="/About"  element={<AboutMainpage />}/>
+              <Route path="/Artwork"  element={<ArtworkMainpage />}/>
             <Route path="/detail" element= {<DetailPage />}/>
 
           </Routes>
