@@ -9,3 +9,6 @@ services:
     build:
       context: . ## build Docker file location
       dockerfile: Dockerfile ## build file name
+    restart: always
+    ports:
+      - "3000:80"
