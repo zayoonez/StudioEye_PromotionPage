@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import './App.css';
-import styled, {createGlobalStyle} from "styled-components";
-import {Routes, Route, BrowserRouter, Navigate} from "react-router-dom";
+import {Routes, Route, BrowserRouter} from "react-router-dom";
 import PromotionMainpage from "./Pages/MainPage/PromotionMainPage";
 import AboutMainpage from "./Pages/AboutPage/AboutMainPage";
 import { AnimatePresence, motion } from 'framer-motion';
