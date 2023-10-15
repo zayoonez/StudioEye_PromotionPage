@@ -63,6 +63,9 @@ const Text = styled.text`
 
 
 const SideBar = () => {
+    const goManagement = () => {
+        window.location.href = "http://13.124.68.5:3000/";
+    };
 
     return (
         <>
@@ -70,7 +73,7 @@ const SideBar = () => {
                 <Wrapper>
                     <Text>notice</Text>
                     <Text>instagram</Text>
-                    <Text>Management</Text>
+                    <Text onClick={goManagement} >management</Text>
                 </Wrapper>
             </Block>
 
