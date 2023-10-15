@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from 'react';
 
 function NaverMap() {
     const mapElement = useRef(null);
-    const markerLocation = { lat: 37.579724108905, lng: 126.92388546717 };
+    const markerLocation = { lat: 37.551442330782, lng: 127.04819402296 };
     const mapOptions = {
         center: markerLocation,
         zoom: 17,
