@@ -67,10 +67,10 @@ const Body = function({children}) {
             const screenWidth = window.innerWidth;
             const screenHeight = window.innerHeight;
             console.log(screenWidth)
-            if (screenWidth > 1180) {
+            if (screenWidth > 1440) {
                 // 추가 너비를 설정
-                setAdditionalWidth((screenWidth - 1180)/2);
-                setMainWidth(1180);
+                setAdditionalWidth((screenWidth - 1440)/2);
+                setMainWidth(1440);
 
             } else {
                 // 1184px 이하일 경우 추가 너비를 0으로 설정
@@ -110,7 +110,6 @@ const Body = function({children}) {
             <Spacer />
         <PageBody>
             <SideDiv additionalWidth={additionalWidth}/>
-
             <motion.div
                 variants={bodymotion}
                 initial="initial"

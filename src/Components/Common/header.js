@@ -24,9 +24,7 @@ const AnimatedOffcanvas = styled(Offcanvas)`
   position: fixed;
   top: 0; 
   left: 0; 
-  height: 93vh;
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
+  height: 96vh;
   
 `;
 
@@ -40,11 +38,28 @@ const CanvasDiv = styled.div`
   display: flex;
   flex-direction: column;
   padding: 1rem;
-
-  width: 100%;
+  width: 95%;
+  height: 85vh;
   
   @media(max-width: 840px){
     padding: 0rem;
+    }
+`;
+const BottomDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  width: 95%;
+  height: 3vh;
+  text-align: right;
+  
+`;
+const Text = styled.text`
+    color: rgba(0,0,0,0.3);
+    font-size: 1.5rem;
+    
+      @media(max-width: 390px){
+    color: rgba(0,0,0,0.0);
     }
 `;
 /**
@@ -89,6 +104,7 @@ const MenuButton = styled(motion.button)`
     outline: none;
     cursor: pointer;
     background-color: transparent;
+    margin-bottom: 5vh;
     
     @media(max-width: 670px){
     font-size: 2.875rem;
@@ -208,21 +224,12 @@ const Header = () => {
                 <OffcanvasBody>
                     <CanvasDiv>
                         <MenuButtons>ABOUT</MenuButtons>
-                        <MenuButtons>InFo</MenuButtons>
                         <MenuButtons>ARTWORK</MenuButtons>
-                        <MenuButtons>QnA</MenuButtons>
+                        <MenuButtons>CONTACT</MenuButtons>
                     </CanvasDiv>
-                    {/*<motion.h1*/}
-                    {/*    whileInView="visible"*/}
-                    {/*    initial="hidden"*/}
-                    {/*    variants={containerVariant}*/}
-                    {/*>*/}
-                    {/*    {Array.from(text).map((letter, index) => (*/}
-                    {/*        <StyledLetter key={index} variants={letterVariant}>*/}
-                    {/*            {letter === " " ? "\u00A0" : letter}*/}
-                    {/*        </StyledLetter>*/}
-                    {/*    ))}*/}
-                    {/*</motion.h1>*/}
+                    <BottomDiv>
+                        <Text>manage</Text>
+                    </BottomDiv>
                 </OffcanvasBody>
             </AnimatedOffcanvas>
             </motion.div>
