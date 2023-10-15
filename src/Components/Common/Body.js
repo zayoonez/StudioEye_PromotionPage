@@ -88,6 +88,7 @@ const Body = function({children}) {
         return () => {
             window.removeEventListener('resize', handleResize);
         };
+
     }, []);
 
   return (

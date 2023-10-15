@@ -1,6 +1,7 @@
-import React from "react";
+import React, {useEffect} from "react";
 import styled from "styled-components";
 import {motion, useAnimation, Variants} from "framer-motion";
+import {useInView} from "react-intersection-observer";
 
 const BoxContainer = styled(motion.div)`
     display: flex;
@@ -61,25 +62,36 @@ const SubVariant =  {
 
 
   export default function GreetingGrid() {
-    const welcome = "원하는 문구 입력";
-    const text = "STUDIO I";
+      const control = useAnimation();
+      const [ref, inView] = useInView();
+
+      useEffect(() => {
+          if (inView) {
+              control.start("animate");
+          } else {
+              control.start("initial");
+          }
+
+      }, [control, inView]);
 
     return (
       <BoxContainer>
         <Img src="/logo192.png"/>
 
         <TitleText
+            ref = {ref}
             variants={TitleVariant}
             initial="initial"
-            whileInView="animate"
+            animate={control}
             transition={{
                 duration: 1,
             }}
         > 기획&제작&편집</TitleText>
           <BackText
+              ref = {ref}
               variants={BackVariant}
               initial="initial"
-              whileInView="animate"
+              animate={control}
               transition={{
                   duration: 1,
                   delay: 1,
@@ -87,17 +99,19 @@ const SubVariant =  {
               Slogan
           </BackText>
         <SubText
+            ref = {ref}
             variants={SubVariant}
             initial="initial"
-            whileInView="animate"
+            animate={control}
             transition={{
                 duration: 1,
                 delay: 1,
             }}> 회사 슬로건을 입력하세요</SubText>
         <Text
+            ref = {ref}
             variants={SubVariant}
             initial="initial"
-            whileInView="animate"
+            animate={control}
             transition={{
                 duration: 1,
                 delay: 1,
