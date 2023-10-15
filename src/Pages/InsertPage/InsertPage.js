@@ -24,7 +24,7 @@ const InsertPage = () => {
         return (
             <>
                 <MainBody>
-                            <Video src="/videos/studioi.mp4" autoPlay muted/>
+                            <Video src="/videos/text_2.mp4" autoPlay muted/>
                 </MainBody>
             </>
         )
