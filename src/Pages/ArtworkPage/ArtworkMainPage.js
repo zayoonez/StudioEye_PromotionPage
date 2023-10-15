@@ -38,21 +38,22 @@ const Category = styled(motion.div)`
 
 const ContContainer = styled(motion.div)`
     height: 85vh;
-    width: 70%;
+    width: 75%;
     border-left: 1px solid black;
     display: flex;
     flex-wrap: wrap; 
     overflow: auto;
     margin-left: 30%;
+    justify-content: center;
     
 `;
 
 const Content = styled(motion.img)`
-    width: 45%;
-    height: 20vh;
+    width: 80%;
+    height: 35vh;
     margin-left: 2%;
     margin-right: 2%;
-    margin-bottom: 2vh;
+    margin-bottom: 5vh;
     margin-top: 2vh;
     cursor: pointer;
 `;
@@ -75,26 +76,49 @@ const ArtworkMainpage = () => {
         useEffect(() => {
             if(selectedCategory === "ALL"){
                 setContentToDisplay([
-                    <Content key={1} src="https://img.youtube.com/vi/bcOO4bu7Alc/maxresdefault.jpg" />,
+                    <Content key={1} src="https://img.youtube.com/vi/EfQlvMi0hI8/maxresdefault.jpg" />,
+                    <Content key={2} src="https://img.youtube.com/vi/6ZBjuPlDxfo/maxresdefault.jpg" />,
+                    <Content key={3} src="https://img.youtube.com/vi/ZVBZ25nKlGM/maxresdefault.jpg" />,
+                    <Content key={4} src="https://img.youtube.com/vi/xil70dCTCBk/maxresdefault.jpg" />,
+                    <Content key={5} src="https://img.youtube.com/vi/MxMsTmmuWU0/maxresdefault.jpg" />,
+                    <Content key={6} src="https://img.youtube.com/vi/_SjnRbi4oRw/maxresdefault.jpg" />,
+                    <Content key={7} src="https://img.youtube.com/vi/EoNOXeDIr1Q/maxresdefault.jpg" />,
+                    <Content key={8} src="https://img.youtube.com/vi/HegtBR9-5Po/maxresdefault.jpg" />,
+                    <Content key={9} src="https://img.youtube.com/vi/LImkG00zmqM/maxresdefault.jpg" />,
+                    <Content key={10} src="https://img.youtube.com/vi/bcOO4bu7Alc/maxresdefault.jpg" />,
+                    <Content key={11} src="https://img.youtube.com/vi/wR0M-swQtNk/maxresdefault.jpg" />,
+                    <Content key={12} src="https://img.youtube.com/vi/DDMepE9i4K4/maxresdefault.jpg" />,
+                    <Content key={13} src="https://img.youtube.com/vi/5jAmdM2ArcA/maxresdefault.jpg" />,
+                    <Content key={14} src="https://img.youtube.com/vi/UtO0wanF-hI/maxresdefault.jpg" />,
+                    <Content key={15} src="https://img.youtube.com/vi/M-bPdrgdl0w/maxresdefault.jpg" />,
                 ]);
             }
             if (selectedCategory === "ENTERTAINMENT") {
                 setContentToDisplay([
-                    <Content key={1} src="https://img.youtube.com/vi/HegtBR9-5Po/maxresdefault.jpg" />,
+                    <Content key={1} src="https://img.youtube.com/vi/EfQlvMi0hI8/maxresdefault.jpg" />,
+                    <Content key={2} src="https://img.youtube.com/vi/6ZBjuPlDxfo/maxresdefault.jpg" />,
+                    <Content key={3} src="https://img.youtube.com/vi/ZVBZ25nKlGM/maxresdefault.jpg" />,
+                    <Content key={4} src="https://img.youtube.com/vi/xil70dCTCBk/maxresdefault.jpg" />,
+                    <Content key={5} src="https://img.youtube.com/vi/MxMsTmmuWU0/maxresdefault.jpg" />,
+                    <Content key={6} src="https://img.youtube.com/vi/_SjnRbi4oRw/maxresdefault.jpg" />,
+                    <Content key={7} src="https://img.youtube.com/vi/EoNOXeDIr1Q/maxresdefault.jpg" />,
+                    <Content key={8} src="https://img.youtube.com/vi/HegtBR9-5Po/maxresdefault.jpg" />,
+                    <Content key={9} src="https://img.youtube.com/vi/LImkG00zmqM/maxresdefault.jpg" />,
+                    <Content key={10} src="https://img.youtube.com/vi/bcOO4bu7Alc/maxresdefault.jpg" />,
                 ]);
             } else if (selectedCategory === "DRAMA") {
                 setContentToDisplay([
-                    <Content key={1} src="https://img.youtube.com/vi/xil70dCTCBk/maxresdefault.jpg" />,
-                    <Content key={2} src="https://img.youtube.com/vi/xil70dCTCBk/maxresdefault.jpg" />,
+                    <Content key={1} src="https://img.youtube.com/vi/wR0M-swQtNk/maxresdefault.jpg" />,
                 ]);
             } else if (selectedCategory === "CHANEL OPERATING") {
                 setContentToDisplay([
-                    <Content key={1} src="https://img.youtube.com/vi/MxMsTmmuWU0/maxresdefault.jpg" />,
-                    <Content key={2} src="https://img.youtube.com/vi/MxMsTmmuWU0/maxresdefault.jpg" />,
+                    <Content key={1} src="https://img.youtube.com/vi/DDMepE9i4K4/maxresdefault.jpg" />,
+                    <Content key={2} src="https://img.youtube.com/vi/5jAmdM2ArcA/maxresdefault.jpg" />,
+                    <Content key={3} src="https://img.youtube.com/vi/UtO0wanF-hI/maxresdefault.jpg" />,
                 ]);
             } else if (selectedCategory === "DOCUMENTARY") {
                 setContentToDisplay([
-                    <Content key={1} src="https://img.youtube.com/vi/bcOO4bu7Alc/maxresdefault.jpg" />,
+                    <Content key={1} src="https://img.youtube.com/vi/M-bPdrgdl0w/maxresdefault.jpg" />,
                 ]);
             }
         }, [selectedCategory])
