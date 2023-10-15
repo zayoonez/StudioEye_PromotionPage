@@ -100,7 +100,7 @@ const DownVariant =  {
 };
   
   export default function BasicInfoGrid() {
-    const welcome = "원하는 문구 입력";
+    const welcome = "원하는 문구";
     const text = "STUDIO I";
 
     return (
