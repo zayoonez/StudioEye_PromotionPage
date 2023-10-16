@@ -12,13 +12,13 @@ const Title = styled.div`
       font-size: 9rem;
       margin-left : 80px;
       font-weight: 500;
-      margin-top : 20px;
     `}
   ${(props) =>
     props.about &&
     css`
       font-size: 1.6rem;
       font-weight: 410;
+      margin-top: 10px;
       /* margin-right: 100px; */
     `}
     ${(props) =>
