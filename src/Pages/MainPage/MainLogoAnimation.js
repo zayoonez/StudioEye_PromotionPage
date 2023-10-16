@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { useAnimation, motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import LetterAnimation from "../../Components/Common/LetterAnimation";
-import {HiArrowLongRight} from "react-icons/hi2";
 import Arrow from "../../assets/icon/Arrow2.png"
 
 
@@ -16,7 +15,6 @@ const LogoContainer = styled.div`
     /* width: 500px; */
 `;
 const ArrowImg = styled.img`
-    margin-top : 5px;
 `;
 const AboutContainer = styled(motion.div)`
     max-width : 600px;
@@ -40,7 +38,7 @@ const Line = styled(motion.div)`
 
 const UnderlinedButton = styled(motion.button)`
     display: flex;
-    margin-left: auto;
+    margin-right: 35px;
     float: right;
     text-decoration: underline;
     background: none;
@@ -50,7 +48,7 @@ const UnderlinedButton = styled(motion.button)`
     border: 2px solid black;
     border-radius: 90px;
     padding: 10px;
-    width: 220px;
+    width: 300px;
 `;
 const lineVariants = {
     hidden: {
