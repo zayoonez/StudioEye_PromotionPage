@@ -40,7 +40,7 @@ function NaverMap() {
             }
             map.panTo(markerLocation);
         });
-    }, []);
+    }, [mapElement]);
 
 
     return <div ref={mapElement} style={{ minHeight: '50vh', minWidth: '90%' }} />;
