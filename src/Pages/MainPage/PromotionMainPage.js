@@ -110,6 +110,10 @@ const PromotionMainpage = () => {
         restDelta: 0.001
       });
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     const PromotionMainpageContent=()=>{
         return (
             <>            
