@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import styled from "styled-components";
 import Body from "../../Components/Common/Body";
 import {motion} from "framer-motion";
@@ -68,6 +68,7 @@ const ArtworkMainpage = () => {
     const ArtworkMainpageContent=()=>{
         const [selectedCategory, setSelectedCategory] = useState("ALL");
         const [contentToDisplay, setContentToDisplay] = useState([]);
+        const contContainerRef = useRef(null);
 
         const changeCategory = (category) => {
             setSelectedCategory(category);
@@ -121,6 +122,11 @@ const ArtworkMainpage = () => {
                     <Content key={1} src="https://img.youtube.com/vi/M-bPdrgdl0w/maxresdefault.jpg" />,
                 ]);
             }
+
+            if (contContainerRef.current) {
+                contContainerRef.current.scrollTop = 0;
+            }
+
         }, [selectedCategory])
 
         return (
@@ -139,7 +145,8 @@ const ArtworkMainpage = () => {
                     <ContContainer
                         variants={CategoryVariants}
                         initial="initial"
-                        animate="animate">
+                        animate="animate"
+                        ref={contContainerRef}>
                         {contentToDisplay}
                     </ContContainer>
                 </BoxContainer>
