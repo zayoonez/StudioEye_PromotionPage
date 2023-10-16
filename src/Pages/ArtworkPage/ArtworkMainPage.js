@@ -118,7 +118,7 @@ const ArtworkMainpage = () => {
                 setContentToDisplay([
                     <Content onClick={() => goToDetail()} key={1} src="https://img.youtube.com/vi/wR0M-swQtNk/maxresdefault.jpg" />,
                 ]);
-            } else if (selectedCategory === "CHANEL OPERATING") {
+            } else if (selectedCategory === "CHANNEL OPERATING") {
                 setContentToDisplay([
                     <Content onClick={() => goToDetail()} key={1} src="https://img.youtube.com/vi/DDMepE9i4K4/maxresdefault.jpg" />,
                     <Content onClick={() => goToDetail()} key={2} src="https://img.youtube.com/vi/5jAmdM2ArcA/maxresdefault.jpg" />,
@@ -144,9 +144,10 @@ const ArtworkMainpage = () => {
                     initial="initial"
                     animate="animate"
                     >
+                        <Category onClick={() => changeCategory("ALL")}>ALL</Category>
                         <Category onClick={() => changeCategory("ENTERTAINMENT")}>ENTERTAINMENT</Category>
                         <Category onClick={() => changeCategory("DRAMA")}>DRAMA</Category>
-                        <Category onClick={() => changeCategory("CHANEL OPERATING")}>CHANEL OPERATING</Category>
+                        <Category onClick={() => changeCategory("CHANNEL OPERATING")}>CHANNEL OPERATING</Category>
                         <Category onClick={() => changeCategory("DOCUMENTARY")}>DOCUMENTARY</Category>
                     </CategoryContainer>
                     <ContContainer
