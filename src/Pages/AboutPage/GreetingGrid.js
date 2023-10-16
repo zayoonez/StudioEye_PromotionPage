@@ -76,7 +76,7 @@ const SubVariant =  {
 
     return (
       <BoxContainer>
-        <Img src="/logo192.png"/>
+        <Img src="/agile.png"/>
 
         <TitleText
             ref = {ref}
