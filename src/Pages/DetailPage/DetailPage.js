@@ -13,6 +13,12 @@ const VideoWrapper = styled.div`
     align-items: center;
     margin-right: 30px;
     
+    
+`;
+const StyledYouTube = styled(YouTube)`
+    width: 50%;
+    height: width*0.6;
+
 `;
 const ProjTitle = styled.div`
     font-size: 40px;
@@ -48,7 +54,7 @@ const DetailSection = styled.div`
 const DetailBox = styled.div`
     text-align: center;
     width: 30%;
-    height: 300px;
+    /* height: 100%; */
     border-radius: 140px;
     background-color: #D9D9D9;
     margin: 20px;
@@ -67,12 +73,13 @@ const DetailContent =styled.div`
     margin-top: 20px;
     font-size: 20px;
     width: 70%;
+    margin-bottom: 30px;
 `
 
 const DetailPage = () => {
     const options = {
+        width: "640",
         height: "360",
-        width: "600",
         playerVars: {
           autoplay: 0, // 자동 재생
           controls: 1, // 재생 컨트롤 표시
