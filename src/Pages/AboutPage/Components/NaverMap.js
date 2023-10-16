@@ -43,7 +43,7 @@ function NaverMap() {
     }, []);
 
 
-    return <div ref={mapElement} style={{ minHeight: '50vh' }} />;
+    return <div ref={mapElement} style={{ minHeight: '50vh', minWidth: '90%' }} />;
 }
 
 
