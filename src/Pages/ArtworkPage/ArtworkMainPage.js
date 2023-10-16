@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Body from "../../Components/Common/Body";
 import {motion} from "framer-motion";
 import {ReactComponent as LogoIcon} from "../../assets/logo/STUDIO-I.svg";
+import {useNavigate} from "react-router-dom";
 
 
 const BoxContainer = styled(motion.div)`
@@ -74,52 +75,58 @@ const ArtworkMainpage = () => {
             setSelectedCategory(category);
         };
 
+        const navigate = useNavigate();
+
+        const goToDetail = () => {
+            navigate(`/detail`);
+        };
+
         useEffect(() => {
             if(selectedCategory === "ALL"){
                 setContentToDisplay([
-                    <Content key={1} src="https://img.youtube.com/vi/EfQlvMi0hI8/maxresdefault.jpg" />,
-                    <Content key={2} src="https://img.youtube.com/vi/6ZBjuPlDxfo/maxresdefault.jpg" />,
-                    <Content key={3} src="https://img.youtube.com/vi/ZVBZ25nKlGM/maxresdefault.jpg" />,
-                    <Content key={4} src="https://img.youtube.com/vi/xil70dCTCBk/maxresdefault.jpg" />,
-                    <Content key={5} src="https://img.youtube.com/vi/MxMsTmmuWU0/maxresdefault.jpg" />,
-                    <Content key={6} src="https://img.youtube.com/vi/_SjnRbi4oRw/maxresdefault.jpg" />,
-                    <Content key={7} src="https://img.youtube.com/vi/EoNOXeDIr1Q/maxresdefault.jpg" />,
-                    <Content key={8} src="https://img.youtube.com/vi/HegtBR9-5Po/maxresdefault.jpg" />,
-                    <Content key={9} src="https://img.youtube.com/vi/LImkG00zmqM/maxresdefault.jpg" />,
-                    <Content key={10} src="https://img.youtube.com/vi/bcOO4bu7Alc/maxresdefault.jpg" />,
-                    <Content key={11} src="https://img.youtube.com/vi/wR0M-swQtNk/maxresdefault.jpg" />,
-                    <Content key={12} src="https://img.youtube.com/vi/DDMepE9i4K4/maxresdefault.jpg" />,
-                    <Content key={13} src="https://img.youtube.com/vi/5jAmdM2ArcA/maxresdefault.jpg" />,
-                    <Content key={14} src="https://img.youtube.com/vi/UtO0wanF-hI/maxresdefault.jpg" />,
-                    <Content key={15} src="https://img.youtube.com/vi/M-bPdrgdl0w/maxresdefault.jpg" />,
+                    <Content onClick={() => goToDetail()} key={1} src="https://img.youtube.com/vi/EfQlvMi0hI8/maxresdefault.jpg" />,
+                    <Content onClick={() => goToDetail()} key={2} src="https://img.youtube.com/vi/6ZBjuPlDxfo/maxresdefault.jpg" />,
+                    <Content onClick={() => goToDetail()} key={3} src="https://img.youtube.com/vi/ZVBZ25nKlGM/maxresdefault.jpg" />,
+                    <Content onClick={() => goToDetail()} key={4} src="https://img.youtube.com/vi/xil70dCTCBk/maxresdefault.jpg" />,
+                    <Content onClick={() => goToDetail()} key={5} src="https://img.youtube.com/vi/MxMsTmmuWU0/maxresdefault.jpg" />,
+                    <Content onClick={() => goToDetail()} key={6} src="https://img.youtube.com/vi/_SjnRbi4oRw/maxresdefault.jpg" />,
+                    <Content onClick={() => goToDetail()} key={7} src="https://img.youtube.com/vi/EoNOXeDIr1Q/maxresdefault.jpg" />,
+                    <Content onClick={() => goToDetail()} key={8} src="https://img.youtube.com/vi/HegtBR9-5Po/maxresdefault.jpg" />,
+                    <Content onClick={() => goToDetail()} key={9} src="https://img.youtube.com/vi/LImkG00zmqM/maxresdefault.jpg" />,
+                    <Content onClick={() => goToDetail()} key={10} src="https://img.youtube.com/vi/bcOO4bu7Alc/maxresdefault.jpg" />,
+                    <Content onClick={() => goToDetail()} key={11} src="https://img.youtube.com/vi/wR0M-swQtNk/maxresdefault.jpg" />,
+                    <Content onClick={() => goToDetail()} key={12} src="https://img.youtube.com/vi/DDMepE9i4K4/maxresdefault.jpg" />,
+                    <Content onClick={() => goToDetail()} key={13} src="https://img.youtube.com/vi/5jAmdM2ArcA/maxresdefault.jpg" />,
+                    <Content onClick={() => goToDetail()} key={14} src="https://img.youtube.com/vi/UtO0wanF-hI/maxresdefault.jpg" />,
+                    <Content onClick={() => goToDetail()} key={15} src="https://img.youtube.com/vi/M-bPdrgdl0w/maxresdefault.jpg" />,
                 ]);
             }
             if (selectedCategory === "ENTERTAINMENT") {
                 setContentToDisplay([
-                    <Content key={1} src="https://img.youtube.com/vi/EfQlvMi0hI8/maxresdefault.jpg" />,
-                    <Content key={2} src="https://img.youtube.com/vi/6ZBjuPlDxfo/maxresdefault.jpg" />,
-                    <Content key={3} src="https://img.youtube.com/vi/ZVBZ25nKlGM/maxresdefault.jpg" />,
-                    <Content key={4} src="https://img.youtube.com/vi/xil70dCTCBk/maxresdefault.jpg" />,
-                    <Content key={5} src="https://img.youtube.com/vi/MxMsTmmuWU0/maxresdefault.jpg" />,
-                    <Content key={6} src="https://img.youtube.com/vi/_SjnRbi4oRw/maxresdefault.jpg" />,
-                    <Content key={7} src="https://img.youtube.com/vi/EoNOXeDIr1Q/maxresdefault.jpg" />,
-                    <Content key={8} src="https://img.youtube.com/vi/HegtBR9-5Po/maxresdefault.jpg" />,
-                    <Content key={9} src="https://img.youtube.com/vi/LImkG00zmqM/maxresdefault.jpg" />,
-                    <Content key={10} src="https://img.youtube.com/vi/bcOO4bu7Alc/maxresdefault.jpg" />,
+                    <Content onClick={() => goToDetail()} key={1} src="https://img.youtube.com/vi/EfQlvMi0hI8/maxresdefault.jpg" />,
+                    <Content onClick={() => goToDetail()} key={2} src="https://img.youtube.com/vi/6ZBjuPlDxfo/maxresdefault.jpg" />,
+                    <Content onClick={() => goToDetail()} key={3} src="https://img.youtube.com/vi/ZVBZ25nKlGM/maxresdefault.jpg" />,
+                    <Content onClick={() => goToDetail()} key={4} src="https://img.youtube.com/vi/xil70dCTCBk/maxresdefault.jpg" />,
+                    <Content onClick={() => goToDetail()} key={5} src="https://img.youtube.com/vi/MxMsTmmuWU0/maxresdefault.jpg" />,
+                    <Content onClick={() => goToDetail()} key={6} src="https://img.youtube.com/vi/_SjnRbi4oRw/maxresdefault.jpg" />,
+                    <Content onClick={() => goToDetail()} key={7} src="https://img.youtube.com/vi/EoNOXeDIr1Q/maxresdefault.jpg" />,
+                    <Content onClick={() => goToDetail()} key={8} src="https://img.youtube.com/vi/HegtBR9-5Po/maxresdefault.jpg" />,
+                    <Content onClick={() => goToDetail()} key={9} src="https://img.youtube.com/vi/LImkG00zmqM/maxresdefault.jpg" />,
+                    <Content onClick={() => goToDetail()} key={10} src="https://img.youtube.com/vi/bcOO4bu7Alc/maxresdefault.jpg" />,
                 ]);
             } else if (selectedCategory === "DRAMA") {
                 setContentToDisplay([
-                    <Content key={1} src="https://img.youtube.com/vi/wR0M-swQtNk/maxresdefault.jpg" />,
+                    <Content onClick={() => goToDetail()} key={1} src="https://img.youtube.com/vi/wR0M-swQtNk/maxresdefault.jpg" />,
                 ]);
             } else if (selectedCategory === "CHANEL OPERATING") {
                 setContentToDisplay([
-                    <Content key={1} src="https://img.youtube.com/vi/DDMepE9i4K4/maxresdefault.jpg" />,
-                    <Content key={2} src="https://img.youtube.com/vi/5jAmdM2ArcA/maxresdefault.jpg" />,
-                    <Content key={3} src="https://img.youtube.com/vi/UtO0wanF-hI/maxresdefault.jpg" />,
+                    <Content onClick={() => goToDetail()} key={1} src="https://img.youtube.com/vi/DDMepE9i4K4/maxresdefault.jpg" />,
+                    <Content onClick={() => goToDetail()} key={2} src="https://img.youtube.com/vi/5jAmdM2ArcA/maxresdefault.jpg" />,
+                    <Content onClick={() => goToDetail()} key={3} src="https://img.youtube.com/vi/UtO0wanF-hI/maxresdefault.jpg" />,
                 ]);
             } else if (selectedCategory === "DOCUMENTARY") {
                 setContentToDisplay([
-                    <Content key={1} src="https://img.youtube.com/vi/M-bPdrgdl0w/maxresdefault.jpg" />,
+                    <Content onClick={() => goToDetail()} key={1} src="https://img.youtube.com/vi/M-bPdrgdl0w/maxresdefault.jpg" />,
                 ]);
             }
 
