@@ -114,36 +114,30 @@ const MenuButton = styled(motion.button)`
     font-size: 1.25rem;
     }
 `;
-
-const containerVariant: Variants = {
-    visible: {
-        opacity: 1,
-        transition: {staggerChildren: 0.2, delayChildren: 0.2}
-    },
-    hidden: {
-        opacity: 0
+const MenuButtonyet = styled(motion.button)`
+    width: 20%;
+    font-size: 6rem;
+    font-weight: 800;
+    border:none;
+    outline: none;
+    cursor: pointer;
+    background-color: transparent;
+    margin-bottom: 5vh;
+    
+    @media(max-width: 670px){
+    font-size: 2.875rem;
     }
-};
-
-const letterVariant: Variants = {
-    visible: {
-        opacity: 1,
-        y: 0,
-        transition: {
-            type: "spring",
-            damping: 15,
-            stiffness: 400
-        }
-    },
-    hidden: {
-        opacity: 0,
-        y: 0,
-        transition: {
-            type: "spring",
-            damping: 15,
-            stiffness: 400
-        }
+    
+    @media(max-width: 390px){
+    font-size: 1.25rem;
     }
+`;
+
+const buttonyetVariants = {
+    initial: { opacity: 0, x: 0, y: 0 },
+    animate: { opacity: 1, x: 40, y: 0, transition:{type: "spring", duration: 1, bounce: 0.5} },
+    hover: {scale: 1.2, color: "blue", transition:{type: "spring", duration: 1, bounce: 0.5}},
+    tab: {scale: 0.9},
 };
 
 const MenuButtons = ({ children }) => {
@@ -225,7 +219,13 @@ const Header = () => {
                     <CanvasDiv>
                         <MenuButtons>ABOUT</MenuButtons>
                         <MenuButtons>ARTWORK</MenuButtons>
-                        <MenuButtons>CONTACT</MenuButtons>
+                        <MenuButtonyet
+                            variants={buttonyetVariants}
+                            initial="initial"
+                            animate="animate"
+                            transition="transition"
+                            whileHover="hover"
+                            whileTap="tab">CONTACT</MenuButtonyet>
                     </CanvasDiv>
                     <BottomDiv>
                         <Text>manage</Text>
