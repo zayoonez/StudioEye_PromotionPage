@@ -7,6 +7,11 @@ import { AnimatePresence, motion } from 'framer-motion';
 import InsertPage from "./Pages/InsertPage/InsertPage";
 import DetailPage from './Pages/DetailPage/DetailPage';
 import ArtworkMainpage from "./Pages/ArtworkPage/ArtworkMainPage";
+import AdminMainPage from "./Pages/AdminPage/AdminMainPage";
+import AboutEditPage from "./Pages/AdminPage/AboutEditPage";
+import ArtworkEditPage from "./Pages/AdminPage/ArtworkEditPage";
+import ContactEditPage from "./Pages/AdminPage/ContactEditPage";
+import NoticeEditPage from "./Pages/AdminPage/NoticeEditPage";
 
 function App() {
     const [showInsertPage, setShowInsertPage] = React.useState(true);
@@ -50,10 +55,14 @@ function App() {
                       )
                   }
               />
-            <Route path="/About"  element={<AboutMainpage />}/>
-              <Route path="/Artwork"  element={<ArtworkMainpage />}/>
-            <Route path="/detail" element= {<DetailPage />}/>
-
+                <Route path="/About"  element={<AboutMainpage />}/>
+                <Route path="/Artwork"  element={<ArtworkMainpage />}/>
+                <Route path="/detail" element= {<DetailPage />}/>
+                <Route path="/admin" element={<AdminMainPage />}/>
+                <Route path="/admin/about" element={<AboutEditPage />}/>
+                <Route path="/admin/artwork" element={<ArtworkEditPage />}/>
+                <Route path="/admin/contact" element={<ContactEditPage />}/>
+                <Route path="/admin/notice" element={<NoticeEditPage />}/>
           </Routes>
           </AnimatePresence>
       </BrowserRouter>
