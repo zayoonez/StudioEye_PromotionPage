@@ -21,7 +21,6 @@ const AboutMainpage = () => {
             <>
                 <BasicInfoGrid />
                 <GreetingGrid />
-                {/*<HistoryGrid />*/}
                 <CoOpInfoGrid />
                 <NaverMapGrid/>
             </>

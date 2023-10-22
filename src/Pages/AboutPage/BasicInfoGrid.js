@@ -9,7 +9,7 @@ const BoxContainer = styled(motion.div)`
     align-items: center;
     flex-direction: column;
     background-color: white;
-    height: 95vh;
+    height: 95rem;
 `;
 
 // const Background = styled(motion.div)`

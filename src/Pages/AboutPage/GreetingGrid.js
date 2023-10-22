@@ -6,7 +6,7 @@ import {useInView} from "react-intersection-observer";
 const BoxContainer = styled(motion.div)`
     display: flex;
     background-color: white;
-    height: 95vh;
+    height: 95rem;
     position: relative;
 `;
 const Img = styled(motion.img)`

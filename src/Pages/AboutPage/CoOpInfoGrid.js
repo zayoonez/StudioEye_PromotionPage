@@ -12,6 +12,7 @@ const BoxContainer = styled(motion.div)`
     align-items: center;
     flex-direction: column;
     padding: 5%;
+    height: 60rem;
 `;
 
 const TableWidth = styled(motion.ul)`
