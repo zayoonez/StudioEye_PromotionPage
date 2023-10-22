@@ -66,7 +66,6 @@ const Body = function({children}) {
         const handleResize = () => {
             const screenWidth = window.innerWidth;
             const screenHeight = window.innerHeight;
-            console.log(screenWidth)
             if (screenWidth > 1180) {
                 // 추가 너비를 설정
                 setAdditionalWidth((screenWidth - 1180)/2);
