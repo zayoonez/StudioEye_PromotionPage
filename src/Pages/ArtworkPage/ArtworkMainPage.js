@@ -38,7 +38,6 @@ const Category = styled(motion.div)`
 const ContContainer = styled(motion.div)`
     height: 85vh;
     width: 100%;
-    border: 1px solid black;
     display: flex;
     flex-wrap: wrap; 
     overflow: auto;
