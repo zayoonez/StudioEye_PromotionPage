@@ -13,7 +13,6 @@ const BoxContainer = styled(motion.div)`
     flex-direction: column;
     padding: 5%;
     height: 65rem;
-    border: 1px solid red;
 `;
 
 const SubTitle = styled(motion.div)`
@@ -31,33 +30,31 @@ justify-content: center;
   height: 20rem;
   display: flex;
   padding: 2%;
-  border: 1px solid red;
   margin-bottom: 2rem;
 `;
 const MainLogo = styled(motion.div)`
-  width: 24rem;
-  height: 13.5rem;
-  display: flex;
-  margin-left: 2%;
-  margin-right: 2%;
-  border: 1px solid red;
-`;
-
-const SubLogoDiv = styled(motion.div)`
-  width: 90%;
-  height: 15rem;
-  display: flex;
-  padding: 2%;
-  border: 1px solid red;
-`;
-
-const SubLogo = styled(motion.div)`
-  width: 16rem;
+  // width: 16rem;
   height: 9rem;
   display: flex;
   margin-left: 2%;
   margin-right: 2%;
-  border: 1px solid red;
+`;
+
+const SubLogoDiv = styled(motion.div)`
+    justify-content: center;
+    align-items: center;
+  width: 90%;
+  height: 15rem;
+  display: flex;
+  padding: 2%;
+`;
+
+const SubLogo = styled(motion.div)`
+  // width: 8rem;
+  height: 4.5rem;
+  display: flex;
+  margin-left: 2%;
+  margin-right: 2%;
 `;
 
 

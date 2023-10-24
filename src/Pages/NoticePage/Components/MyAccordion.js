@@ -7,8 +7,8 @@ const Container = styled.div`
   position: relative;
   flex-direction: column;
   justify-content: center;
-  border-bottom: 1px solid black;
-  width: 100%;
+  border-bottom: 2px solid black;
+  width: 90%;
   margin-bottom: 1rem;
 `;
 
@@ -16,11 +16,13 @@ const Header = styled.div`
   display: flex;
   align-items: center;
 
-  height: 2rem;
+  height: 2.5rem;
   margin: 0 1rem;
   
-  font-size: 1rem;
+  font-size: 1.25rem;
   font-weight: 600;
+  
+  cursor: pointer;
 `;
 
 const Button = styled.div`

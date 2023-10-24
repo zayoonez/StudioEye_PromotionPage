@@ -10,7 +10,7 @@ const BoxContainer = styled(motion.div)`
     flex-direction: column;
     background-color: white;
     height: 40rem;
-    padding-top: 25rem;
+    padding-top: 20rem;
 `;
 
 // const Background = styled(motion.div)`

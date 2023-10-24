@@ -11,14 +11,12 @@ const BoxContainer = styled(motion.div)`
     flex-direction: column;
     height: 60rem;
     padding: 5%;
-    border: 1px solid red;
 `;
 
 const Div = styled(motion.div)`
     height: 32rem;
     width: 90%;
-    margin-bottom: 2rem;
-    border: 1px solid red;
+    margin-bottom: 2rem; 
 `;
 
 const Text = styled(motion.text)`
