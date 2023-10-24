@@ -42,9 +42,7 @@ function NaverMap() {
         });
     }, [mapElement]);
 
-
     return <div ref={mapElement} style={{ minHeight: '50vh', minWidth: '90%' }} />;
 }
-
 
 export default NaverMap;
