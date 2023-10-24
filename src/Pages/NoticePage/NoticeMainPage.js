@@ -92,18 +92,6 @@ const NoticeMainpage = () => {
                         {data.map((item, i) => (
                             <MyAccordion index={i+1} title={item.title} contents={item.imageUrl} />
                         ))}
-                    <MyAccordion index={2} title="adsfasd" contents="adsfasd" />
-                        {/*<Accordions defaultActiveKey="0" flush>*/}
-                        {/*    {data.map((item, i) => (*/}
-                        {/*        // <Title>Q{i+1}.{item.title}</Title>*/}
-                        {/*        <AccordionItem key={item.id} eventKey={i}>*/}
-                        {/*            <AccordionHeader>{item.title}</AccordionHeader>*/}
-                        {/*            <AccordionBody>*/}
-                        {/*                <img src={item.imageUrl} />*/}
-                        {/*            </AccordionBody>*/}
-                        {/*        </AccordionItem>*/}
-                        {/*    ))}*/}
-                        {/*</Accordions>*/}
                 </BoxContainer>
             </>
         )
