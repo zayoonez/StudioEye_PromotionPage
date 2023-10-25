@@ -17,7 +17,7 @@ const LogoContainer = styled.div`
 const ArrowImg = styled.img`
 `;
 const AboutContainer = styled(motion.div)`
-    max-width : 600px;
+    max-width : 700px;
     display: flex;
     flex-direction: row;
     margin-left: 400px;
@@ -38,7 +38,7 @@ const Line = styled(motion.div)`
 
 const UnderlinedButton = styled(motion.button)`
     display: flex;
-    margin-right: 35px;
+    margin-right:30%;
     float: right;
     text-decoration: underline;
     background: none;
@@ -49,13 +49,15 @@ const UnderlinedButton = styled(motion.button)`
     border-radius: 90px;
     padding: 10px;
     width: 300px;
+    margin-bottom: 100px;
+    
 `;
 const lineVariants = {
     hidden: {
       height : "0vh", 
     },
     visible: {
-      height: "60vh", // 80vh 아래로 이동
+      height: "auto", // 80vh 아래로 이동
       transition: {
         duration: 1.5, // 애니메이션 지속 시간
       },
@@ -68,7 +70,7 @@ const lineVariants = {
 
     }, // 초기 너비를 0으로 설정하여 숨깁니다.
     visible: { 
-        x: 0,
+        x: "-130px",
         width: "100vw" ,
         transition: {
             duration: 2, // 애니메이션 지속 시간

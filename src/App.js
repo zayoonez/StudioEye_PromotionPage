@@ -5,7 +5,7 @@ import PromotionMainpage from "./Pages/MainPage/PromotionMainPage";
 import AboutMainpage from "./Pages/AboutPage/AboutMainPage";
 import { AnimatePresence, motion } from 'framer-motion';
 import InsertPage from "./Pages/InsertPage/InsertPage";
-import DetailPage from './Pages/DetailPage/DetailPage';
+import DetailPages from './Pages/DetailPage/DetailPages';
 import ArtworkMainpage from "./Pages/ArtworkPage/ArtworkMainPage";
 import AdminMainPage from "./Pages/AdminPage/AdminMainPage";
 import AboutEditPage from "./Pages/AdminPage/AboutEditPage";
@@ -33,6 +33,7 @@ function App() {
           <AnimatePresence>
 
           <Routes>
+
               {/*<Route*/}
               {/*    path="/"*/}
               {/*    element={*/}
@@ -59,7 +60,7 @@ function App() {
                 <Route path="/"  element={<PromotionMainpage />}/>
                 <Route path="/About"  element={<AboutMainpage />}/>
                 <Route path="/Artwork"  element={<ArtworkMainpage />}/>
-                <Route path="/detail" element= {<DetailPage />}/>
+                <Route path="/detail" element= {<DetailPages />}/>
                 <Route path="/notice" element= {<NoticeMainPage />}/>
                 <Route path="/admin" element={<AdminMainPage />}/>
                 <Route path="/admin/about" element={<AboutEditPage />}/>
