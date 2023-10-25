@@ -9,20 +9,20 @@ const BoxContainer = styled(motion.div)`
     display: flex;
     align-items: center;
     flex-direction: column;
-    height: 93vh;
+    height: 60rem;
     padding: 5%;
 `;
 
 const Div = styled(motion.div)`
-    height: 50vh;
+    height: 32rem;
     width: 90%;
-    margin-bottom: 2vh;
+    margin-bottom: 2rem; 
 `;
 
 const Text = styled(motion.text)`
     font-size: 1.4rem;
     width: 90%;
-    margin-bottom: 1vh;
+    margin-bottom: 1rem;
 `;
 const divVariant =  {
     animate: { opacity: 1, y:0},

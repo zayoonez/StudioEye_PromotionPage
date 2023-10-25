@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import styled from "styled-components";
 import Body from "../../Components/Common/Body";
 import BasicInfoGrid from "./BasicInfoGrid";
@@ -12,12 +12,15 @@ import NaverMapGrid from "./NaverMapGrid";
 
 const AboutMainpage = () => {
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     const AboutMainpageContent=()=>{
         return (
             <>
                 <BasicInfoGrid />
                 <GreetingGrid />
-                {/*<HistoryGrid />*/}
                 <CoOpInfoGrid />
                 <NaverMapGrid/>
             </>

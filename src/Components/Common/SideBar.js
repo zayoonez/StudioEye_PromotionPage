@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
 import Responsive from './responsive';
+import {useNavigate} from "react-router-dom";
 
 const Block = styled.div`
   position: fixed;
@@ -63,6 +64,12 @@ const Text = styled.text`
 
 
 const SideBar = () => {
+    const navigate = useNavigate();
+
+    const goNotice = () => {
+        navigate(`/Notice`);
+    };
+
     const goManagement = () => {
         window.location.href = "http://13.124.68.5:3000/";
     };
@@ -71,7 +78,7 @@ const SideBar = () => {
         <>
             <Block>
                 <Wrapper>
-                    <Text>notice</Text>
+                    <Text onClick={goNotice}>notice</Text>
                     <Text>instagram</Text>
                     <Text onClick={goManagement} >management</Text>
                 </Wrapper>

@@ -5,11 +5,12 @@ import {BsChevronDoubleDown} from "react-icons/bs";
 
 const BoxContainer = styled(motion.div)`
     display: flex;
-    justify-content: center;
+    // justify-content: center;
     align-items: center;
     flex-direction: column;
     background-color: white;
-    height: 95vh;
+    height: 40rem;
+    padding-top: 20rem;
 `;
 
 // const Background = styled(motion.div)`
@@ -47,7 +48,7 @@ const Div = styled(motion.div)`
   align-items: center;
   flex-direction: column;
   position: absolute;
-  bottom: 10vh;
+  top: 50rem;
 `;
 
 const TextVariant = {

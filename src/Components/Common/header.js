@@ -39,7 +39,7 @@ const CanvasDiv = styled.div`
   flex-direction: column;
   padding: 1rem;
   width: 95%;
-  height: 85vh;
+  height: 70vh;
   
   @media(max-width: 840px){
     padding: 0rem;
@@ -55,7 +55,7 @@ const BottomDiv = styled.div`
   
 `;
 const Text = styled.text`
-    color: rgba(0,0,0,0.3);
+    color: rgba(0,0,0,0.2);
     font-size: 1.5rem;
     
       @media(max-width: 390px){
@@ -197,6 +197,10 @@ const Header = () => {
         navigate(`/`);
     };
 
+    const goToAdmin = () => {
+        navigate('/admin')
+    }
+
     const text = "STUDIO I";
     return (
         <>
@@ -228,7 +232,7 @@ const Header = () => {
                             whileTap="tab">CONTACT</MenuButtonyet>
                     </CanvasDiv>
                     <BottomDiv>
-                        <Text>manage</Text>
+                        <Text onClick={goToAdmin}>manage</Text>
                     </BottomDiv>
                 </OffcanvasBody>
             </AnimatedOffcanvas>

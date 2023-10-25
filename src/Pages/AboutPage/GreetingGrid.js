@@ -6,22 +6,23 @@ import {useInView} from "react-intersection-observer";
 const BoxContainer = styled(motion.div)`
     display: flex;
     background-color: white;
-    height: 95vh;
+    height: 80rem;
     position: relative;
 `;
 const Img = styled(motion.img)`
     font-size: 2rem;
     position: absolute;
     left: 5%;
+    top: 2rem;
     width: 90%;
-    height: 30vh;
+    height: 20rem;
 `;
 
 const TitleText = styled(motion.div)`
     font-size: 4rem;
     position: absolute;
     right: 5rem;
-    top: 40vh;
+    top: 25rem;
     font-weight: 600;
 `;
 const BackText = styled(motion.div)`
@@ -29,14 +30,14 @@ const BackText = styled(motion.div)`
     color: gray;
     position: absolute;
     left: 5rem;
-    top: 37vh;
+    top: 27rem;
     font-weight: 600;
 `;
 const SubText = styled(motion.div)`
     font-size: 3rem;
     position: absolute;
     left: 5rem;
-    top: 50vh;
+    top: 38rem;
     font-weight: 600;
 `;
 const Text = styled(motion.div)`
@@ -44,7 +45,7 @@ const Text = styled(motion.div)`
     position: absolute;
     left: 5rem;
     width: 60%;
-    top: 60vh;
+    top: 44rem;
 `;
 
 const TitleVariant =  {

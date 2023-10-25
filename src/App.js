@@ -7,6 +7,12 @@ import { AnimatePresence, motion } from 'framer-motion';
 import InsertPage from "./Pages/InsertPage/InsertPage";
 import DetailPages from './Pages/DetailPage/DetailPages';
 import ArtworkMainpage from "./Pages/ArtworkPage/ArtworkMainPage";
+import AdminMainPage from "./Pages/AdminPage/AdminMainPage";
+import AboutEditPage from "./Pages/AdminPage/AboutEditPage";
+import ArtworkEditPage from "./Pages/AdminPage/ArtworkEditPage";
+import ContactEditPage from "./Pages/AdminPage/ContactEditPage";
+import NoticeEditPage from "./Pages/AdminPage/NoticeEditPage";
+import NoticeMainPage from "./Pages/NoticePage/NoticeMainPage";
 
 function App() {
     const [showInsertPage, setShowInsertPage] = React.useState(true);
@@ -27,33 +33,40 @@ function App() {
           <AnimatePresence>
 
           <Routes>
-              <Route
-                  path="/"
-                  element={
-                      showInsertPage ? (
-                          <motion.div
-                              initial={{ opacity: 0 }}
-                              animate={{ opacity: 1 }}
-                              exit={{ opacity: 0, transition: { duration: 0.5 } }}
-                          >
-                              <InsertPage />
-                          </motion.div>
-                      ) : (
-                          <motion.div
-                              initial={{ opacity: 0 }}
-                              animate={{ opacity: 1 }}
-                              exit={{ opacity: 0 }}
-                              transition={{ duration: 0.5 }}
-                          >
-                              <PromotionMainpage />
-                          </motion.div>
-                      )
-                  }
-              />
-            <Route path="/About"  element={<AboutMainpage />}/>
-              <Route path="/Artwork"  element={<ArtworkMainpage />}/>
-            <Route path="/detail" element= {<DetailPages />}/>
 
+              {/*<Route*/}
+              {/*    path="/"*/}
+              {/*    element={*/}
+              {/*        showInsertPage ? (*/}
+              {/*            <motion.div*/}
+              {/*                initial={{ opacity: 0 }}*/}
+              {/*                animate={{ opacity: 1 }}*/}
+              {/*                exit={{ opacity: 0, transition: { duration: 0.5 } }}*/}
+              {/*            >*/}
+              {/*                <InsertPage />*/}
+              {/*            </motion.div>*/}
+              {/*        ) : (*/}
+              {/*            <motion.div*/}
+              {/*                initial={{ opacity: 0 }}*/}
+              {/*                animate={{ opacity: 1 }}*/}
+              {/*                exit={{ opacity: 0 }}*/}
+              {/*                transition={{ duration: 0.5 }}*/}
+              {/*            >*/}
+              {/*                <PromotionMainpage />*/}
+              {/*            </motion.div>*/}
+              {/*        )*/}
+              {/*    }*/}
+              {/*/>*/}
+                <Route path="/"  element={<PromotionMainpage />}/>
+                <Route path="/About"  element={<AboutMainpage />}/>
+                <Route path="/Artwork"  element={<ArtworkMainpage />}/>
+                <Route path="/detail" element= {<DetailPages />}/>
+                <Route path="/notice" element= {<NoticeMainPage />}/>
+                <Route path="/admin" element={<AdminMainPage />}/>
+                <Route path="/admin/about" element={<AboutEditPage />}/>
+                <Route path="/admin/artwork" element={<ArtworkEditPage />}/>
+                <Route path="/admin/contact" element={<ContactEditPage />}/>
+                <Route path="/admin/notice" element={<NoticeEditPage />}/>
           </Routes>
           </AnimatePresence>
       </BrowserRouter>

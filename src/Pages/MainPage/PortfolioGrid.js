@@ -35,6 +35,7 @@ const Section = styled(motion.div)`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding-bottom: 10vh;
     /* margin-left: 30px; */
 `;
 const VideoSection = styled(motion.div)`
@@ -186,20 +187,6 @@ const PortfolioGrid = () => {
                         대결을 펼치고 점수를 얻는 서바이벌 예능</BasicInfo>
                 </VideoSection>
                 {/* <Year>2021</Year> */}
-                <VideoSection>
-                    <Link to={'/detail'} >
-                        <ThumbnailImage src="https://img.youtube.com/vi/bcOO4bu7Alc/maxresdefault.jpg" />
-                    </Link>
-                    <BasicInfo
-                    variants={infovariants}
-                    initial="hidden"
-                    animate={inView ? "visible" : "hidden"} 
-                    transition={{ duration: 3 }}
-                    >tvND X 글로벌 스포츠 브랜드 언더아머 브랜디드 콘텐츠
-                        총상금 5,000만원이 걸린 고등학생 스포츠 서바이벌 프로그램
-                        사전 선발된 24명의 고교생들이 3박 4일 동안 다양한 게임을 통해
-                        대결을 펼치고 점수를 얻는 서바이벌 예능</BasicInfo>
-                </VideoSection>
             </Section>
         </>
 
