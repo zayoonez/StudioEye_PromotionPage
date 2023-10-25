@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Header from "./header";
 import SideBar from "./SideBar";
 import { motion, AnimatePresence } from "framer-motion";
+import ContactButton from './ContactButton';
 
 // const Spacer = styled.div`
 //   height: 4rem;
@@ -130,6 +131,7 @@ const Body = function({children}) {
                 <SideBar />
             </motion.div>
             <SideDiv additionalWidth={additionalWidth}/>
+            <ContactButton/>
         </PageBody>
         </ScrollDiv>
     </motion.div>

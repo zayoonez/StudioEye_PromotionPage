@@ -11,7 +11,7 @@ const VideoWrapper = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-right: 30px;
+    margin-right: 50px;
     
     
 `;

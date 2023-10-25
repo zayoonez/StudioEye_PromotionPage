@@ -5,7 +5,7 @@ import PromotionMainpage from "./Pages/MainPage/PromotionMainPage";
 import AboutMainpage from "./Pages/AboutPage/AboutMainPage";
 import { AnimatePresence, motion } from 'framer-motion';
 import InsertPage from "./Pages/InsertPage/InsertPage";
-import DetailPage from './Pages/DetailPage/DetailPage';
+import DetailPages from './Pages/DetailPage/DetailPages';
 import ArtworkMainpage from "./Pages/ArtworkPage/ArtworkMainPage";
 
 function App() {
@@ -52,7 +52,7 @@ function App() {
               />
             <Route path="/About"  element={<AboutMainpage />}/>
               <Route path="/Artwork"  element={<ArtworkMainpage />}/>
-            <Route path="/detail" element= {<DetailPage />}/>
+            <Route path="/detail" element= {<DetailPages />}/>
 
           </Routes>
           </AnimatePresence>
