@@ -108,13 +108,16 @@ const ArtworkEditPage = () => {
                         date: data.data[i].date,
                         department: data.data[i].department,
                         id: data.data[i].id,
-                        imgList: data.data[i].imageUrlList,
+                        // imgList: data.data[i].imageUrlList,
                         isPosted: data.data[i].isPosted,
                         link: data.data[i].link,
                         name: data.data[i].name,
                         overView: data.data[i].overView,
-                    };
 
+                    };
+                    for(let j = 0; j<data.data[i].imageUrlList.length;j++){
+                        imgObjects.
+                    }
                     objects.push(obj);
                 }
 

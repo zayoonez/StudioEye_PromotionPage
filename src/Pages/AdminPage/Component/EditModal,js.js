@@ -15,20 +15,52 @@ function EditModal({ item, onSave, onCancel}) {
     }, [item.imgList]);
     const handleSave = () => {
         // FormData 객체 생성
-        const formData = new FormData();
+        //const formData = new FormData();
 
         // 폼 데이터에 필드 추가
-        formData.append('projectId', editedItem.id);
-        formData.append('department', editedItem.department);
-        formData.append('category', editedItem.category);
-        formData.append('name', editedItem.name);
-        formData.append('client', editedItem.client);
-        formData.append('date', editedItem.date);
-        formData.append('link', editedItem.link);
-        formData.append('overView', editedItem.overView);
-        
+        // formData.append('projectId', editedItem.id);
+        // formData.append('department', editedItem.department);
+        // formData.append('category', editedItem.category);
+        // formData.append('name', editedItem.name);
+        // formData.append('client', editedItem.client);
+        // formData.append('date', editedItem.date);
+        // formData.append('link', editedItem.link);
+        // formData.append('overView', editedItem.overView);
+        //
+        // const requestData = {
+        //     projectId: editedItem.id, // 수정할 아이템의 ID
+        //     department: editedItem.department,
+        //     category: editedItem.category,
+        //     name: editedItem.name,
+        //     client: editedItem.client,
+        //     date: editedItem.date,
+        //     link: editedItem.link,
+        //     overView: editedItem.overView
+        // };
+        //
+        // formData.append('request', requestData);
+        // formData.append('files', editedItem.imgList);
+
+        const requestData = {
+                projectId: editedItem.id,
+                department: editedItem.department,
+                category: editedItem.category,
+                name: editedItem.name,
+                client: editedItem.client,
+                date: editedItem.date,
+                link: editedItem.link,
+                overView: editedItem.overView
+        };
+
+        const formData = new FormData();
+        formData.append('request', JSON.stringify(requestData)); // JSON 데이터를 추가
+        formData.append('files', editedItem.imgList); // FormData의 'files' 필드에 원하는 값을 추가
+
         axios
-            .put(`https://port-0-promoationpage-server-12fhqa2blnlum4de.sel5.cloudtype.app/api/projects`, formData)
+            .put(`https://port-0-promoationpage-server-12fhqa2blnlum4de.sel5.cloudtype.app/api/projects`, formData, {
+                headers: {
+                    "content-type": "multipart/form-data"
+                }})
             .then((response) => {
                 console.log('수정된 데이터를 서버에 보냈습니다.', response);
                 onSave(editedItem); // 수정된 데이터를 부모 컴포넌트로 전달
