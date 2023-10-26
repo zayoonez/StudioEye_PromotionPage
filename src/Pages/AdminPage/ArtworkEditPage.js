@@ -115,9 +115,7 @@ const ArtworkEditPage = () => {
                         overView: data.data[i].overView,
 
                     };
-                    for(let j = 0; j<data.data[i].imageUrlList.length;j++){
-                        imgObjects.
-                    }
+
                     objects.push(obj);
                 }
 
