@@ -41,6 +41,7 @@ const CanvasDiv = styled.div`
   width: 95%;
   height: 70vh;
   
+  
   @media(max-width: 840px){
     padding: 0rem;
     }
@@ -57,6 +58,7 @@ const BottomDiv = styled.div`
 const Text = styled.text`
     color: rgba(0,0,0,0.2);
     font-size: 1.5rem;
+    cursor: pointer;
     
       @media(max-width: 390px){
     color: rgba(0,0,0,0.0);
@@ -97,7 +99,7 @@ const StyledHiMenu = styled(motion(HiMenu))`
 `;
 
 const MenuButton = styled(motion.button)`
-    width: 20%;
+    width: 40%;
     font-size: 6rem;
     font-weight: 800;
     border:none;
@@ -105,24 +107,8 @@ const MenuButton = styled(motion.button)`
     cursor: pointer;
     background-color: transparent;
     margin-bottom: 5vh;
-    
-    @media(max-width: 670px){
-    font-size: 2.875rem;
-    }
-    
-    @media(max-width: 390px){
-    font-size: 1.25rem;
-    }
-`;
-const MenuButtonyet = styled(motion.button)`
-    width: 20%;
-    font-size: 6rem;
-    font-weight: 800;
-    border:none;
-    outline: none;
-    cursor: pointer;
-    background-color: transparent;
-    margin-bottom: 5vh;
+    text-align: left;
+    margin-left: 5%;
     
     @media(max-width: 670px){
     font-size: 2.875rem;
@@ -133,12 +119,6 @@ const MenuButtonyet = styled(motion.button)`
     }
 `;
 
-const buttonyetVariants = {
-    initial: { opacity: 0, x: 0, y: 0 },
-    animate: { opacity: 1, x: 40, y: 0, transition:{type: "spring", duration: 1, bounce: 0.5} },
-    hover: {scale: 1.2, color: "blue", transition:{type: "spring", duration: 1, bounce: 0.5}},
-    tab: {scale: 0.9},
-};
 
 const MenuButtons = ({ children }) => {
     const navigate = useNavigate();
@@ -170,12 +150,6 @@ const MenuButtons = ({ children }) => {
         </MenuButton>
     );
 };
-const StyledLetter = styled(motion.span)`
-  display: inline-block;
-  font-size: 3rem;
-  font-weight: 600;
-  color: blue;
-`;
 
 const canvasanimation = {
     initial: { opacity: 0, x: 0, y: 0 },
@@ -201,7 +175,6 @@ const Header = () => {
         navigate('/admin')
     }
 
-    const text = "STUDIO I";
     return (
         <>
             <HeaderBlock>
@@ -223,13 +196,7 @@ const Header = () => {
                     <CanvasDiv>
                         <MenuButtons>ABOUT</MenuButtons>
                         <MenuButtons>ARTWORK</MenuButtons>
-                        <MenuButtonyet
-                            variants={buttonyetVariants}
-                            initial="initial"
-                            animate="animate"
-                            transition="transition"
-                            whileHover="hover"
-                            whileTap="tab">CONTACT</MenuButtonyet>
+                        <MenuButtons>CONTACT</MenuButtons>
                     </CanvasDiv>
                     <BottomDiv>
                         <Text onClick={goToAdmin}>manage</Text>
