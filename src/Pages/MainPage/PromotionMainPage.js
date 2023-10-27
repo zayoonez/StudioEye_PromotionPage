@@ -63,7 +63,7 @@ const PromotionMainpage = () => {
 
                 {/* <Featuredprojects><LetterAnimation text="Featured Projects"></LetterAnimation></Featuredprojects> */}
                 <PortfolioGrid/>
-                <LogoBanner/>
+                {/*<LogoBanner/>*/}
                 <ProgressBar style = {{scaleX}}></ProgressBar>
 
 
