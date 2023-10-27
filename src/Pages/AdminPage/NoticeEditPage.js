@@ -1,8 +1,19 @@
+import Body from "../../Components/Common/Body";
+import React from "react";
 
 const NoticeEditPage = () => {
 
+    const NoticeEditPageContent=()=>{
+
+        return (
+            <></>
+        );
+    }
+
     return(
-        <div></div>
+        <Body>
+            <NoticeEditPageContent/>
+        </Body>
     )
 
 }
