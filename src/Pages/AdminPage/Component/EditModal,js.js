@@ -78,6 +78,7 @@ function EditModal({ item, onSave, onCancel}) {
                 overView: editedItem.overView
         };
 
+
         const formData = new FormData();
         formData.append('request', JSON.stringify(requestData)); // JSON 데이터를 추가
         formData.append('files', editedItem.imgList); // FormData의 'files' 필드에 원하는 값을 추가
