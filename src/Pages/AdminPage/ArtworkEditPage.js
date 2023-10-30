@@ -106,7 +106,7 @@ const ArtworkEditPage = () => {
 
                 for (let i = 0; i < data.data.length; i++) {
                     for(let j = 0; j < data.data[i].imageUrlList.length; j++) {
-                        imgObjects[i] = data.data[i].imageUrlList[j].toString();
+                        imgObjects[i] = data.data[i].imageUrlList[j];
                     }
 
                     const obj = {
@@ -122,7 +122,6 @@ const ArtworkEditPage = () => {
                         name: data.data[i].name,
                         overView: data.data[i].overView,
                     };
-
 
                     objects.push(obj);
                 }
