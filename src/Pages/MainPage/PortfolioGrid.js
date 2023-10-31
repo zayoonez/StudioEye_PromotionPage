@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, {useEffect, useRef, useState} from "react";
 import styled from "styled-components";
 import { AnimatePresence, motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -6,6 +6,7 @@ import DetailTransition from "../../Components/Common/DetailTransition";
 import { useInView } from 'react-intersection-observer'; 
 import LetterAnimation from "../../Components/Common/LetterAnimation";
 import Arrow from "../../assets/icon/Arrow2.png"
+import axios from "axios";
 
 const ArrowImg = styled.img`
     width: 60px;
@@ -105,87 +106,147 @@ const PortfolioGrid = () => {
         threshold: 0.2,
         // triggerOnce: true,
       });
+    const [data, setData] = useState([]);
+    const [imgData, setImgData] = useState([]);
+
+    useEffect(() => {
+
+        axios.get('https://port-0-promoationpage-server-12fhqa2blnlum4de.sel5.cloudtype.app/api/projects')
+            .then(response => {
+                const data = response.data;
+                console.log(data);
+                const objects = [];
+                const imgObjects = [];
+
+                for(let i = 0; i < 5; i++) {
+                    const obj = {
+                        id: data.data[i].id,
+                        overView: data.data[i].overView,
+                        img: data.data[i].imageUrlList[0]
+                    };
+                    for(let j=0; j<data.data[i].imageUrlList.length;j++){
+                        const ImgObj = {
+                            ImgId: data.data[i].id,
+                            title: data.data[i].title
+                        };
+
+                        imgObjects.push(obj);
+                    }
+
+                    objects.push(obj);
+                }
+                setImgData(imgObjects);
+                setData(objects);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+    }, [])
+
     return (
         <>
             <Section ref={ref}>
                 
                 <Featuredprojects><LetterAnimation text="Our Projects"></LetterAnimation></Featuredprojects>
 
-                <VideoSection >
-                    <Link to={'/detail'}>
-                        <ThumbnailImage
-                        variants={thumbnailvariants}
-                        initial="hidden"
-                        animate={inView ? "visible" : "hidden"}                        
-                        transition={{ duration: 1 }}  
-                        src="https://img.youtube.com/vi/bcOO4bu7Alc/maxresdefault.jpg"/>
-                    </Link>
-                    {/* <InfoContainer> */}
+                {data.map((item, i) => (
+                    <VideoSection >
+                        <Link to={`/detail/${item.id}`}>
+                            <ThumbnailImage
+                                variants={thumbnailvariants}
+                                initial="hidden"
+                                animate={inView ? "visible" : "hidden"}
+                                transition={{ duration: 1 }}
+                                src={item.img}/>
+                        </Link>
+                        {/* <InfoContainer> */}
                         <BasicInfo
-                        variants={infovariants}
-                        initial="hidden"
-                        animate={inView ? "visible" : "hidden"}                        
-                        transition={{ duration: 1 }}
-                        >개그맨 황제성이 출연해 다양한 소재에 대한 궁금증을 해결하기 위해 
-                            백과사전 속으로 떠나는 탐험! DK백과사전 기반 필수 지식을 알기 쉽고 재미있게 풀어낸 어린이 지식 충전 예능 콘텐츠
+                            variants={infovariants}
+                            initial="hidden"
+                            animate={inView ? "visible" : "hidden"}
+                            transition={{ duration: 1 }}
+                        >{item.overView}
                         </BasicInfo>
                         {/* <ArrowImg src={Arrow} /> */}
-                    {/* </InfoContainer> */}
-                </VideoSection>
+                        {/* </InfoContainer> */}
+                    </VideoSection>
+                ))}
+                {/*<VideoSection >*/}
+                {/*    <Link to={'/detail'}>*/}
+                {/*        <ThumbnailImage*/}
+                {/*        variants={thumbnailvariants}*/}
+                {/*        initial="hidden"*/}
+                {/*        animate={inView ? "visible" : "hidden"}                        */}
+                {/*        transition={{ duration: 1 }}  */}
+                {/*        src="https://img.youtube.com/vi/bcOO4bu7Alc/maxresdefault.jpg"/>*/}
+                {/*    </Link>*/}
+                {/*    /!* <InfoContainer> *!/*/}
+                {/*        <BasicInfo*/}
+                {/*        variants={infovariants}*/}
+                {/*        initial="hidden"*/}
+                {/*        animate={inView ? "visible" : "hidden"}                        */}
+                {/*        transition={{ duration: 1 }}*/}
+                {/*        >개그맨 황제성이 출연해 다양한 소재에 대한 궁금증을 해결하기 위해 */}
+                {/*            백과사전 속으로 떠나는 탐험! DK백과사전 기반 필수 지식을 알기 쉽고 재미있게 풀어낸 어린이 지식 충전 예능 콘텐츠*/}
+                {/*        </BasicInfo>*/}
+                {/*        /!* <ArrowImg src={Arrow} /> *!/*/}
+                {/*    /!* </InfoContainer> *!/*/}
+                {/*</VideoSection>*/}
 
-                <VideoSection >
-                    <Link to={'/detail'} >
-                        <ThumbnailImage 
-                        variants={thumbnailvariants}
-                        initial="hidden"
-                        animate={inView ? "visible" : "hidden"} 
-                        transition={{ duration: 1.5 }}  
-                        src="https://img.youtube.com/vi/HegtBR9-5Po/maxresdefault.jpg" />
-                    </Link>
-                    <BasicInfo
-                    variants={infovariants}
-                    initial="hidden"
-                    animate={inView ? "visible" : "hidden"} 
-                    transition={{ duration: 1.5 }}
-                    >tvND X 글로벌 스포츠 브랜드 언더아머 브랜디드 콘텐츠
-                        총상금 5,000만원이 걸린 고등학생 스포츠 서바이벌 프로그램
-                        사전 선발된 24명의 고교생들이 3박 4일 동안 다양한 게임을 통해
-                        대결을 펼치고 점수를 얻는 서바이벌 예능
-                        </BasicInfo>
-                </VideoSection>
-                <VideoSection >
-                    <Link to={'/detail'}>
-                        <ThumbnailImage 
-                        variants={thumbnailvariants}
-                        initial="hidden"
-                        animate={inView ? "visible" : "hidden"} 
-                        transition={{ duration: 2 }}  
-                        src="https://img.youtube.com/vi/xil70dCTCBk/maxresdefault.jpg" />
-                    </Link>
-                    <BasicInfo
-                    variants={infovariants}
-                    initial="hidden"
-                    animate={inView ? "visible" : "hidden"} 
-                    transition={{ duration: 2 }}
-                    >tvND X 글로벌 스포츠 브랜드 언더아머 브랜디드 콘텐츠
-                        총상금 5,000만원이 걸린 고등학생 스포츠 서바이벌 프로그램
-                        사전 선발된 24명의 고교생들이 3박 4일 동안 다양한 게임을 통해
-                        대결을 펼치고 점수를 얻는 서바이벌 예능</BasicInfo>
-                </VideoSection>
-                <VideoSection>
-                    <Link to={'/detail'} >
-                        <ThumbnailImage 
-                        variants={thumbnailvariants}
-                        initial="hidden"
-                        animate={inView ? "visible" : "hidden"} 
-                        transition={{ duration: 3 }}  
-                        src="https://img.youtube.com/vi/MxMsTmmuWU0/maxresdefault.jpg" />
-                    </Link>
-                    <BasicInfo>tvND X 글로벌 스포츠 브랜드 언더아머 브랜디드 콘텐츠
-                        총상금 5,000만원이 걸린 고등학생 스포츠 서바이벌 프로그램
-                        사전 선발된 24명의 고교생들이 3박 4일 동안 다양한 게임을 통해
-                        대결을 펼치고 점수를 얻는 서바이벌 예능</BasicInfo>
-                </VideoSection>
+                {/*<VideoSection >*/}
+                {/*    <Link to={'/detail'} >*/}
+                {/*        <ThumbnailImage */}
+                {/*        variants={thumbnailvariants}*/}
+                {/*        initial="hidden"*/}
+                {/*        animate={inView ? "visible" : "hidden"} */}
+                {/*        transition={{ duration: 1.5 }}  */}
+                {/*        src="https://img.youtube.com/vi/HegtBR9-5Po/maxresdefault.jpg" />*/}
+                {/*    </Link>*/}
+                {/*    <BasicInfo*/}
+                {/*    variants={infovariants}*/}
+                {/*    initial="hidden"*/}
+                {/*    animate={inView ? "visible" : "hidden"} */}
+                {/*    transition={{ duration: 1.5 }}*/}
+                {/*    >tvND X 글로벌 스포츠 브랜드 언더아머 브랜디드 콘텐츠*/}
+                {/*        총상금 5,000만원이 걸린 고등학생 스포츠 서바이벌 프로그램*/}
+                {/*        사전 선발된 24명의 고교생들이 3박 4일 동안 다양한 게임을 통해*/}
+                {/*        대결을 펼치고 점수를 얻는 서바이벌 예능*/}
+                {/*        </BasicInfo>*/}
+                {/*</VideoSection>*/}
+                {/*<VideoSection >*/}
+                {/*    <Link to={'/detail'}>*/}
+                {/*        <ThumbnailImage */}
+                {/*        variants={thumbnailvariants}*/}
+                {/*        initial="hidden"*/}
+                {/*        animate={inView ? "visible" : "hidden"} */}
+                {/*        transition={{ duration: 2 }}  */}
+                {/*        src="https://img.youtube.com/vi/xil70dCTCBk/maxresdefault.jpg" />*/}
+                {/*    </Link>*/}
+                {/*    <BasicInfo*/}
+                {/*    variants={infovariants}*/}
+                {/*    initial="hidden"*/}
+                {/*    animate={inView ? "visible" : "hidden"} */}
+                {/*    transition={{ duration: 2 }}*/}
+                {/*    >tvND X 글로벌 스포츠 브랜드 언더아머 브랜디드 콘텐츠*/}
+                {/*        총상금 5,000만원이 걸린 고등학생 스포츠 서바이벌 프로그램*/}
+                {/*        사전 선발된 24명의 고교생들이 3박 4일 동안 다양한 게임을 통해*/}
+                {/*        대결을 펼치고 점수를 얻는 서바이벌 예능</BasicInfo>*/}
+                {/*</VideoSection>*/}
+                {/*<VideoSection>*/}
+                {/*    <Link to={'/detail'} >*/}
+                {/*        <ThumbnailImage */}
+                {/*        variants={thumbnailvariants}*/}
+                {/*        initial="hidden"*/}
+                {/*        animate={inView ? "visible" : "hidden"} */}
+                {/*        transition={{ duration: 3 }}  */}
+                {/*        src="https://img.youtube.com/vi/MxMsTmmuWU0/maxresdefault.jpg" />*/}
+                {/*    </Link>*/}
+                {/*    <BasicInfo>tvND X 글로벌 스포츠 브랜드 언더아머 브랜디드 콘텐츠*/}
+                {/*        총상금 5,000만원이 걸린 고등학생 스포츠 서바이벌 프로그램*/}
+                {/*        사전 선발된 24명의 고교생들이 3박 4일 동안 다양한 게임을 통해*/}
+                {/*        대결을 펼치고 점수를 얻는 서바이벌 예능</BasicInfo>*/}
+                {/*</VideoSection>*/}
                 {/* <Year>2021</Year> */}
             </Section>
         </>
