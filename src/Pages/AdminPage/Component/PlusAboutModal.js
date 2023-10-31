@@ -42,7 +42,7 @@ function PlusAboutModal({onCancel}) {
 
     const handleOptionChange = (e) => {
         console.log(e.target.value);
-        if(e.target.value='true'){
+        if(selectedOption=="Main"){
             setItem({...item, is_main: true});
         }
         else{
@@ -102,8 +102,8 @@ function PlusAboutModal({onCancel}) {
                     <label htmlFor="dropdown">옵션 선택:</label>
                     <select id="dropdown" value={selectedOption} onChange={handleOptionChange}>
                         <option value="">선택하세요</option>
-                        <option value="true">Main CoOp.</option>
-                        <option value="false">Sub CoOp.</option>
+                        <option value="Main">Main CoOp.</option>
+                        <option value="Sub">Sub CoOp.</option>
                     </select>
                 </div>
                 <div>

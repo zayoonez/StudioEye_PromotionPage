@@ -30,7 +30,7 @@ const Modal = styled.div`
 function PlusNoticeModal({onCancel}) {
 
     const createNoticeBoardRequestDto = {
-        title: ""
+        title: " "
 
     }
 
@@ -50,7 +50,7 @@ function PlusNoticeModal({onCancel}) {
         const formData = new FormData();
         formData.append(
             "createNoticeBoardRequestDto",
-            new Blob([JSON.stringify(createNoticeBoardRequestDto)], { type: "application/json" })
+            new Blob([JSON.stringify(item)], { type: "application/json" })
         );
         formData.append('file', image);
 

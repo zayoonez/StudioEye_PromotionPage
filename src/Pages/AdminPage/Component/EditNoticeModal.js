@@ -31,6 +31,8 @@ function EditNoticeModal({ item, onCancel}) {
 
     const deleteProject = () => {
 
+        console.log(item);
+        console.log(item.id);
             const Id = item.id;
 
             axios
