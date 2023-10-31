@@ -30,6 +30,8 @@ const StyledTable = styled.table`
 
 function DataTable({ data, onEdit, deleteProject }) {
     return (
+        <div>
+            <button>생성</button>
         <StyledTable>
             <thead>
             <tr>
@@ -64,6 +66,7 @@ function DataTable({ data, onEdit, deleteProject }) {
             ))}
             </tbody>
         </StyledTable>
+        </div>
     );
 }
 
@@ -102,6 +105,10 @@ const ArtworkEditPage = () => {
                 const imgObjects = [];
 
                 for (let i = 0; i < data.data.length; i++) {
+                    for(let j = 0; j < data.data[i].imageUrlList.length; j++) {
+                        imgObjects[i] = data.data[i].imageUrlList[j];
+                    }
+
                     const obj = {
                         category: data.data[i].category,
                         client: data.data[i].client,
@@ -109,14 +116,12 @@ const ArtworkEditPage = () => {
                         department: data.data[i].department,
                         id: data.data[i].id,
                         imgList: data.data[i].imageUrlList,
+                        imgListFiles: imgObjects[i],
                         isPosted: data.data[i].isPosted,
                         link: data.data[i].link,
                         name: data.data[i].name,
                         overView: data.data[i].overView,
                     };
-                    for(let j = 0; j < data.data[i].imageUrlList.length; j++) {
-                        imgObjects[i] = data.data[i].imageUrlList[j].toString();
-                    }
 
                     objects.push(obj);
                 }

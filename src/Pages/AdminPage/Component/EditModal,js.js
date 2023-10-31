@@ -67,7 +67,19 @@ function EditModal({ item, onSave, onCancel}) {
         // formData.append('request', requestData);
         // formData.append('files', editedItem.imgList);
 
-        const requestData = {
+        // const requestData = {
+        //         projectId: editedItem.id,
+        //         department: editedItem.department,
+        //         category: editedItem.category,
+        //         name: editedItem.name,
+        //         client: editedItem.client,
+        //         date: editedItem.date,
+        //         link: editedItem.link,
+        //         overView: editedItem.overView
+        // };
+
+        const testData = {
+
                 projectId: editedItem.id,
                 department: editedItem.department,
                 category: editedItem.category,
@@ -76,18 +88,19 @@ function EditModal({ item, onSave, onCancel}) {
                 date: editedItem.date,
                 link: editedItem.link,
                 overView: editedItem.overView
-        };
+
+        }
 
 
         const formData = new FormData();
-        formData.append('request', JSON.stringify(requestData)); // JSON 데이터를 추가
-        formData.append('files', editedItem.imgList); // FormData의 'files' 필드에 원하는 값을 추가
+        formData.append(
+            "request",
+            new Blob([JSON.stringify(testData)], { type: "application/json" })
+        );
+        formData.append('files', [editedItem.imgListFiles]); // FormData의 'files' 필드에 원하는 값을 추가
 
         axios
-            .put(`https://port-0-promoationpage-server-12fhqa2blnlum4de.sel5.cloudtype.app/api/projects`, formData, {
-                headers: {
-                    "content-type": "multipart/form-data"
-                }})
+            .put(`https://port-0-promoationpage-server-12fhqa2blnlum4de.sel5.cloudtype.app/api/projects`, formData)
             .then((response) => {
                 console.log('수정된 데이터를 서버에 보냈습니다.', response);
                 onSave(editedItem); // 수정된 데이터를 부모 컴포넌트로 전달
