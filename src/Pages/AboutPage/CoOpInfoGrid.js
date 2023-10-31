@@ -1,10 +1,11 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import styled from "styled-components";
 import { motion, useAnimation } from "framer-motion";
 
 import AboutTitle from "./Components/AboutTitle";
 import studioi from "../../assets/studioi.png";
 import {useInView} from "react-intersection-observer";
+import axios from "axios";
 
 const BoxContainer = styled(motion.div)`
     display: flex;
@@ -38,6 +39,7 @@ const MainLogo = styled(motion.div)`
   display: flex;
   margin-left: 2%;
   margin-right: 2%;
+  cursor: pointer;
 `;
 
 const SubLogoDiv = styled(motion.div)`
@@ -73,6 +75,59 @@ export default function CoOpInfoGrid() {
     const control2 = useAnimation();
     const [ref2, inView2] = useInView();
 
+    const [mainData, setMainData] = useState([]);
+    const [subData, setSubData] = useState([]);
+
+    const goManagement = (link) => {
+        window.location.href = `${link}`;
+    };
+
+    useEffect(()=>{
+
+        axios.get('https://port-0-promoationpage-server-12fhqa2blnlum4de.sel5.cloudtype.app/api/partners')
+
+            .then(response => {
+                const data = response.data;
+                console.log(data);
+                console.log(data.data[0]);
+                const objects = [];
+                const objects2 = [];
+
+                for(let i = 0; i < data.data.length; i++) {
+
+                    if(data.data[i].is_main){
+                        const obj = {
+                            id: data.data[i].id,
+                            logoImageUrl: data.data[i].logoImageUrl,
+                            link: data.data[i].link,
+                            is_main: "Main CoOp."
+                        };
+
+                        console.log("여기");
+                        console.log(obj);
+                        objects.push(obj);
+                    }
+                    else {
+                        const obj = {
+                            id: data.data[i].id,
+                            logoImageUrl: data.data[i].logoImageUrl,
+                            link: data.data[i].link,
+                            is_main: "Sub CoOp."
+                        };
+
+                        console.log("여기22");
+                        console.log(obj);
+                        objects2.push(obj);
+                    }
+                }
+                setMainData(objects);
+                setSubData(objects2);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    },[]);
+
     useEffect(() => {
         if (inView) {
             control.start("visible");
@@ -104,8 +159,10 @@ export default function CoOpInfoGrid() {
                   variants={boxVariant}
                   initial="hidden"
                   animate={control}>
-              <MainLogo><Img src={studioi} alt='logo image' /></MainLogo>
-              <MainLogo><Img src={studioi} alt='logo image' /></MainLogo>
+              {mainData.map((item) => (
+                  <MainLogo><Img src={item.logoImageUrl} alt='logo image' onClick={() => goManagement(item.link)}/></MainLogo>
+              ))}
+              {/*<MainLogo><Img src={studioi} alt='logo image' /></MainLogo>*/}
           </MainLogoDiv>
           <SubTitle
               ref = {ref2}
@@ -117,7 +174,9 @@ export default function CoOpInfoGrid() {
               variants={boxVariant}
               initial="hidden"
               animate={control2}>
-              <SubLogo><Img src={studioi} alt='logo image' /></SubLogo>
+              {subData.map((item) => (
+                  <SubLogo><Img src={item.logoImageUrl} alt='logo image' /></SubLogo>
+              ))}
           </SubLogoDiv>
         {/*<TableWidth*/}
         {/*    ref = {ref}*/}
