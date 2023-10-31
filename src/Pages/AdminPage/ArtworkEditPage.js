@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import EditModal from "./Component/EditModal,js";
+import Body from "../../Components/Common/Body";
 
 const StyledTable = styled.table`
   width: 100%;
@@ -135,12 +136,12 @@ const ArtworkEditPage = () => {
 
 
     return (
-        <div>
+        <Body>
             <DataTable data={data} onEdit={handleEdit}/>
             {isEditing && (
                 <EditModal item={editingItem} onSave={handleSave} onCancel={handleCancel}/>
             )}
-        </div>
+        </Body>
     );
 };
 
