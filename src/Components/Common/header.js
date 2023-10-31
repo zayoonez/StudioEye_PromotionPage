@@ -197,6 +197,10 @@ const Header = () => {
         navigate(`/`);
     };
 
+    const goToAdmin = () => {
+        navigate('/admin')
+    }
+
     const text = "STUDIO I";
     return (
         <>
@@ -228,7 +232,7 @@ const Header = () => {
                             whileTap="tab">CONTACT</MenuButtonyet>
                     </CanvasDiv>
                     <BottomDiv>
-                        <Text>manage</Text>
+                        <Text onClick={goToAdmin}>manage</Text>
                     </BottomDiv>
                 </OffcanvasBody>
             </AnimatedOffcanvas>

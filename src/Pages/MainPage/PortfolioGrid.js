@@ -109,7 +109,7 @@ const PortfolioGrid = () => {
         <>
             <Section ref={ref}>
                 
-                <Featuredprojects><LetterAnimation text="Featured Projects"></LetterAnimation></Featuredprojects>
+                <Featuredprojects><LetterAnimation text="Our Projects"></LetterAnimation></Featuredprojects>
 
                 <VideoSection >
                     <Link to={'/detail'}>
