@@ -4,7 +4,7 @@ import { Link, Router, Route } from "react-router-dom";
 
 //아직 연결, animation 미적용
 
-const ButtonSection = styled.button`
+const ButtonSection = styled(Link)`
     position: fixed;
     width: 75px;
     height: 75px;
@@ -19,6 +19,7 @@ const ButtonSection = styled.button`
     display: flex;
     justify-content: center; /* 수평 가운데 정렬 */
     align-items: center; /* 수직 가운데 정렬 */
+    text-decoration: none;
 `;
 
 const ButtonText = styled.div`
@@ -33,7 +34,7 @@ const ContactButton = () => {
     };
 
     return (
-        <ButtonSection to="/detail">
+        <ButtonSection to="/Contact">
             <ButtonText>
                 Contact Us!
             </ButtonText>

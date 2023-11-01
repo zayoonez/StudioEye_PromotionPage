@@ -43,7 +43,6 @@ const ContContainer = styled(motion.div)`
     display: flex;
     flex-wrap: wrap; 
     overflow: auto;
-    
 `;
 
 const Content = styled(motion.img)`
@@ -72,7 +71,7 @@ const ArtworkMainpage = () => {
         const navigate = useNavigate();
 
         const goToDetail = (id) => {
-            navigate(`/detail`);
+            navigate(`/detail/${id}`);
         };
 
         useEffect(() => {

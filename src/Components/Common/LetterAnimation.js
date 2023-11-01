@@ -28,6 +28,26 @@ const Title = styled.div`
       font-weight: 410;
       margin:5px;
       /* margin-top: 5px; */
+      `}
+
+    ${(props) =>
+    props.contact &&
+    css`
+      font-size: 7rem;
+      font-weight: 450;
+      /* margin:5px; */
+      margin-left: 80px;
+
+    `}
+  
+    ${(props) =>
+    props.detailTitle &&
+    css`
+      font-size: 70px;
+      font-weight: 500;
+      margin-top : 50px;
+      margin-top: 30vh;
+      margin-left: 20%;
 
     `}
   
