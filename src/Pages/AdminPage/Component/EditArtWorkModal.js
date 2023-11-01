@@ -32,15 +32,21 @@ function EditArtWorkModal({ item, onSave, onCancel}) {
     const [editedItem, setEditedItem] = useState(item);
     const [selectedImage, setSelectedImage] = useState(null);
     const [imagePreviews, setImagePreviews] = useState([]);
+    const [imageList, setImageList] = useState([]);
+
+    const onImageHandler = (event) => {
+        setImageList([...imageList, ...event.target.files]);
+
+    };
 
     // item의 이미지 URL 목록을 초기 이미지 미리보기 배열로 설정
     useEffect(() => {
         if (editedItem.imageUrlList && editedItem.imageUrlList.length > 0) {
             setImagePreviews(editedItem.imageUrlList);
+            setImageList(editedItem.imageUrlList);
         }
     }, [editedItem.imageUrlList]);
     const handleSave = () => {
-        console.log("imgURL"+ editedItem.imageUrlList);
 
         const requestData = {
                 projectId: editedItem.id,
@@ -60,10 +66,16 @@ function EditArtWorkModal({ item, onSave, onCancel}) {
         );
 
         //이미지 수정 적용하지 않고 일단 기존 imageUrlList로 보냄
-        formData.append('files', editedItem.imageUrlList);
-        
+        //formData.append('files', editedItem.imageUrlList);
+
+        imageList.forEach(image => {
+            formData.append('files', image);
+        });
+
         axios
-            .put(`https://port-0-promoationpage-server-12fhqa2blnlum4de.sel5.cloudtype.app/api/projects`, formData)
+            .put(`https://port-0-promoationpage-server-12fhqa2blnlum4de.sel5.cloudtype.app/api/projects`, formData, {
+                headers: {'Content-Type': 'multipart/form-data', charset: 'utf-8'},
+            })
             .then((response) => {
                 console.log('수정된 데이터를 서버에 보냈습니다.', response);
                 //isEditing - false;
@@ -94,16 +106,19 @@ function EditArtWorkModal({ item, onSave, onCancel}) {
 
     // ------------- 수정 필요 -----------------
     function handleImageUpload(event) {
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                const newPreviews = [...imagePreviews, e.target.result];
-                setImagePreviews(newPreviews);
-                //editItem.imageUrlList = newPreviews;
-            };
-            reader.readAsDataURL(file);
-        }
+        //기존의 이미지를 안불러오고 있음 ...
+        setImageList([...imageList, ...event.target.files]);
+
+        // const file = event.target.files[0];
+        // if (file) {
+        //     const reader = new FileReader();
+        //     reader.onload = (e) => {
+        //         const newPreviews = [...imagePreviews, e.target.result];
+        //         setImagePreviews(newPreviews);
+        //         //editItem.imageUrlList = newPreviews;
+        //     };
+        //     reader.readAsDataURL(file);
+        // }
 
     }
 
@@ -176,7 +191,7 @@ function EditArtWorkModal({ item, onSave, onCancel}) {
             </div>
 
             <div>
-            <input type="file" id="imageInput" accept="image/*" onChange={handleImageUpload} />
+            <input type="file" id="imageInput" accept="image/*" multiple onChange={handleImageUpload} />
             {selectedImage && (
                 <img src={selectedImage} alt="Selected" width="200" />
             )}

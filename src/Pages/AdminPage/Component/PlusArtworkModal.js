@@ -53,7 +53,6 @@ function PlusArtworkModal({ onSave, onCancel }) {
     };
 
     const handleSubmit = () => {
-        // 입력값을 서버에 보낼 수 있도록 작업
 
         const formData = new FormData();
         formData.append("request", new Blob([JSON.stringify(data)], {type: "application/json"}));
