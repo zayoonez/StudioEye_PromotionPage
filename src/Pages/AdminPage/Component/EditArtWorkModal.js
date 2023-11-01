@@ -57,6 +57,8 @@ function EditArtWorkModal({ item, onSave, onCancel}) {
                 date: editedItem.date,
                 link: editedItem.link,
                 overView: editedItem.overView,
+                // 기존 이미지 리스트 바로 보내기 중
+                existingImageUrlList: editedItem.imageUrlList
         }
 
         const formData = new FormData();
