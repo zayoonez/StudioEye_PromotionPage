@@ -5,9 +5,7 @@ import PortfolioGrid from "./PortfolioGrid"
 import {motion, useScroll, useSpring} from "framer-motion"
 import {ReactComponent as LogoIcon} from '../../assets/logo/STUDIO-I_1.svg'
 import CustomCursor from "../../Components/Common/CustomCursor";
-import MainAnimation from "./MainAnimation";
 import MainLogoAnimation from "./MainLogoAnimation";
-import LogoBanner from "./LogoBanner";
 import {HiArrowLongRight} from "react-icons/hi2";
 import { useInView } from 'react-intersection-observer'; 
 import LetterAnimation from "../../Components/Common/LetterAnimation";
@@ -63,7 +61,6 @@ const PromotionMainpage = () => {
 
                 {/* <Featuredprojects><LetterAnimation text="Featured Projects"></LetterAnimation></Featuredprojects> */}
                 <PortfolioGrid/>
-                <LogoBanner/>
                 <ProgressBar style = {{scaleX}}></ProgressBar>
 
 

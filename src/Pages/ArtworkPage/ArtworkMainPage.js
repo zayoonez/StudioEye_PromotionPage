@@ -72,7 +72,7 @@ const ArtworkMainpage = () => {
         const navigate = useNavigate();
 
         const goToDetail = (id) => {
-            navigate(`/detail`);
+            navigate(`/detail/${id}`);
         };
 
         useEffect(() => {

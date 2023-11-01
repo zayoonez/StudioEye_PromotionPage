@@ -72,4 +72,4 @@ const Banner = ({ images, speed }) => {
         </Inner>
     );
   };
-export default Banner ;
+export default Banner;
