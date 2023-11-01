@@ -23,7 +23,7 @@ const MainDiv = styled.div`
   //이게 ..........calc 가 안먹어 ! 100vh - 4rem 을 해야되는데 .. !
   width: 100vw;
 `;
-const Title = styled.div`
+const Title = styled(motion.div)`
   width: 80vw;
   height: 100px;
   color: black;
@@ -77,7 +77,7 @@ const FirstDetail = styled.div`
 `;
 const BackGround = styled.div`
     width: 80vw;
-    height: 100%;
+    height: 100vh;
     background-size: cover;
     opacity: 0.3;
     /* background-color: beige; */
@@ -159,7 +159,11 @@ const DetailPages = () => {
         <HorizontalScroll reverseScroll = {true} config={{damping:15}}>
         <FirstDetail reverseScroll = {true} style={First}>
             <BackGround style={{ backgroundImage: `url(${detail.img})` }}/>
-            <Title> {detail.name} </Title>
+            <Title 
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.4 }}> 
+                {detail.name} </Title>
             {/* <LetterAnimation about detailTitle text="x"></LetterAnimation> */}
             <Client>{detail.client}</Client>
             <Date>2023</Date>

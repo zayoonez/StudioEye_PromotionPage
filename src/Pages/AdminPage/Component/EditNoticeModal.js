@@ -51,7 +51,12 @@ function EditNoticeModal({ item, onCancel}) {
             const Id = item.id;
 
             axios
-                .delete(`https://port-0-promoationpage-server-12fhqa2blnlum4de.sel5.cloudtype.app/api/notice-board`, {Id})
+                .delete(`https://port-0-promoationpage-server-12fhqa2blnlum4de.sel5.cloudtype.app/api/notice-board`, {
+                    data: Id,
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                })
                 .then((response) => {
                     console.log('삭제되었습니다.', response);
                     onCancel(); // 삭제가 완료되면 취소 함수를 호출하여 모달을 닫습니다.

@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
 import { Link, Router, Route } from "react-router-dom";
+import {motion} from "framer-motion"
 
 //아직 연결, animation 미적용
 
-const ButtonSection = styled(Link)`
+const ButtonSection = styled(motion(Link))`
     position: fixed;
     width: 75px;
     height: 75px;
@@ -32,9 +33,21 @@ const ContactButton = () => {
     const goContact = () => {
         // window.location.href = "http://13.124.68.5:3000/";
     };
-
+    //button scale 부드럽게 in out 되는 방법 . . 찾아야합니다. 
     return (
-        <ButtonSection to="/Contact">
+        <ButtonSection to="/Contact" 
+            // whileHover={{scale : 1.1}}
+            // transition={{ ease: "easeInOut",  duration: 0.5}} 
+            // transition={{
+            //         type: "spring",
+            //         damping: 10,
+            //         mass: 0.75,
+            //         stiffness: 100}}
+            // initial={{ scale: 1 }} 
+            animate={{ scale: [1, 1.12, 1], 
+                transition: { repeat: Infinity, duration: 1.8 } }}
+            // transition={{ ease: "easeInOut",  duration: 0.5,repeat: Infinity }} 
+        >
             <ButtonText>
                 Contact Us!
             </ButtonText>
