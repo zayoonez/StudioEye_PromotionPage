@@ -157,17 +157,17 @@ const DetailPages = () => {
     <StyledBody>
       <MainDiv>
         <HorizontalScroll reverseScroll = {true} config={{damping:15}}>
-        <FirstDetail style={First}>
+        <FirstDetail reverseScroll = {true} style={First}>
             <BackGround style={{ backgroundImage: `url(${detail.img})` }}/>
             <Title> {detail.name} </Title>
             {/* <LetterAnimation about detailTitle text="x"></LetterAnimation> */}
             <Client>{detail.client}</Client>
             <Date>2023</Date>
           </FirstDetail>
-          <SecondDetail style = {Second}>
+          <SecondDetail reverseScroll = {true} style = {Second}>
             <OverView>{detail.overView}</OverView>
           </SecondDetail>
-          <ThirdDetail style = {Third}>
+          <ThirdDetail reverseScroll = {true} style = {Third}>
             <VideoContainer>
               
             </VideoContainer>
