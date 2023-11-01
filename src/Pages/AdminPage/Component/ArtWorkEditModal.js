@@ -27,59 +27,21 @@ const Modal = styled.div`
 `;
 
 
-function EditModal({ item, onSave, onCancel}) {
-    const [editedItem, setEditedItem] = useState(item);
+function ArtworkEditModal({ item, onSave, onCancel}) {
     const navigate = useNavigate();
+    const [editedItem, setEditedItem] = useState(item);
     const [selectedImage, setSelectedImage] = useState(null);
     const [imagePreviews, setImagePreviews] = useState([]);
 
     // item의 이미지 URL 목록을 초기 이미지 미리보기 배열로 설정
     useEffect(() => {
-        if (item.imgList && item.imgList.length > 0) {
-            setImagePreviews(item.imgList);
+        if (editedItem.imgUrlList && editedItem.imgUrlList.length > 0) {
+            setImagePreviews(editedItem.imgUrlList);
         }
-    }, [item.imgList]);
+    }, [editedItem.imgUrlList]);
     const handleSave = () => {
-        // FormData 객체 생성
-        //const formData = new FormData();
 
-        // 폼 데이터에 필드 추가
-        // formData.append('projectId', editedItem.id);
-        // formData.append('department', editedItem.department);
-        // formData.append('category', editedItem.category);
-        // formData.append('name', editedItem.name);
-        // formData.append('client', editedItem.client);
-        // formData.append('date', editedItem.date);
-        // formData.append('link', editedItem.link);
-        // formData.append('overView', editedItem.overView);
-        //
-        // const requestData = {
-        //     projectId: editedItem.id, // 수정할 아이템의 ID
-        //     department: editedItem.department,
-        //     category: editedItem.category,
-        //     name: editedItem.name,
-        //     client: editedItem.client,
-        //     date: editedItem.date,
-        //     link: editedItem.link,
-        //     overView: editedItem.overView
-        // };
-        //
-        // formData.append('request', requestData);
-        // formData.append('files', editedItem.imgList);
-
-        // const requestData = {
-        //         projectId: editedItem.id,
-        //         department: editedItem.department,
-        //         category: editedItem.category,
-        //         name: editedItem.name,
-        //         client: editedItem.client,
-        //         date: editedItem.date,
-        //         link: editedItem.link,
-        //         overView: editedItem.overView
-        // };
-
-        const testData = {
-
+        const requestData = {
                 projectId: editedItem.id,
                 department: editedItem.department,
                 category: editedItem.category,
@@ -87,23 +49,24 @@ function EditModal({ item, onSave, onCancel}) {
                 client: editedItem.client,
                 date: editedItem.date,
                 link: editedItem.link,
-                overView: editedItem.overView
-
+                overView: editedItem.overView,
         }
-
 
         const formData = new FormData();
         formData.append(
             "request",
-            new Blob([JSON.stringify(testData)], { type: "application/json" })
+            new Blob([JSON.stringify(requestData)], { type: "application/json" })
         );
-        formData.append('files', [editedItem.imgListFiles]); // FormData의 'files' 필드에 원하는 값을 추가
+
+        //이미지 수정 ...
+        formData.append('files', [editedItem.imgListFiles]);
 
         axios
             .put(`https://port-0-promoationpage-server-12fhqa2blnlum4de.sel5.cloudtype.app/api/projects`, formData)
             .then((response) => {
                 console.log('수정된 데이터를 서버에 보냈습니다.', response);
-                onSave(editedItem); // 수정된 데이터를 부모 컴포넌트로 전달
+                //isEditing - false;
+                onSave();
             })
             .catch((error) => {
                 console.error('데이터를 서버에 보내는 중 오류가 발생했습니다.', error);
@@ -139,18 +102,6 @@ function EditModal({ item, onSave, onCancel}) {
             reader.readAsDataURL(file);
         }
 
-        const formData = new FormData();
-        formData.append("image", file);
-
-        //---------------수정 필요----------------------
-        axios
-            .post("서버 엔드포인트 URL", formData)
-            .then((response) => {
-                console.log("파일 업로드 성공", response.data);
-            })
-            .catch((error) => {
-                console.error("파일 업로드 중 오류 발생", error);
-            });
     }
 
     const imagePreviewComponents = imagePreviews.map((imagePreview, index) => (
@@ -204,14 +155,6 @@ function EditModal({ item, onSave, onCancel}) {
                     onChange={(e) => setEditedItem({ ...editedItem, date: e.target.value })}
                 />
             </div>
-            {/*<div>*/}
-            {/*    <span>게시 여부(*true / false)</span>*/}
-            {/*    <input*/}
-            {/*        type="boolean"*/}
-            {/*        value={editedItem.isPosted}*/}
-            {/*        onChange={(e) => setEditedItem({ ...editedItem, isPosted: e.target.value })}*/}
-            {/*    />*/}
-            {/*</div>*/}
             <div>
                 <span>상세 설명</span>
                 <input
@@ -247,4 +190,4 @@ function EditModal({ item, onSave, onCancel}) {
     );
 }
 
-export default EditModal;
+export default ArtworkEditModal;

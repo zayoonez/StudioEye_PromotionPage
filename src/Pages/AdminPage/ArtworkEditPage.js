@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import EditModal from "./Component/EditModal,js";
 import Body from "../../Components/Common/Body";
+import ArtWorkEditModal from "./Component/ArtWorkEditModal";
+import ArtworkCreateModal from "./Component/ArtworkCreateModal";
 
 const StyledTable = styled.table`
   width: 100%;
@@ -29,10 +30,10 @@ const StyledTable = styled.table`
   }
 `;
 
-function DataTable({ data, onEdit, deleteProject }) {
+function DataTable({ data, onCreate, onEdit, deleteProject }) {
     return (
         <div>
-            <button>생성</button>
+            <button onClick={() => onCreate()}>생성</button>
         <StyledTable>
             <thead>
             <tr>
@@ -44,7 +45,7 @@ function DataTable({ data, onEdit, deleteProject }) {
                 <th>연도</th>
                 <th>게시여부</th>
                 <th>상세 설명</th>
-                <th>동영상 링크</th>
+                {/*<th>동영상 링크</th>*/}
                 <th>편집</th>
             </tr>
             </thead>
@@ -59,7 +60,7 @@ function DataTable({ data, onEdit, deleteProject }) {
                     <td>{item.date}</td>
                     <td>{item.isPosted ? "O" : "X"}</td>
                     <td>{item.overView}</td>
-                    <td>{item.link}</td>
+                    {/*<td>{item.link}</td>*/}
                     <td>
                         <button onClick={() => onEdit(item)}>편집</button>
                     </td>
@@ -74,34 +75,35 @@ function DataTable({ data, onEdit, deleteProject }) {
 const ArtworkEditPage = () => {
     const [data, setData] = useState([]);
     const [imgData, setImgData] = useState([]);
+    const [isCreating, setIsCreating] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
     const [editingItem, setEditingItem] = useState(null);
 
+    const handleCreate = () => {
+        setIsCreating(true);
+    };
+
     const handleEdit = (item) => {
+        console.log(item);
         setEditingItem(item);
         setIsEditing(true);
     };
 
-    const handleSave = (editedItem) => {
+    const handleSave = () => {
         setIsEditing(false);
+        setIsCreating(false);
     };
 
     const handleCancel = () => {
         setIsEditing(false);
+        setIsCreating(false);
     };
-
-    const deleteProject = () => {
-        
-    }
-
 
     useEffect(() => {
         axios
             .get('https://port-0-promoationpage-server-12fhqa2blnlum4de.sel5.cloudtype.app/api/projects')
             .then((response) => {
                 const data = response.data;
-
-                console.log(data.data[0]);
                 const objects = [];
                 const imgObjects = [];
 
@@ -110,13 +112,14 @@ const ArtworkEditPage = () => {
                         imgObjects[i] = data.data[i].imageUrlList[j];
                     }
 
+
                     const obj = {
                         category: data.data[i].category,
                         client: data.data[i].client,
                         date: data.data[i].date,
                         department: data.data[i].department,
                         id: data.data[i].id,
-                        imgList: data.data[i].imageUrlList,
+                        imgUrlList: data.data[i].imageUrlList,
                         imgListFiles: imgObjects[i],
                         isPosted: data.data[i].isPosted,
                         link: data.data[i].link,
@@ -134,12 +137,14 @@ const ArtworkEditPage = () => {
             });
     }, []);
 
-
     return (
         <Body>
-            <DataTable data={data} onEdit={handleEdit}/>
+            <DataTable data={data} onCreate={handleCreate} onEdit={handleEdit}/>
             {isEditing && (
-                <EditModal item={editingItem} onSave={handleSave} onCancel={handleCancel}/>
+                <ArtWorkEditModal item={editingItem} onSave={handleSave} onCancel={handleCancel}/>
+            )}
+            {isCreating && (
+                <ArtworkCreateModal onSave={handleSave} onCancel={handleCancel}/>
             )}
         </Body>
     );
