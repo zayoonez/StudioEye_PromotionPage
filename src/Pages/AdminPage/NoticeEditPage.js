@@ -5,6 +5,7 @@ import styled from "styled-components";
 import {motion} from "framer-motion";
 import EditNoticeModal from "./Component/EditNoticeModal";
 import PlusNoticeModal from "./Component/PlusNoticeModal";
+import {AiFillDelete} from "react-icons/ai";
 
 
 const BoxContainer = styled(motion.div)`
@@ -14,19 +15,27 @@ const BoxContainer = styled(motion.div)`
     flex-direction: column;
     background-color: white;  
     width: 90%; 
+    
 `;
 
 const AdminDiv = styled(motion.div)`
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: gray;
-    height: 5rem; 
-    width: 60%;
+    text-align: center;
+    width: 100%;
+    position: relative;
 `;
-
+const Delete = styled(motion(AiFillDelete))`
+  font-size: 2.25rem; 
+  cursor: pointer;
+`;
 const Button = styled(motion.button)`
-
+    font-size: 1rem;
+    font-weight: 400;
+    margin: 0.25rem 0;
+    position: absolute;
+    right: 0;
 `;
 
 const Text = styled(motion.text)`
@@ -38,7 +47,7 @@ const Text = styled(motion.text)`
 const StyledTable = styled.table`
   width: 100%;
   border-collapse: separate;
-  border-spacing: 0 16px;
+  border-spacing: 0 2px;
 
   th,
   td {
@@ -61,7 +70,7 @@ const StyledTable = styled.table`
 `;
 
 const Img = styled.img`
-    width: 20%;
+    width: 50%;
 `;
 
 function DataTable({ data, onEdit, deleteProject }) {
@@ -82,7 +91,7 @@ function DataTable({ data, onEdit, deleteProject }) {
                     <td>{item.title}</td>
                     <td><Img src={item.imageUrl} /></td>
                     <td>
-                        <button onClick={() => onEdit(item)}>삭제</button>
+                        <Delete onClick={() => onEdit(item)}></Delete>
                     </td>
                 </tr>
             ))}
@@ -143,9 +152,10 @@ const NoticeEditPage = () => {
         return (
             <>
                 <BoxContainer>
+                    <AdminDiv>
                     <Text>공지사항 목록</Text>
                     <Button onClick={AddNotice}>등록하기</Button>
-
+                    </AdminDiv>
                     <DataTable data={data} onEdit={handleEdit}/>
                     {isEditing && (
                         <EditNoticeModal item={editingItem} onCancel={handleCancel}/>
