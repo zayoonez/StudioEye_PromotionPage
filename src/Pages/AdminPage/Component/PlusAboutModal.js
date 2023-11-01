@@ -26,6 +26,20 @@ const Modal = styled.div`
   overflow-y: auto;
 `;
 
+const Text = styled.text`
+    font-size: 2rem;
+    font-weight: 600;
+     margin: 0.5rem 0;
+`;
+
+const Div = styled.div`
+    margin: 0.25rem 0;
+`;
+const Button = styled.button`
+    font-size: 1rem;
+    font-weight: 400;
+    margin: 0.5rem 0.25rem;
+`;
 
 function PlusAboutModal({onCancel}) {
 
@@ -89,15 +103,15 @@ function PlusAboutModal({onCancel}) {
     return (
         <ModalContainer>
             <Modal>
-                <h2>추가</h2>
-                <div>
+                <Text>협력사 추가</Text>
+                <Div>
                     <span>링크</span>
                     <input
                         type="text"
                         onChange={(e) => setItem({ ...item, link: e.target.value })}
                     />
-                </div>
-                <div>
+                </Div>
+                <Div>
                     {/*<span>게시여부</span>*/}
                     <label htmlFor="dropdown">옵션 선택:</label>
                     <select id="dropdown" value={selectedOption} onChange={handleOptionChange}>
@@ -105,13 +119,15 @@ function PlusAboutModal({onCancel}) {
                         <option value="Main">Main CoOp.</option>
                         <option value="Sub">Sub CoOp.</option>
                     </select>
-                </div>
-                <div>
+                </Div>
+                <Div>
                     <span>이미지</span>
                     <input type="file" accept='image/*' onChange={onImageHandler} />
+                </Div>
+                <div>
+                <Button onClick={AddAbout}>저장</Button>
+                <Button onClick={onCancel}>취소</Button>
                 </div>
-                <button onClick={AddAbout}>저장</button>
-                <button onClick={onCancel}>취소</button>
             </Modal>
         </ModalContainer>
     );

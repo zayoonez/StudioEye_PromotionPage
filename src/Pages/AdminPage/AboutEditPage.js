@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import MyAccordion from "../NoticePage/Components/MyAccordion";
 import Body from "../../Components/Common/Body";
 import styled from "styled-components";
 import {motion} from "framer-motion";
 import EditAboutModal from "./Component/EditAboutModal";
 import PlusAboutModal from "./Component/PlusAboutModal";
+import {AiFillDelete} from "react-icons/ai";
 
 
 const BoxContainer = styled(motion.div)`
@@ -21,13 +21,21 @@ const AdminDiv = styled(motion.div)`
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: gray;
-    height: 5rem; 
-    width: 80%;
+    text-align: center;
+    width: 100%;
+    position: relative;
+`;
+const Delete = styled(motion(AiFillDelete))`
+  font-size: 2.25rem; 
+  cursor: pointer;
 `;
 
 const Button = styled(motion.button)`
-    
+    font-size: 1rem;
+    font-weight: 400;
+    margin: 0.25rem 0;
+    position: absolute;
+    right: 0;
 `;
 
 const Text = styled(motion.text)`
@@ -85,7 +93,7 @@ function DataTable({ data, onEdit, deleteProject }) {
                     <td><Img src={item.logoImageUrl} /></td>
                     <td>{item.link}</td>
                     <td>
-                        <Button onClick={() => onEdit(item)}>삭제</Button>
+                        <Delete onClick={() => onEdit(item)}></Delete>
                     </td>
                 </tr>
             ))}
@@ -165,8 +173,10 @@ const AdminEditPage = () => {
         return (
             <>
                 <BoxContainer>
+                    <AdminDiv>
                         <Text>협력사 목록</Text>
                         <Button onClick={AddAbout}>등록하기</Button>
+                    </AdminDiv>
                     <DataTable data={data} onEdit={handleEdit}/>
                     {isEditing && (
                         <EditAboutModal item={editingItem} onCancel={handleCancel}/>

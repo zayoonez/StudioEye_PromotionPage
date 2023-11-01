@@ -24,8 +24,22 @@ const Modal = styled.div`
   max-width: 80%;
   max-height: 80%;
   overflow-y: auto;
+   display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 `;
 
+const Text = styled.text`
+    font-size: 2rem;
+    font-weight: 600;
+`;
+
+const Button = styled.button`
+    font-size: 1rem;
+    font-weight: 400;
+    margin: 1rem 0.25rem;
+`;
 
 function EditNoticeModal({ item, onCancel}) {
 
@@ -33,6 +47,7 @@ function EditNoticeModal({ item, onCancel}) {
 
         console.log(item);
         console.log(item.id);
+
             const Id = item.id;
 
             axios
@@ -52,10 +67,11 @@ function EditNoticeModal({ item, onCancel}) {
     return (
         <ModalContainer>
             <Modal>
-                <h2>삭제 하시겠습니까?</h2>
-
-                <button onClick={deleteProject}>삭제</button>
-                <button onClick={onCancel}>취소</button>
+                <Text>삭제 하시겠습니까?</Text>
+                <div>
+                    <Button onClick={deleteProject}>삭제</Button>
+                    <Button onClick={onCancel}>취소</Button>
+                </div>
             </Modal>
         </ModalContainer>
     );

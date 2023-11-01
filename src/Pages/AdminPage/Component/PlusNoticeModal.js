@@ -26,6 +26,20 @@ const Modal = styled.div`
   overflow-y: auto;
 `;
 
+const Text = styled.text`
+    font-size: 2rem;
+    font-weight: 600;
+     margin: 0.5rem 0;
+`;
+
+const Div = styled.div`
+    margin: 0.25rem 0;
+`;
+const Button = styled.button`
+    font-size: 1rem;
+    font-weight: 400;
+    margin: 0.5rem 0.25rem;
+`;
 
 function PlusNoticeModal({onCancel}) {
 
@@ -75,20 +89,22 @@ function PlusNoticeModal({onCancel}) {
     return (
         <ModalContainer>
             <Modal>
-                <h2>추가</h2>
-                <div>
+                <Text>공지사항 추가</Text>
+                <Div>
                     <span>제목</span>
                     <input
                         type="text"
                         onChange={(e) => setItem({ ...item, title: e.target.value })}
                     />
-                </div>
-                <div>
+                </Div>
+                <Div>
                     <span>이미지</span>
                     <input type="file" accept='image/*' onChange={onImageHandler} />
+                </Div>
+                <div>
+                <Button onClick={AddNotice}>저장</Button>
+                <Button onClick={onCancel}>취소</Button>
                 </div>
-                <button onClick={AddNotice}>저장</button>
-                <button onClick={onCancel}>취소</button>
             </Modal>
         </ModalContainer>
     );
