@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import Body from "../../Components/Common/Body";
-import ArtWorkEditModal from "./Component/ArtWorkEditModal";
-import ArtworkCreateModal from "./Component/ArtworkCreateModal";
+import PlusArtworkModal from "./Component/PlusArtworkModal";
+import EditArtWorkModal from "./Component/EditArtWorkModal";
 
 const StyledTable = styled.table`
   width: 100%;
@@ -90,37 +90,35 @@ const ArtworkEditPage = () => {
     };
 
     const handleSave = () => {
+        fetchData();
         setIsEditing(false);
         setIsCreating(false);
     };
 
     const handleCancel = () => {
+        fetchData();
         setIsEditing(false);
         setIsCreating(false);
     };
 
     useEffect(() => {
+        fetchData();
+    }, []);
+    const fetchData = () => {
         axios
             .get('https://port-0-promoationpage-server-12fhqa2blnlum4de.sel5.cloudtype.app/api/projects')
             .then((response) => {
                 const data = response.data;
                 const objects = [];
-                const imgObjects = [];
 
                 for (let i = 0; i < data.data.length; i++) {
-                    for(let j = 0; j < data.data[i].imageUrlList.length; j++) {
-                        imgObjects[i] = data.data[i].imageUrlList[j];
-                    }
-
-
                     const obj = {
                         category: data.data[i].category,
                         client: data.data[i].client,
                         date: data.data[i].date,
                         department: data.data[i].department,
                         id: data.data[i].id,
-                        imgUrlList: data.data[i].imageUrlList,
-                        imgListFiles: imgObjects[i],
+                        imageUrlList: data.data[i].imageUrlList,
                         isPosted: data.data[i].isPosted,
                         link: data.data[i].link,
                         name: data.data[i].name,
@@ -129,22 +127,20 @@ const ArtworkEditPage = () => {
 
                     objects.push(obj);
                 }
-                setImgData(imgObjects);
                 setData(objects);
             })
             .catch((error) => {
                 console.error(error);
             });
-    }, []);
-
+    };
     return (
         <Body>
             <DataTable data={data} onCreate={handleCreate} onEdit={handleEdit}/>
             {isEditing && (
-                <ArtWorkEditModal item={editingItem} onSave={handleSave} onCancel={handleCancel}/>
+                <EditArtWorkModal item={editingItem} onSave={handleSave} onCancel={handleCancel}/>
             )}
             {isCreating && (
-                <ArtworkCreateModal onSave={handleSave} onCancel={handleCancel}/>
+                <PlusArtworkModal onSave={handleSave} onCancel={handleCancel}/>
             )}
         </Body>
     );

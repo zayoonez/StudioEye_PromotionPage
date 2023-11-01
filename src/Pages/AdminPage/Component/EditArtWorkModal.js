@@ -27,7 +27,7 @@ const Modal = styled.div`
 `;
 
 
-function ArtworkEditModal({ item, onSave, onCancel}) {
+function EditArtWorkModal({ item, onSave, onCancel}) {
     const navigate = useNavigate();
     const [editedItem, setEditedItem] = useState(item);
     const [selectedImage, setSelectedImage] = useState(null);
@@ -35,11 +35,12 @@ function ArtworkEditModal({ item, onSave, onCancel}) {
 
     // item의 이미지 URL 목록을 초기 이미지 미리보기 배열로 설정
     useEffect(() => {
-        if (editedItem.imgUrlList && editedItem.imgUrlList.length > 0) {
-            setImagePreviews(editedItem.imgUrlList);
+        if (editedItem.imageUrlList && editedItem.imageUrlList.length > 0) {
+            setImagePreviews(editedItem.imageUrlList);
         }
-    }, [editedItem.imgUrlList]);
+    }, [editedItem.imageUrlList]);
     const handleSave = () => {
+        console.log("imgURL"+ editedItem.imageUrlList);
 
         const requestData = {
                 projectId: editedItem.id,
@@ -58,9 +59,9 @@ function ArtworkEditModal({ item, onSave, onCancel}) {
             new Blob([JSON.stringify(requestData)], { type: "application/json" })
         );
 
-        //이미지 수정 ...
-        formData.append('files', [editedItem.imgListFiles]);
-
+        //이미지 수정 적용하지 않고 일단 기존 imageUrlList로 보냄
+        formData.append('files', editedItem.imageUrlList);
+        
         axios
             .put(`https://port-0-promoationpage-server-12fhqa2blnlum4de.sel5.cloudtype.app/api/projects`, formData)
             .then((response) => {
@@ -91,6 +92,7 @@ function ArtworkEditModal({ item, onSave, onCancel}) {
         }
     };
 
+    // ------------- 수정 필요 -----------------
     function handleImageUpload(event) {
         const file = event.target.files[0];
         if (file) {
@@ -98,6 +100,7 @@ function ArtworkEditModal({ item, onSave, onCancel}) {
             reader.onload = (e) => {
                 const newPreviews = [...imagePreviews, e.target.result];
                 setImagePreviews(newPreviews);
+                //editItem.imageUrlList = newPreviews;
             };
             reader.readAsDataURL(file);
         }
@@ -190,4 +193,4 @@ function ArtworkEditModal({ item, onSave, onCancel}) {
     );
 }
 
-export default ArtworkEditModal;
+export default EditArtWorkModal;
