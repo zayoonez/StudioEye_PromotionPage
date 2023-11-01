@@ -52,6 +52,7 @@ function DataTable({data, onEdit}){
                     <td>{item.clientName}</td>
                     <td>{item.organization}</td>
                     <td>{item.contact}</td>
+                    <td>{item.email}</td>
                     <td>{item.description}</td>
                     <td>
                         <button onClick={() => onEdit(item)}>편집</button>
@@ -88,12 +89,11 @@ const ContactEditPage = () => {
             .then((response) => {
                 const data = response.data;
 
-                console.log(data.data[0]);
+                console.log(data.data[1]);
                 const objects = [];
                 const imgObjects = [];
 
                 for (let i = 0; i < data.data.length; i++) {
-
                     const obj = {
                         category: data.data[i].category,
                         clientName: data.data[i].clientName,

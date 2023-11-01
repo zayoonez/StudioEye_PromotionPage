@@ -27,10 +27,10 @@ const Modal = styled.div`
 `;
 
 function PlusArtworkModal({ onSave, onCancel }) {
-    const [image, setImage] = useState();
+    const [imageList, setImageList] = useState([]);
 
     const onImageHandler = (event) => {
-        setImage(()=>event.target.files[0]);
+        setImageList([...imageList, ...event.target.files]);
 
     };
 
@@ -57,7 +57,9 @@ function PlusArtworkModal({ onSave, onCancel }) {
 
         const formData = new FormData();
         formData.append("request", new Blob([JSON.stringify(data)], {type: "application/json"}));
-        formData.append('files', image);
+        imageList.forEach(image => {
+            formData.append('files', image);
+        });
 
         axios
             .post(` https://port-0-promoationpage-server-12fhqa2blnlum4de.sel5.cloudtype.app/api/projects`, formData)
@@ -153,7 +155,7 @@ function PlusArtworkModal({ onSave, onCancel }) {
             </div>
             <div>
                 <span>이미지</span>
-                <input type="file" accept='image/*' onChange={onImageHandler} />
+                <input type="file" accept='image/*' multiple onChange={onImageHandler} />
             </div>
             <button onClick={handleSubmit}>저장</button>
             <button onClick={onCancel}>취소</button>
