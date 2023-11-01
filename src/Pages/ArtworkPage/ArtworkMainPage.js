@@ -43,7 +43,6 @@ const ContContainer = styled(motion.div)`
     display: flex;
     flex-wrap: wrap; 
     overflow: auto;
-    
 `;
 
 const Content = styled(motion.img)`
