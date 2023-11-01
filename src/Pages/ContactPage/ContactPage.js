@@ -119,6 +119,7 @@ const CName = styled.span`
     padding: 0.375em 0.75em 0.375em 0.375em;
     border-radius: 99em;
     transition: 0.25s ease;
+    font-size: 18px;
 
     &:hover {
       background-color:  rgb(219, 41, 23, 0.2);
@@ -140,26 +141,27 @@ const CName = styled.span`
   
 `;
 
-
-
 const Placeholder = styled.span`
-  position: absolute;
-  margin: 17px 0;
-  padding: 0 4px;
-  font-family: Roboto, sans-serif;
-  color: #6c757d;
-  display: flex;
-  align-items: center;
-  font-size: 1.6rem;
-  top: 0;
-  left: 17px;
-  transition: all 0.2s;
-  transform-origin: 0% 0%;
-  background: none;
-  pointer-events: none;
+    position: absolute;
+    margin: 17px 0;
+    padding: 0 4px;
+    font-family: Roboto, sans-serif;
+    color: #6c757d;
+    display: flex;
+    align-items: center;
+    font-size: 1.6rem;
+    top: 0;
+    left: 17px;
+    transition: all 0.2s;
+    transform-origin: 0% 0%;
+    background: none;
+    pointer-events: none;
 `;
+const CButton = styled.div`
+    width: 100px;
+    height: 100px;
 
-
+`;
 
 const ContactPage = () => {
     useEffect(() => {
@@ -242,10 +244,11 @@ const ContactPage = () => {
                     <InputField type="text" name="성함" id="name" required spellCheck={false} />
                     <Placeholder>직책</Placeholder>
                 </InputBlock>
-
+                
             </FormBlock_2>
-                         
             </FormBlock>
+            <CButton>문의하기</CButton>
+
         </Body>
     )
 }
