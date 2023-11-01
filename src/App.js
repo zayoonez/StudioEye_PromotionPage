@@ -13,6 +13,7 @@ import ArtworkEditPage from "./Pages/AdminPage/ArtworkEditPage";
 import ContactEditPage from "./Pages/AdminPage/ContactEditPage";
 import NoticeEditPage from "./Pages/AdminPage/NoticeEditPage";
 import NoticeMainPage from "./Pages/NoticePage/NoticeMainPage";
+import ContactPage from './Pages/ContactPage/ContactPage';
 
 function App() {
     const [showInsertPage, setShowInsertPage] = React.useState(true);
@@ -60,13 +61,14 @@ function App() {
                 <Route path="/"  element={<PromotionMainpage />}/>
                 <Route path="/About"  element={<AboutMainpage />}/>
                 <Route path="/Artwork"  element={<ArtworkMainpage />}/>
-                <Route path="/detail" element= {<DetailPages />}/>
+                <Route path="/detail/:id" element= {<DetailPages />}/>
                 <Route path="/notice" element= {<NoticeMainPage />}/>
                 <Route path="/admin" element={<AdminMainPage />}/>
                 <Route path="/admin/about" element={<AboutEditPage />}/>
                 <Route path="/admin/artwork" element={<ArtworkEditPage />}/>
                 <Route path="/admin/contact" element={<ContactEditPage />}/>
                 <Route path="/admin/notice" element={<NoticeEditPage />}/>
+                <Route path="/Contact" element={<ContactPage/>}/>
           </Routes>
           </AnimatePresence>
       </BrowserRouter>

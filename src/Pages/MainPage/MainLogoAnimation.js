@@ -29,8 +29,8 @@ const SecondBox = styled.div`
 `
 const Line = styled(motion.div)`
     background-color: red; /* 선의 색상 설정 */
-    width: 20px;
-    border-radius: 5px;
+    width: 30px;
+    /* border-radius: 5px; */
 
     /* height: 80vh; */
     /* transform: rotate(45deg); */
@@ -82,10 +82,10 @@ const lineVariants = {
 //     color: red;
 // `;
 const Line2 = styled(motion.div)`
-    height: 7px;
+    height: 11px;
     background-color: red;
     width: 100vw;
-    border-radius: 5px;
+    /* border-radius: 5px; */
 
 `;
 const MainLogoAnimation = () => {
