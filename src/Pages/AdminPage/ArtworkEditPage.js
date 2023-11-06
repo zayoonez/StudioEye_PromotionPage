@@ -10,14 +10,10 @@ const StyledTable = styled.table`
   border-collapse: separate;
   border-spacing: 0 16px;
 
-  th,
+ 
   td {
     padding: 15px;
     text-align: center;
-  }
-
-  th:last-child {
-    display: flex;
   }
 
   tbody tr {
@@ -44,7 +40,7 @@ function DataTable({ data, onCreate, onEdit, deleteProject }) {
                 <th>고객사</th>
                 <th>연도</th>
                 <th>게시여부</th>
-                <th>상세 설명</th>
+                {/*<th>상세 설명</th>*/}
                 {/*<th>동영상 링크</th>*/}
                 <th>편집</th>
             </tr>
@@ -59,7 +55,7 @@ function DataTable({ data, onCreate, onEdit, deleteProject }) {
                     <td>{item.client}</td>
                     <td>{item.date}</td>
                     <td>{item.isPosted ? "O" : "X"}</td>
-                    <td>{item.overView}</td>
+                    {/*<td>{item.overView}</td>*/}
                     {/*<td>{item.link}</td>*/}
                     <td>
                         <button onClick={() => onEdit(item)}>편집</button>
