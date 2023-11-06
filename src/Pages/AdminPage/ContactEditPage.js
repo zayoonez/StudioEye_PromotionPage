@@ -40,8 +40,6 @@ function DataTable({data, onEdit}){
                 <th>contact</th>
                 <th>email</th>
                 <th>position</th>
-                <th>description</th>
-                <th>편집</th>
             </tr>
             </thead>
             <tbody>
@@ -53,10 +51,7 @@ function DataTable({data, onEdit}){
                     <td>{item.organization}</td>
                     <td>{item.contact}</td>
                     <td>{item.email}</td>
-                    <td>{item.description}</td>
-                    <td>
-                        <button onClick={() => onEdit(item)}>편집</button>
-                    </td>
+                    <td>{item.position}</td>
                 </tr>
             ))}
             </tbody>
