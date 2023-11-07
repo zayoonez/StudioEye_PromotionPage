@@ -11,6 +11,11 @@ const BoxContainer = styled(motion.div)`
     background-color: white;
     height: 40rem;
     padding-top: 20rem;
+    
+     @media(max-width: 390px){
+    height: 20rem;
+    padding-top: 10rem;
+    }
 `;
 
 // const Background = styled(motion.div)`
@@ -29,18 +34,38 @@ const TextWelcome = styled(motion.div)`
   font-weight: 600;
   width: 60%;
   text-align: right:
+  
+   @media(max-width: 390px){
+    font-size: 1rem;
+    }
 `;
 const Text = styled(motion.div)`
   text-align: right;
   font-size: 2rem;
   font-weight: 600;
   width: 60%;
+  
+   @media(max-width: 390px){
+    font-size: 1rem;
+    }
 `;
 
 const StyledLetter = styled(motion.span)`
   display: inline-block;
   font-size: 6rem;
   font-weight: 600;
+  
+  @media(max-width: 850px){
+    font-size: 4rem;
+    }
+    
+    @media(max-width: 562px){
+    font-size: 2.75rem;
+    }
+  
+   @media(max-width: 390px){
+    font-size: 2.5rem;
+    }
 `;
 const Div = styled(motion.div)`
   display: flex;
@@ -49,6 +74,10 @@ const Div = styled(motion.div)`
   flex-direction: column;
   position: absolute;
   top: 50rem;
+  
+  @media(max-width: 390px){
+    top: 22rem;
+    }
 `;
 
 const TextVariant = {
@@ -93,6 +122,10 @@ const letterVariant = {
 
 const GoDown = styled(motion.div)`
   font-size: 5rem; 
+  
+   @media(max-width: 390px){
+    font-size: 2.5rem;
+    }
 `;
 
 const DownVariant =  {

@@ -1,12 +1,29 @@
 import React, { useEffect, useRef } from 'react';
+import styled from "styled-components";
+import {motion} from "framer-motion";
 
+const Div = styled(motion.div)`
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 27rem;
+    padding: 5%;
+    
+    @media(max-width: 520px){
+    height: 17rem;
+    }
+    
+    @media(max-width: 390px){
+    height: 13.5rem;
+    }
+`;
 
 function NaverMap() {
     const mapElement = useRef(null);
     const markerLocation = { lat: 37.551442330782, lng: 127.04819402296 };
     const mapOptions = {
         center: markerLocation,
-        zoom: 17,
+        zoom: 16,
         draggable: false,
         zoomControl: true,
     };
@@ -42,7 +59,7 @@ function NaverMap() {
         });
     }, []);
 
-    return <div ref={mapElement} style={{ height: '32rem', width: '100%' }} />;
+    return <Div ref={mapElement}  />;
 }
 
 export default NaverMap;

@@ -12,8 +12,13 @@ const BoxContainer = styled(motion.div)`
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding: 5%;
+    width: 100%;
     height: 65rem;
+    
+    @media(max-width: 390px){
+    height: 40rem;
+    width: 90%;
+    }
 `;
 
 const SubTitle = styled(motion.div)`
@@ -21,17 +26,29 @@ const SubTitle = styled(motion.div)`
     font-size: 4rem;
     font-weight: 600;
     margin-bottom: 1rem;
-    margin-top: 1rem;
+    
+    @media(max-width: 700px){
+    font-size: 1.75rem;
+    height: 5rem;
+    }
+    
+    @media(max-width: 390px){
+    font-size: 1.75rem;
+    height: 5rem;
+    }
 `;
 
 const MainLogoDiv = styled(motion.div)`
-justify-content: center;
-    align-items: center;
+  justify-content: center;
+  align-items: center;
   width: 90%;
-  height: 20rem;
+  // height: 20rem;
   display: flex;
   padding: 2%;
   margin-bottom: 2rem;
+  word-wrap: break-word;
+  
+
 `;
 const MainLogo = styled(motion.div)`
   // width: 16rem;
@@ -40,15 +57,20 @@ const MainLogo = styled(motion.div)`
   margin-left: 2%;
   margin-right: 2%;
   cursor: pointer;
+  
+  @media(max-width: 700px){
+    height: 4.5rem;
+    }
 `;
 
 const SubLogoDiv = styled(motion.div)`
-    justify-content: center;
-    align-items: center;
+  justify-content: center;
+  align-items: center;
   width: 90%;
-  height: 15rem;
+  word-wrap: break-word;
   display: flex;
   padding: 2%;
+ 
 `;
 
 const SubLogo = styled(motion.div)`
@@ -57,6 +79,11 @@ const SubLogo = styled(motion.div)`
   display: flex;
   margin-left: 2%;
   margin-right: 2%;
+  
+  @media(max-width: 390px){
+    height: 2.25rem;
+    }
+  
 `;
 
 

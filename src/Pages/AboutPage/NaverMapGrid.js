@@ -11,18 +11,40 @@ const BoxContainer = styled(motion.div)`
     flex-direction: column;
     height: 60rem;
     padding: 5%;
+    
+     @media(max-width: 390px){
+    height: 45rem;
+    }
 `;
 
 const Div = styled(motion.div)`
     height: 32rem;
     width: 90%;
     margin-bottom: 2rem; 
+    border: 1px solid red;
+    
+    @media(max-width: 520px){
+    height: 20rem;
+    }
+    
+    @media(max-width: 390px){
+    height: 16rem;
+    margin-bottom: 1rem; 
+    }
 `;
 
 const Text = styled(motion.text)`
     font-size: 1.4rem;
     width: 90%;
     margin-bottom: 1rem;
+    
+    @media(max-width: 520px){
+    height: 1rem;
+    }
+    
+    @media(max-width: 390px){
+    font-size: 0.75rem;
+    }
 `;
 const divVariant =  {
     animate: { opacity: 1, y:0},

@@ -8,14 +8,22 @@ const BoxContainer = styled(motion.div)`
     background-color: white;
     height: 80rem;
     position: relative;
+    
+    @media(max-width: 390px){
+        height: 50rem;
+    }
 `;
 const Img = styled(motion.img)`
-    font-size: 2rem;
     position: absolute;
     left: 5%;
     top: 2rem;
     width: 90%;
     height: 20rem;
+    
+    @media(max-width: 390px){
+    left: 0%;
+    height: 15rem;
+    }
 `;
 
 const TitleText = styled(motion.div)`
@@ -24,6 +32,22 @@ const TitleText = styled(motion.div)`
     right: 5rem;
     top: 25rem;
     font-weight: 600;
+    
+     @media(max-width: 780px){
+    font-size: 3rem;
+    }
+    
+     @media(max-width: 585px){
+    font-size: 2rem;
+    }
+    
+     @media(max-width: 390px){
+    top: 15rem;
+    right: 4rem;
+    font-size: 2rem;
+    }
+    
+    
 `;
 const BackText = styled(motion.div)`
     font-size: 14rem;
@@ -32,6 +56,20 @@ const BackText = styled(motion.div)`
     left: 5rem;
     top: 27rem;
     font-weight: 600;
+    
+    @media(max-width: 780px){
+    font-size: 10rem;
+    }
+    
+    @media(max-width: 585px){
+    font-size: 6rem;
+    }
+    
+    @media(max-width: 390px){
+        top: 18rem;
+        font-size: 6rem;
+        left: 1rem;
+    }
 `;
 const SubText = styled(motion.div)`
     font-size: 3rem;
@@ -39,6 +77,20 @@ const SubText = styled(motion.div)`
     left: 5rem;
     top: 38rem;
     font-weight: 600;
+    
+    @media(max-width: 780px){
+    font-size: 2rem;
+    }
+    
+    @media(max-width: 585px){
+    font-size: 1.5rem;
+    }
+    
+    @media(max-width: 390px){
+        top: 24rem;
+        font-size: 1.5rem;
+        left: 1rem;
+    }
 `;
 const Text = styled(motion.div)`
     font-size: 2rem;
@@ -46,6 +98,20 @@ const Text = styled(motion.div)`
     left: 5rem;
     width: 60%;
     top: 44rem;
+    
+    @media(max-width: 780px){
+    font-size: 1.5rem;
+    }
+    
+    @media(max-width: 585px){
+    font-size: 1rem;
+    }
+    
+    @media(max-width: 390px){
+        top: 28rem;
+        font-size: 1rem;
+        left: 1rem;
+    }
 `;
 
 const TitleVariant =  {

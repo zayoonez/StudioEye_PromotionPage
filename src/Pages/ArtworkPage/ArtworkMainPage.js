@@ -17,26 +17,6 @@ const BoxContainer = styled(motion.div)`
     
 `;
 
-const CategoryContainer = styled(motion.div)`
-    height: 40vh;
-    width: 20%;
-    position: absolute;
-    left: 1%;
-    top: 1rem;
-`;
-
-const Category = styled(motion.div)`
-    height: 20%;
-    margin-bottom: 5%;
-    font-weight:600;
-    font-size: 1.5rem;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    cursor: pointer;
-`;
-
-
 const ContContainer = styled(motion.div)`
     height: 85vh;
     width: 100%;
@@ -47,6 +27,7 @@ const ContContainer = styled(motion.div)`
 
 const Content = styled(motion.img)`
     width: 45%;
+    aspect-ratio: 1024 / 720;
     margin-left: 2%;
     margin-right: 2%;
     margin-bottom: 5vh;

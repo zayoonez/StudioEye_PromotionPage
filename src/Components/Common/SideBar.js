@@ -6,12 +6,11 @@ import {useNavigate} from "react-router-dom";
 const Block = styled.div`
   position: fixed;
   width: 8vw;
+  min-width: 3rem;
   height: 95vh;
   top: 4rem;
   right:0;
   background-color: transparent;
-
-
 
  
 `;
@@ -57,7 +56,7 @@ const Text = styled.text`
     cursor: pointer;
     
      @media(max-width: 390px){
-    font-size: 1.25rem;
+    font-size: 1rem;
     }
 `;
 

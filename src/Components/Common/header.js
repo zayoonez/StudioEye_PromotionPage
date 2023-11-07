@@ -7,6 +7,8 @@ import {motion} from "framer-motion";
 import {Variants} from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import studioi from '../../assets/studioi.png'
+import PlusAboutModal from "../../Pages/AdminPage/Component/PlusAboutModal";
+import AdminModal from "./AdminModal";
 
 const HeaderBlock = styled.div`
   position: fixed;
@@ -26,12 +28,19 @@ const AnimatedOffcanvas = styled(Offcanvas)`
   left: 0; 
   height: 96vh;
   
+  @media(max-width: 390px){
+    margin-top: 2rem;
+    }
 `;
 
 const OffcanvasBody = styled(Offcanvas.Body)`
   display: flex;
   flex-direction: column;
   padding: 1rem;
+  
+  @media(max-width: 840px){
+    padding-left: 0rem;
+    }
 `;
 
 const CanvasDiv = styled.div`
@@ -57,9 +66,11 @@ const BottomDiv = styled.div`
 const Text = styled.text`
     color: rgba(0,0,0,0.2);
     font-size: 1.5rem;
+    cursor: default;
     
       @media(max-width: 390px){
     color: rgba(0,0,0,0.0);
+    font-size: 0rem;
     }
 `;
 /**
@@ -72,16 +83,16 @@ const Wrapper = styled(Responsive)`
   align-items: center;
   justify-content: space-between; 
   
+  @media(max-width: 390px){
+    height: 2rem;
+    }
+    
   .logo {
-    font-size: 2.25rem;
     font-weight: 600;
     letter-spacing: 2px;
     white-space: nowrap;
     cursor: pointer;
     
-    @media(max-width: 390px){
-    font-size: 1.625rem;
-    }
   }
   .menu{
     margin-right: 5%;
@@ -111,7 +122,7 @@ const MenuButton = styled(motion.button)`
     }
     
     @media(max-width: 390px){
-    font-size: 1.25rem;
+    font-size: 2rem;
     }
 `;
 
@@ -163,6 +174,7 @@ const Header = () => {
     const navigate = useNavigate();
 
     const [show, setShow] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -173,8 +185,12 @@ const Header = () => {
     };
 
     const goToAdmin = () => {
-        navigate('/admin')
+        setIsAdmin(true);
+        // navigate('/admin');
     }
+    const handleCancel = () => {
+        setIsAdmin(false);
+    };
 
     const text = "STUDIO I";
     return (
@@ -207,7 +223,9 @@ const Header = () => {
             </AnimatedOffcanvas>
             </motion.div>
 
-
+            {isAdmin && (
+                <AdminModal onCancel={handleCancel}/>
+            )}
         </>
     );
 };

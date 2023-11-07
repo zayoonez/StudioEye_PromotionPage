@@ -13,13 +13,19 @@ const boxVariant = {
 
 const Title = styled(motion.div)`
     display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 300px;
     margin-top: 100px;
     margin-bottom: 100px;
     font-size: 4rem;
     font-weight: 600;
+    
+    @media(max-width: 700px){
+    font-size: 2rem;
+    }
+    
+    @media(max-width: 390px){
+    font-size: 1.75rem;
+    margin-top: 100px;
+    }
     
 `;
 
