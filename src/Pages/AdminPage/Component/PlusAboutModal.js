@@ -34,6 +34,26 @@ const Text = styled.text`
 
 const Div = styled.div`
     margin: 0.25rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
+
+const Title = styled.div`
+    margin-right: 5%;
+    width: 25%;
+`;
+const Input = styled.input`
+    width: 70%;
+`;
+
+const Label = styled.label`
+    margin-right: 5%;
+    width: 25%;
+`;
+
+const Select = styled.select`
+    width: 70%;
 `;
 const Button = styled.button`
     font-size: 1rem;
@@ -105,24 +125,23 @@ function PlusAboutModal({onCancel}) {
             <Modal>
                 <Text>협력사 추가</Text>
                 <Div>
-                    <span>링크</span>
-                    <input
+                    <Title>링크</Title>
+                    <Input
                         type="text"
                         onChange={(e) => setItem({ ...item, link: e.target.value })}
                     />
                 </Div>
                 <Div>
-                    {/*<span>게시여부</span>*/}
-                    <label htmlFor="dropdown">옵션 선택:</label>
-                    <select id="dropdown" value={selectedOption} onChange={handleOptionChange}>
+                    <Label htmlFor="dropdown">옵션 선택</Label>
+                    <Select id="dropdown" value={selectedOption} onChange={handleOptionChange}>
                         <option value="">선택하세요</option>
                         <option value="Main">Main CoOp.</option>
                         <option value="Sub">Sub CoOp.</option>
-                    </select>
+                    </Select>
                 </Div>
                 <Div>
-                    <span>이미지</span>
-                    <input type="file" accept='image/*' onChange={onImageHandler} />
+                    <Title>이미지</Title>
+                    <Input type="file" accept='image/*' onChange={onImageHandler} />
                 </Div>
                 <div>
                 <Button onClick={AddAbout}>저장</Button>

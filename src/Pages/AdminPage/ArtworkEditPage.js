@@ -6,7 +6,7 @@ import PlusArtworkModal from "./Component/PlusArtworkModal";
 import EditArtWorkModal from "./Component/EditArtWorkModal";
 
 const StyledTable = styled.table`
-  width: 100%;
+  width: 1180px;
   border-collapse: separate;
   border-spacing: 0 16px;
 

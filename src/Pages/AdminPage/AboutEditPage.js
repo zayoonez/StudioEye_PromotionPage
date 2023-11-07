@@ -45,7 +45,7 @@ const Text = styled(motion.text)`
 `;
 
 const StyledTable = styled.table`
-  width: 100%;
+  width: 1180px;
   border-collapse: separate;
   border-spacing: 0 16px;
 
@@ -78,7 +78,7 @@ function DataTable({ data, onEdit, deleteProject }) {
         <StyledTable>
             <thead>
             <tr>
-                <th>번호</th>
+                <th>-</th>
                 <th>분류</th>
                 <th>이미지</th>
                 <th>링크</th>

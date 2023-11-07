@@ -25,7 +25,25 @@ const Modal = styled.div`
   max-height: 80%;
   overflow-y: auto;
 `;
+const Text = styled.text`
+    font-size: 2rem;
+    font-weight: 600;
+     margin: 0.5rem 0;
+`;
+const Div = styled.div`
+    margin: 0.25rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
 
+const Title = styled.div`
+    margin-right: 5%;
+    width: 35%;
+`;
+const Input = styled.input`
+    width: 60%;
+`;
 function PlusArtworkModal({ onSave, onCancel }) {
     const [imageList, setImageList] = useState([]);
 
@@ -88,74 +106,74 @@ function PlusArtworkModal({ onSave, onCancel }) {
     return (
         <ModalContainer>
         <Modal>
-            <h2>Artwork 생성</h2>
-            <div>
-                <span>부서</span>
-                <input
+            <Text>Artwork 생성</Text>
+            <Div>
+                <Title>부서</Title>
+                <Input
                     type="text"
                     name="department"
                     value={data.department}
                     onChange={handleChange}
                 />
-            </div>
-            <div>
-                <span>카테고리</span>
-                <input
+            </Div>
+            <Div>
+                <Title>카테고리</Title>
+                <Input
                     type="text"
                     name="category"
                     value={data.category}
                     onChange={handleChange}
                 />
-            </div>
-            <div>
-                <span>프로젝트 이름</span>
-                <input
+            </Div>
+            <Div>
+                <Title>프로젝트 이름</Title>
+                <Input
                     type="text"
                     name="name"
                     value={data.name}
                     onChange={handleChange}
                 />
-            </div>
-            <div>
-                <span>고객사</span>
-                <input
+            </Div>
+            <Div>
+                <Title>고객사</Title>
+                <Input
                     type="text"
                     name="client"
                     value={data.client}
                     onChange={handleChange}
                 />
-            </div>
-            <div>
-                <span>연도</span>
-                <input
+            </Div>
+            <Div>
+                <Title>연도</Title>
+                <Input
                     type="text"
                     name="date"
                     value={data.date}
                     onChange={handleChange}
                 />
-            </div>
-            <div>
-                <span>상세 설명</span>
-                <input
+            </Div>
+            <Div>
+                <Title>상세 설명</Title>
+                <Input
                     type="text"
                     name="overView"
                     value={data.overView}
                     onChange={handleChange}
                 />
-            </div>
-            <div>
-                <span>동영상 링크</span>
-                <input
+            </Div>
+            <Div>
+                <Title>동영상 링크</Title>
+                <Input
                     type="text"
                     name="link"
                     value={data.link}
                     onChange={handleChange}
                 />
-            </div>
-            <div>
-                <span>이미지</span>
-                <input type="file" accept='image/*' multiple onChange={onImageHandler} />
-            </div>
+            </Div>
+            <Div>
+                <Title>이미지</Title>
+                <Input type="file" accept='image/*' multiple onChange={onImageHandler} />
+            </Div>
             <button onClick={handleSubmit}>저장</button>
             <button onClick={onCancel}>취소</button>
         </Modal>

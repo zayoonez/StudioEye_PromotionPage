@@ -34,6 +34,17 @@ const Text = styled.text`
 
 const Div = styled.div`
     margin: 0.25rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
+
+const Title = styled.div`
+    margin-right: 5%;
+    width: 25%;
+`;
+const Input = styled.input`
+    width: 70%;
 `;
 const Button = styled.button`
     font-size: 1rem;
@@ -91,15 +102,15 @@ function PlusNoticeModal({onCancel}) {
             <Modal>
                 <Text>공지사항 추가</Text>
                 <Div>
-                    <span>제목</span>
-                    <input
+                    <Title>제목</Title>
+                    <Input
                         type="text"
                         onChange={(e) => setItem({ ...item, title: e.target.value })}
                     />
                 </Div>
                 <Div>
-                    <span>이미지</span>
-                    <input type="file" accept='image/*' onChange={onImageHandler} />
+                    <Title>이미지</Title>
+                    <Input type="file" accept='image/*' onChange={onImageHandler} />
                 </Div>
                 <div>
                 <Button onClick={AddNotice}>저장</Button>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import Data from "bootstrap/js/src/dom/data";
+import Body from "../../Components/Common/Body";
 
 const StyledTable = styled.table`
   width: 100%;
@@ -110,9 +111,11 @@ const ContactEditPage = () => {
     }, []);
 
     return(
+        <Body>
         <div>
             <DataTable data={data} onEdit={handleEdit}></DataTable>
         </div>
+        </Body>
     )
 
 }
