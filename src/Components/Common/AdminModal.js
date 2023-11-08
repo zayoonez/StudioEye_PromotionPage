@@ -44,14 +44,25 @@ const Button = styled.button`
 const Div = styled.div`
     margin: 0.5rem 0;
 `;
-
-
 function AdminModal({onCancel}) {
+
+    const [inputValue, setInputValue] = useState('');
+
+    const handleInputChange = (event) => {
+        setInputValue(event.target.value);
+    };
+    const password = "admin1234";
 
     const navigate = useNavigate();
 
     const checkAdmin = () => {
-        navigate('/admin');
+        if(inputValue === password){
+            navigate('/admin');
+        }
+
+        else{
+            onCancel();
+        }
     };
 
 
@@ -63,6 +74,8 @@ function AdminModal({onCancel}) {
                 <Div>
                     <input
                         type="text"
+                        value={inputValue}
+                        onChange={handleInputChange}
                     />
                 </Div>
                 <div>

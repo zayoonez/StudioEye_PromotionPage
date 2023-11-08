@@ -219,13 +219,14 @@ const Header = () => {
                     <BottomDiv>
                         <Text onClick={goToAdmin}>manage</Text>
                     </BottomDiv>
+                    {isAdmin && (
+                        <AdminModal onCancel={handleCancel}/>
+                    )}
                 </OffcanvasBody>
             </AnimatedOffcanvas>
             </motion.div>
 
-            {isAdmin && (
-                <AdminModal onCancel={handleCancel}/>
-            )}
+
         </>
     );
 };
