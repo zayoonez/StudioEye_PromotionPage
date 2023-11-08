@@ -13,7 +13,7 @@ const ContactTitle = styled.div`
     font-weight: 600;
 `;
 
-const FormBlock = styled.div`
+const FormBlock = styled.form`
     display: flex;
     flex-direction : row;
     justify-content: center;
@@ -37,28 +37,82 @@ const FormBlock_2 = styled.div`
 `;
 const InputBlock = styled.div`
     position: relative;
-    margin: 10px;
+    margin: 14px;
 `;
 
+const InputFileContainer = styled.div`
+  display: inline-block;
+  margin-top: 10px;
+  margin-bottom: 10px;
+`;
+
+const FileInputText = styled.input`
+  width: 300px;
+  background: #f5f5f5;
+  height: 32px;
+  line-height: 26px;
+  text-indent: 10px;
+  border: 1px solid #bbb;
+  border-radius: 10px;
+`;
+
+const FileLabel = styled.label`
+  display: inline-block;
+  min-width: 53px;
+  height: 30px;
+  line-height: 30px;
+  padding: 0 10px;
+  border-radius: 30px;
+  font-size: 13px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  margin-left: 5px;
+  cursor: pointer;
+`;
+
+const FileText = styled.input`
+    width: 330px;
+    background: white;
+    height: 27px;
+    line-height: 26px;
+    text-indent: 5px;
+    border: 2px solid #D9D9D9;
+    border-radius : 10px;
+`;
+
+const FileUploadInput = styled.input.attrs({ type: 'file' })`
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0 none;
+`;
 const RadioBlock = styled.div`
     display: flex;
     flex-direction: row;
+    margin-bottom: 20px;
 `;
 const RadioTitle = styled.div`
     color: rgb(0, 0, 0, 0.6);
     /* color: #495055; */
     font-size : 23px;
     margin-right: auto;
-    margin-left: 10px;
-    margin-bottom: 15px;
+    margin-left: 15px;
+    margin-bottom: 10px;
 `;
 const RadioBlock_1 = styled.div`
     display: flex;
     flex-direction: column;
+    margin-right: 25px;
 `;
 const RadioBlock_2 = styled.div`
     display: flex;
     flex-direction: column;
+    margin-left: 30px;
 `;
 
 const SharedInputStyles = `
@@ -66,7 +120,7 @@ const SharedInputStyles = `
   font-size: 1.4rem;
   color: #495055;
   width: 350px;
-  padding: 15px 15px;
+  padding: 18px 18px;
   border-radius: 1rem;
   border: 2px solid #D9D9D9;
   outline: none;
@@ -157,97 +211,174 @@ const Placeholder = styled.span`
     background: none;
     pointer-events: none;
 `;
-const CButton = styled.div`
-    width: 100px;
-    height: 100px;
+const CButton = styled.button`
+    width: 130px;
+    height: 70px;
+    border-radius: 50px;
+    background-color: white;
+    border-color: black;
+    border: 3px solid black;
+    font-size : 20px;
+    font-weight: bold;
+    text-align: center;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    margin-bottom: 20px;
 
 `;
+const categories_1 = [
+    'Entertainment',
+    'Drama',
+    'Documentary',
+    'Channel Operating',
+  ];
+const categories_2 = [
+    'Branded',
+    'Motion Graphic',
+    'Animation',
+    'Live Commerce',
+  ];
 
 const ContactPage = () => {
+    const [fileList, setFileList] = useState([]);
+    const FileTextRef = useRef(null);
+    const [formData, setFormData] = useState({
+        category: '',
+        description: '',
+        clientName: '',
+        organization: '', 
+        contact: '', 
+        email: '',
+        position: '',
+    });     
+
+    const handleDataChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value,
+        });
+    };
+
+    const handleCategoryChange = (e) => {
+        setFormData({ ...formData, category: e.target.value });
+    };
+
+    const handleFileChange = (e) => {
+        const selectedFiles = e.target.files;
+        if(selectedFiles.length > 0) { // 선택된 파일 multiple 일 경우
+            const fileNames = Array.from(selectedFiles).map((file) => file.name).join(', ');
+            FileTextRef.current.value = fileNames;
+        } else {
+            FileTextRef.current.value = ''; //파일 선택되지 않았을 경우 입력 내용 지우기
+        }
+        setFileList([...fileList, ...selectedFiles]);
+    };
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const requestData = new FormData();
+        requestData.append("request", new Blob([JSON.stringify(formData)], {type: "application/json"}));
+        fileList.forEach(file => {
+            requestData.append('files', file);
+        });
+        axios.post('https://port-0-promoationpage-server-12fhqa2blnlum4de.sel5.cloudtype.app/api/requests', requestData)
+            .then((response) => {
+                console.log(response.data, "임다. ");
+                setFormData({
+                    department: "",
+                    category: "",
+                    name: "",
+                    client: "",
+                    date: "",
+                    link: "",
+                    overView: "",});
+                ;
+            })
+            .catch((error) => {
+                console.error("에러 발생" , error);
+            })
+    }
     useEffect(() => {
-        let checkedCategory = document.getElementById("entertainment");
+        let checkedCategory = document.getElementById("Entertainment");
         checkedCategory.checked = true;
+
       }, []);
 
     return (
         <Body>
             <LetterAnimation contact text="CONTACT US!"></LetterAnimation>
-            <FormBlock>
-
+            <FormBlock onSubmit={handleSubmit}>
             <FormBlock_1>
                 <RadioTitle>프로젝트 카테고리</RadioTitle>
-
                 <RadioBlock>
                     <RadioBlock_1>
-                        <CLabel>
-                            <Category type="radio" id="entertainment" name="radio" />
-                            <CName>Entertainment</CName>
-                        </CLabel>
-                        <CLabel>
-                            <Category type="radio" name="radio"/>
-                            <CName>Drama</CName>
-                        </CLabel>
-                        <CLabel>
-                            <Category type="radio" name="radio"/>
-                            <CName>Documentary</CName>
-                        </CLabel>
-                        <CLabel>
-                            <Category type="radio" name="radio"/>
-                            <CName>Channel Operating</CName>
-                        </CLabel>
+                        {categories_1.map((category,index) => (
+                            <CLabel key={index}>
+                                <Category 
+                                    type="radio"
+                                    name="category"
+                                    id={category}
+                                    value={category}
+                                    onChange={handleCategoryChange}
+                                />
+                                <CName>{category}</CName>
+                            </CLabel>
+                        ))}
                     </RadioBlock_1>
                     <RadioBlock_2>
-                        <CLabel>
-                            <Category type="radio" name="radio"/>
-                            <CName>Branded</CName>
-                        </CLabel>
-                        <CLabel>
-                            <Category type="radio" name="radio"/>
-                            <CName>Motion Graphic</CName>
-                        </CLabel>
-                        <CLabel>
-                            <Category type="radio" name="radio"/>
-                            <CName>Animation</CName>
-                        </CLabel>
-                        <CLabel>
-                            <Category type="radio" name="radio"/>
-                            <CName>Live Commerce</CName>
-                        </CLabel>
+                        {categories_2.map((category,index) => (
+                                <CLabel key={index}>
+                                    <Category 
+                                        type="radio"
+                                        name="category"
+                                        id={category}
+                                        value={category}
+                                        onChange={handleCategoryChange}
+                                    />
+                                    <CName>{category}</CName>
+                                </CLabel>
+                            ))}
                     </RadioBlock_2>
-
-                
                 </RadioBlock>
-                
+                <InputFileContainer>
+                    <FileText ref= {FileTextRef} type="text" readOnly="readonly"></FileText>
+                    <FileUploadInput id = "uploadfile" type="file" accept="*/*" multiple onChange={handleFileChange}/>
+                    <FileLabel htmlFor="uploadfile" className="file-label">upload</FileLabel>
+                </InputFileContainer>
                 <InputBlock>
-                    <TextAreaField type="text" name="성함" id="name" required spellCheck={false} />
+                    <TextAreaField type="text" name="description" id="description" required spellCheck={false} onChange={handleDataChange}/>
                     <Placeholder>프로젝트 정보</Placeholder>
                 </InputBlock>
+
             </FormBlock_1>
             <FormBlock_2>
                 <InputBlock>
-                    <InputField type="text" name="성함" id="name" required spellCheck={false} />
+                    <InputField type="text" name="clientName" id="clientName" required spellCheck={false} onChange={handleDataChange}/>
                     <Placeholder>성함</Placeholder>
                 </InputBlock>
                 <InputBlock>
-                    <InputField type="text" name="성함" id="name" required spellCheck={false} />
+                    <InputField type="text" name="organization" id="organization" required spellCheck={false} onChange={handleDataChange}/>
                     <Placeholder>기관 혹은 기업명</Placeholder>
                 </InputBlock>
                 <InputBlock>
-                    <InputField type="text" name="성함" id="name" required spellCheck={false} />
+                    <InputField type="text" name="contact" id="contact" required spellCheck={false} onChange={handleDataChange}/>
                     <Placeholder>연락처</Placeholder>
                 </InputBlock>
                 <InputBlock>
-                    <InputField type="text" name="성함" id="name" required spellCheck={false} />
+                    <InputField type="text" name="email" id="email" required spellCheck={false} onChange={handleDataChange}/>
                     <Placeholder>이메일주소</Placeholder>
                 </InputBlock>
                 <InputBlock>
-                    <InputField type="text" name="성함" id="name" required spellCheck={false} />
+                    <InputField type="text" name="position" id="position" required spellCheck={false} onChange={handleDataChange}/>
                     <Placeholder>직책</Placeholder>
                 </InputBlock>
                 
             </FormBlock_2>
             </FormBlock>
-            <CButton>문의하기</CButton>
+            <CButton type="submit" onClick={handleSubmit}>문의하기</CButton>
 
         </Body>
     )
