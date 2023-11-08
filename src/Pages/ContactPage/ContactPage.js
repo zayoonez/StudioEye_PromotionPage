@@ -59,22 +59,22 @@ const FileInputText = styled.input`
 const FileLabel = styled.label`
   display: inline-block;
   min-width: 53px;
-  height: 30px;
+  height: 32px;
   line-height: 30px;
   padding: 0 10px;
-  border-radius: 30px;
-  font-size: 13px;
+  border-radius: 20px;
+  font-size: 16px;
   background-color: #333;
   color: #fff;
   text-align: center;
-  margin-left: 5px;
+  margin-left: 8px;
   cursor: pointer;
 `;
 
 const FileText = styled.input`
-    width: 330px;
+    width: 306px;
     background: white;
-    height: 27px;
+    height: 30px;
     line-height: 26px;
     text-indent: 5px;
     border: 2px solid #D9D9D9;
@@ -107,12 +107,12 @@ const RadioTitle = styled.div`
 const RadioBlock_1 = styled.div`
     display: flex;
     flex-direction: column;
-    margin-right: 25px;
+    margin-right: 10px;
 `;
 const RadioBlock_2 = styled.div`
     display: flex;
     flex-direction: column;
-    margin-left: 30px;
+    margin-left: 20px;
 `;
 
 const SharedInputStyles = `
@@ -197,7 +197,7 @@ const CName = styled.span`
 
 const Placeholder = styled.span`
     position: absolute;
-    margin: 17px 0;
+    margin-top: 17px;
     padding: 0 4px;
     font-family: Roboto, sans-serif;
     color: #6c757d;
@@ -226,7 +226,8 @@ const CButton = styled.button`
     align-items: center;
     justify-content: center;
     color: black;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    margin-top: 30px;
 
 `;
 const categories_1 = [
