@@ -31,6 +31,48 @@ const ImagePreviewContainer = styled.div`
   overflow-y: auto;
 `;
 
+const InputDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0;
+`;
+
+const InputLabel = styled.span`
+  font-weight: bold;
+`;
+
+const InputElement = styled.input`
+  width: 100%;
+  padding: 5px;
+`;
+
+const OverviewDiv = styled.div`
+  margin: 10px 0;
+`;
+
+const OverviewLabel = styled.span`
+  font-weight: bold;
+  margin-bottom: 5px;
+`;
+
+const OverviewTextArea = styled.textarea`
+  width: 100%;
+  padding: 5px;
+  height: 100px; /* Adjust the height as needed */
+`;
+
+const StyledButton = styled.button`
+  background-color: #363636;
+  color: #fff;
+  border: none;
+  padding: 5px 10px; 
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px; 
+`;
+
+
+
 function EditArtWorkModal({ item, onSave, onCancel }) {
     const navigate = useNavigate();
     const [editedItem, setEditedItem] = useState(item);
@@ -122,14 +164,14 @@ function EditArtWorkModal({ item, onSave, onCancel }) {
     const selectedImageComponents = selectedImages.map((image, index) => (
         <div key={index}>
             <img src={URL.createObjectURL(image)} alt={`Image ${index}`} width="200" />
-            <button onClick={() => handleRemoveImage(index)}>Remove</button>
+            <StyledButton onClick={() => handleRemoveImage(index)}>X</StyledButton>
         </div>
     ));
 
     const imagePreviewComponents = existingImageUrlList.map((imagePreview, index) => (
         <div key={index}>
             <img src={imagePreview} alt={`Image ${index}`} width="200" />
-            <button onClick={() => handleRemoveExistingImage(index)}>Remove</button>
+            <StyledButton onClick={() => handleRemoveExistingImage(index)}>X</StyledButton>
         </div>
     ));
 
@@ -137,63 +179,62 @@ function EditArtWorkModal({ item, onSave, onCancel }) {
         <ModalContainer>
             <Modal>
                 <h2>Artwork 수정</h2>
-                <div>
-                    <span>부서</span>
-                    <input
+                <InputDiv>
+                    <InputLabel>부서</InputLabel>
+                    <InputElement
                         type="text"
                         value={editedItem.department}
                         onChange={(e) => setEditedItem({ ...editedItem, department: e.target.value })}
                     />
-                </div>
-                <div>
-                    <span>카테고리</span>
-                    <input
+                </InputDiv>
+                <InputDiv>
+                    <InputLabel>카테고리</InputLabel>
+                    <InputElement
                         type="text"
                         value={editedItem.category}
                         onChange={(e) => setEditedItem({ ...editedItem, category: e.target.value })}
                     />
-                </div>
-                <div>
-                    <span>프로젝트 이름</span>
-                    <input
+                </InputDiv>
+                <InputDiv>
+                    <InputLabel>프로젝트 이름</InputLabel>
+                    <InputElement
                         type="text"
                         value={editedItem.name}
                         onChange={(e) => setEditedItem({ ...editedItem, name: e.target.value })}
                     />
-                </div>
-                <div>
-                    <span>고객사</span>
-                    <input
+                </InputDiv>
+                <InputDiv>
+                    <InputLabel>고객사</InputLabel>
+                    <InputElement
                         type="text"
                         value={editedItem.client}
                         onChange={(e) => setEditedItem({ ...editedItem, client: e.target.value })}
                     />
-                </div>
-                <div>
-                    <span>연도</span>
-                    <input
+                </InputDiv>
+                <InputDiv>
+                    <InputLabel>연도</InputLabel>
+                    <InputElement
                         type="text"
                         value={editedItem.date}
                         onChange={(e) => setEditedItem({ ...editedItem, date: e.target.value })}
                     />
-                </div>
-                <div>
-                    <span>상세 설명</span>
-                    <input
-                        type="text"
-                        value={editedItem.overView}
-                        onChange={(e) => setEditedItem({ ...editedItem, overView: e.target.value })}
-                    />
-                </div>
-                <div>
-                    <span>동영상 링크</span>
-                    <input
+                </InputDiv>
+                <InputDiv>
+                    <InputLabel>동영상 링크</InputLabel>
+                    <InputElement
                         type="text"
                         value={editedItem.link}
                         onChange={(e) => setEditedItem({ ...editedItem, link: e.target.value })}
                     />
-                </div>
-
+                </InputDiv>
+                <OverviewDiv>
+                    <OverviewLabel>상세 설명</OverviewLabel>
+                    <OverviewTextArea
+                        type="text"
+                        value={editedItem.overView}
+                        onChange={(e) => setEditedItem({ ...editedItem, overView: e.target.value })}
+                    />
+                </OverviewDiv>
                 <div>
                     <input type="file" id="imageInput" accept="image/*" multiple onChange={handleImageUpload} />
                     {selectedImageComponents}
