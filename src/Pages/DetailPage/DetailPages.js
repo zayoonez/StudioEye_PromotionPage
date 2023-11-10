@@ -5,7 +5,6 @@ import styled from "styled-components";
 import Body from "../../Components/Common/Body";
 import image from "../../assets/images/1.jpeg"
 import {useParams} from "react-router-dom";
-import LetterAnimation from "../../Components/Common/LetterAnimation";
 import axios from "axios";
 
 //subdiv 없게 
@@ -128,12 +127,6 @@ const DetailPages = () => {
           overView: data.data.overView,
           img: data.data.imageUrlList[0]
         };
-      //   const ImgObj = {
-      //     ImgId: data.data.id,
-      //     title: data.data.title
-      // };
-
-        // imgObjects.push(ImgObj);
         objects.push(obj);
         setImgData(imgObjects);
         setDetail(obj);
@@ -164,7 +157,6 @@ const DetailPages = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.4 }}> 
                 {detail.name} </Title>
-            {/* <LetterAnimation about detailTitle text="x"></LetterAnimation> */}
             <Client>{detail.client}</Client>
             <Date>2023</Date>
           </FirstDetail>

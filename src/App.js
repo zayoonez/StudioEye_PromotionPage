@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import './App.css';
-import {Routes, Route, BrowserRouter} from "react-router-dom";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 import PromotionMainpage from "./Pages/MainPage/PromotionMainPage";
 import AboutMainpage from "./Pages/AboutPage/AboutMainPage";
 import { AnimatePresence, motion } from 'framer-motion';
@@ -28,52 +28,52 @@ function App() {
         };
     }, []);
 
-  return (
-    <>
-      <BrowserRouter>
-          <AnimatePresence>
+    return (
+        <>
+            <BrowserRouter>
+                <AnimatePresence>
 
-          <Routes>
+                    <Routes>
 
-              {/*<Route*/}
-              {/*    path="/"*/}
-              {/*    element={*/}
-              {/*        showInsertPage ? (*/}
-              {/*            <motion.div*/}
-              {/*                initial={{ opacity: 0 }}*/}
-              {/*                animate={{ opacity: 1 }}*/}
-              {/*                exit={{ opacity: 0, transition: { duration: 0.5 } }}*/}
-              {/*            >*/}
-              {/*                <InsertPage />*/}
-              {/*            </motion.div>*/}
-              {/*        ) : (*/}
-              {/*            <motion.div*/}
-              {/*                initial={{ opacity: 0 }}*/}
-              {/*                animate={{ opacity: 1 }}*/}
-              {/*                exit={{ opacity: 0 }}*/}
-              {/*                transition={{ duration: 0.5 }}*/}
-              {/*            >*/}
-              {/*                <PromotionMainpage />*/}
-              {/*            </motion.div>*/}
-              {/*        )*/}
-              {/*    }*/}
-              {/*/>*/}
-                <Route path="/"  element={<PromotionMainpage />}/>
-                <Route path="/About"  element={<AboutMainpage />}/>
-                <Route path="/Artwork"  element={<ArtworkMainpage />}/>
-                <Route path="/detail/:id" element= {<DetailPages />}/>
-                <Route path="/notice" element= {<NoticeMainPage />}/>
-                <Route path="/admin" element={<AdminMainPage />}/>
-                <Route path="/admin/about" element={<AboutEditPage />}/>
-                <Route path="/admin/artwork" element={<ArtworkEditPage />}/>
-                <Route path="/admin/contact" element={<ContactEditPage />}/>
-                <Route path="/admin/notice" element={<NoticeEditPage />}/>
-                <Route path="/Contact" element={<ContactPage/>}/>
-          </Routes>
-          </AnimatePresence>
-      </BrowserRouter>
-      </>
-  );
+                        {/*<Route*/}
+                        {/*    path="/"*/}
+                        {/*    element={*/}
+                        {/*        showInsertPage ? (*/}
+                        {/*            <motion.div*/}
+                        {/*                initial={{ opacity: 0 }}*/}
+                        {/*                animate={{ opacity: 1 }}*/}
+                        {/*                exit={{ opacity: 0, transition: { duration: 0.5 } }}*/}
+                        {/*            >*/}
+                        {/*                <InsertPage />*/}
+                        {/*            </motion.div>*/}
+                        {/*        ) : (*/}
+                        {/*            <motion.div*/}
+                        {/*                initial={{ opacity: 0 }}*/}
+                        {/*                animate={{ opacity: 1 }}*/}
+                        {/*                exit={{ opacity: 0 }}*/}
+                        {/*                transition={{ duration: 0.5 }}*/}
+                        {/*            >*/}
+                        {/*                <PromotionMainpage />*/}
+                        {/*            </motion.div>*/}
+                        {/*        )*/}
+                        {/*    }*/}
+                        {/*/>*/}
+                        <Route path="/" element={<PromotionMainpage />} />
+                        <Route path="/About" element={<AboutMainpage />} />
+                        <Route path="/Artwork" element={<ArtworkMainpage />} />
+                        <Route path="/detail/:id" element={<DetailPages />} />
+                        <Route path="/notice" element={<NoticeMainPage />} />
+                        <Route path="/admin" element={<AdminMainPage />} />
+                        <Route path="/admin/about" element={<AboutEditPage />} />
+                        <Route path="/admin/artwork" element={<ArtworkEditPage />} />
+                        <Route path="/admin/contact" element={<ContactEditPage />} />
+                        <Route path="/admin/notice" element={<NoticeEditPage />} />
+                        <Route path="/Contact" element={<ContactPage />} />
+                    </Routes>
+                </AnimatePresence>
+            </BrowserRouter>
+        </>
+    );
 }
 
 export default App;

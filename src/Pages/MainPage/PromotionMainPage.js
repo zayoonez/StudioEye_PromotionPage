@@ -1,16 +1,10 @@
 import React, { useEffect, useState } from "react";
-import styled, {keyframes} from "styled-components";
+import styled, { keyframes } from "styled-components";
 import Body from "../../Components/Common/Body";
 import PortfolioGrid from "./PortfolioGrid"
-import {motion, useScroll, useSpring} from "framer-motion"
-import {ReactComponent as LogoIcon} from '../../assets/logo/STUDIO-I_1.svg'
+import { motion, useScroll, useSpring } from "framer-motion"
 import CustomCursor from "../../Components/Common/CustomCursor";
 import MainLogoAnimation from "./MainLogoAnimation";
-import {HiArrowLongRight} from "react-icons/hi2";
-import { useInView } from 'react-intersection-observer'; 
-import LetterAnimation from "../../Components/Common/LetterAnimation";
-
-//media query 처리 하기 !!
 
 const ProgressBar = styled(motion.div)`
     position: fixed;
@@ -19,8 +13,6 @@ const ProgressBar = styled(motion.div)`
     right: 0;
     height: 10px;
     background-color: gray;
-    /* transform-origin: 0%; */
-    /* background: var(--accent); */
 `;
 
 const LogoContainer = styled.div`
@@ -30,51 +22,35 @@ const LogoContainer = styled.div`
 `;
 
 const PromotionMainpage = () => {
-    const {scrollYProgress} = useScroll();
-    
+    const { scrollYProgress } = useScroll();
+
     const scaleX = useSpring(scrollYProgress, {
         stiffness: 100,
         damping: 30,
         restDelta: 0.001
-      });
+    });
 
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
 
-    const PromotionMainpageContent=()=>{
+    const PromotionMainpageContent = () => {
         return (
-            <>            
-                {/* <MainBody> */}
-                    <LogoContainer>
-                        {/* <StyledLogoIcon>
-                        </StyledLogoIcon> */}
-                        {/* <AnimatedText >
-                            STUDIO i
-                        </AnimatedText> */}
-                        <MainLogoAnimation/>
-                        
-
-                    </LogoContainer>
-                    
-                {/* </MainBody> */}
-
-                {/* <Featuredprojects><LetterAnimation text="Featured Projects"></LetterAnimation></Featuredprojects> */}
-                <PortfolioGrid/>
-                <ProgressBar style = {{scaleX}}></ProgressBar>
-
-
+            <>
+                <LogoContainer>
+                    <MainLogoAnimation />
+                </LogoContainer>
+                <PortfolioGrid />
+                <ProgressBar style={{ scaleX }}></ProgressBar>
             </>
         )
     }
 
 
-    return(
+    return (
         <Body>
-
-            <PromotionMainpageContent/>
+            <PromotionMainpageContent />
             <CustomCursor />
-
         </Body>
     )
 }
