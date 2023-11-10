@@ -5,7 +5,7 @@ import { useInView } from "react-intersection-observer";
 
 const Title = styled.div`
   margin: 80px;
-
+// props 이용하여 여러곳에서 사용 가능
   ${(props) =>
     props.mainlogo &&
     css`
@@ -19,7 +19,6 @@ const Title = styled.div`
       font-size: 1.6rem;
       font-weight: 410;
       margin-top: 10px;
-      /* margin-right: 100px; */
     `}
     ${(props) =>
     props.more &&
@@ -27,15 +26,13 @@ const Title = styled.div`
       font-size: 1.3rem;
       font-weight: 410;
       margin:5px;
-      /* margin-top: 5px; */
-      `}
+    `}
 
     ${(props) =>
     props.contact &&
     css`
       font-size: 7rem;
       font-weight: 450;
-      /* margin:5px; */
       margin-left: 80px;
 
     `}

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Body from "../../Components/Common/Body";
-import {motion, Variants} from "framer-motion";
+import { motion, Variants } from "framer-motion";
 
 const MainBody = styled.div`
     display : flex;
@@ -21,13 +21,13 @@ const Video = styled.video`
 
 const RoutePage = () => {
 
-        return (
-            <>
-                <MainBody>
-                            aaa
-                </MainBody>
-            </>
-        )
-    }
+    return (
+        <>
+            <MainBody>
+                aaa
+            </MainBody>
+        </>
+    )
+}
 
 export default RoutePage;

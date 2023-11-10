@@ -6,6 +6,7 @@ import MainAnimation from "../MainPage/MainAnimation";
 import DetailTransition from "../../Components/Common/DetailTransition";
 import YouTube from "react-youtube";
 
+//지금은 안쓰는 임시 js 파일
 const VideoWrapper = styled.div`
     display: flex;
     flex-direction: column;
@@ -35,16 +36,12 @@ const MainSection = styled.div`
     width: 100%; 
     height: 500px;
     background-color: #D9D9D9;
-    /* background-color: white; */
-    /* border: 3px solid black; */
-    /* height: 80vh; */
     border-radius: 252px;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     padding: 20px;
-    /* margin: 0 auto ; */
 `;
 const DetailSection = styled.div`
     display: flex;
@@ -54,13 +51,11 @@ const DetailSection = styled.div`
 const DetailBox = styled.div`
     text-align: center;
     width: 30%;
-    /* height: 100%; */
     border-radius: 140px;
     background-color: #D9D9D9;
     margin: 20px;
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
     align-items: center;
     
 `;
@@ -100,7 +95,6 @@ const DetailPage = () => {
                     <ProductionTeam>
                         2023.3
                     </ProductionTeam>
-                    
                 </BasicInfo>
                 <VideoWrapper>
                     <YouTube videoId="bcOO4bu7Alc" opts={options}/>
@@ -112,8 +106,6 @@ const DetailPage = () => {
                 <DetailBox><DetailTitle>Overview</DetailTitle><DetailContent>개그맨 황제성이 출연해 다양한 소재에 대한 궁금증을 해결하기 위해 백과사전 속으로 떠나는 탐험!
                 DK백과사전 기반 필수 지식을 알기 쉽고 재미있게 풀어낸 어린이 지식 충전 예능 콘텐츠</DetailContent></DetailBox>
             </DetailSection>
-
-            
         </Body>      
         
 

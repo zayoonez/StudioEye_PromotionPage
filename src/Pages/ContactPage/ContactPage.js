@@ -1,17 +1,9 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import Body from "../../Components/Common/Body";
-import {motion} from "framer-motion";
-import {ReactComponent as LogoIcon} from "../../assets/logo/STUDIO-I.svg";
-import {useNavigate} from "react-router-dom";
+import { motion } from "framer-motion";
 import axios from "axios";
 import LetterAnimation from "../../Components/Common/LetterAnimation";
-
-const ContactTitle = styled.div`
-    margin-bottom: 30px;
-    font-size: 50px;
-    font-weight: 600;
-`;
 
 const FormBlock = styled.form`
     display: flex;
@@ -41,34 +33,24 @@ const InputBlock = styled.div`
 `;
 
 const InputFileContainer = styled.div`
-  display: inline-block;
-  margin-top: 10px;
-  margin-bottom: 10px;
-`;
-
-const FileInputText = styled.input`
-  width: 300px;
-  background: #f5f5f5;
-  height: 32px;
-  line-height: 26px;
-  text-indent: 10px;
-  border: 1px solid #bbb;
-  border-radius: 10px;
+    display: inline-block;
+    margin-top: 10px;
+    margin-bottom: 10px;
 `;
 
 const FileLabel = styled.label`
-  display: inline-block;
-  min-width: 53px;
-  height: 32px;
-  line-height: 30px;
-  padding: 0 10px;
-  border-radius: 20px;
-  font-size: 16px;
-  background-color: #333;
-  color: #fff;
-  text-align: center;
-  margin-left: 8px;
-  cursor: pointer;
+    display: inline-block;
+    min-width: 53px;
+    height: 32px;
+    line-height: 30px;
+    padding: 0 10px;
+    border-radius: 20px;
+    font-size: 16px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    margin-left: 8px;
+    cursor: pointer;
 `;
 
 const FileText = styled.input`
@@ -82,14 +64,14 @@ const FileText = styled.input`
 `;
 
 const FileUploadInput = styled.input.attrs({ type: 'file' })`
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0 none;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0 none;
 `;
 const RadioBlock = styled.div`
     display: flex;
@@ -116,34 +98,34 @@ const RadioBlock_2 = styled.div`
 `;
 
 const SharedInputStyles = `
-  font-weight: 500;
-  font-size: 1.4rem;
-  color: #495055;
-  width: 350px;
-  padding: 18px 18px;
-  border-radius: 1rem;
-  border: 2px solid #D9D9D9;
-  outline: none;
+    font-weight: 500;
+    font-size: 1.4rem;
+    color: #495055;
+    width: 350px;
+    padding: 18px 18px;
+    border-radius: 1rem;
+    border: 2px solid #D9D9D9;
+    outline: none;
 
-  &:valid + span,
-  &:focus + span {
-    transform: scale(0.8) translateY(-30px);
-    background: #fff;
-  }
+    &:valid + span,
+    &:focus + span {
+        transform: scale(0.8) translateY(-30px);
+        background: #fff;
+    }
 
-  &:focus {
-    color: #284B63;
-    border-color: #284B63;
-  }
+    &:focus {
+        color: #284B63;
+        border-color: #284B63;
+    }
 `;
 
 const InputField = styled.input`
-  ${SharedInputStyles}
+    ${SharedInputStyles}
 `;
 
 const TextAreaField = styled.textarea`
-  ${SharedInputStyles}
-  height: 140px;
+    ${SharedInputStyles}
+    height: 140px;
 `;
 const CLabel = styled.label`
     display: flex;
@@ -164,9 +146,6 @@ const Category = styled.input`
       }
     }
 `;
-// $primary-color: #00005c; // Change color here. C'mon, try it! 
-// $text-color: mix(#000, $primary-color, 64%);
-
 const CName = styled.span`
     display: flex;
     align-items: center;
@@ -228,6 +207,7 @@ const CButton = styled.button`
     color: black;
     margin-bottom: 10px;
     margin-top: 30px;
+    cursor: pointer;
 
 `;
 const categories_1 = [
@@ -235,13 +215,13 @@ const categories_1 = [
     'Drama',
     'Documentary',
     'Channel Operating',
-  ];
+];
 const categories_2 = [
     'Branded',
     'Motion Graphic',
     'Animation',
     'Live Commerce',
-  ];
+];
 
 const ContactPage = () => {
     const [fileList, setFileList] = useState([]);
@@ -250,11 +230,11 @@ const ContactPage = () => {
         category: '',
         description: '',
         clientName: '',
-        organization: '', 
-        contact: '', 
+        organization: '',
+        contact: '',
         email: '',
         position: '',
-    });     
+    });
 
     const handleDataChange = (e) => {
         const { name, value } = e.target;
@@ -270,7 +250,7 @@ const ContactPage = () => {
 
     const handleFileChange = (e) => {
         const selectedFiles = e.target.files;
-        if(selectedFiles.length > 0) { // 선택된 파일 multiple 일 경우
+        if (selectedFiles.length > 0) { // 선택된 파일 multiple 일 경우
             const fileNames = Array.from(selectedFiles).map((file) => file.name).join(', ');
             FileTextRef.current.value = fileNames;
         } else {
@@ -281,7 +261,7 @@ const ContactPage = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const requestData = new FormData();
-        requestData.append("request", new Blob([JSON.stringify(formData)], {type: "application/json"}));
+        requestData.append("request", new Blob([JSON.stringify(formData)], { type: "application/json" }));
         fileList.forEach(file => {
             requestData.append('files', file);
         });
@@ -295,44 +275,31 @@ const ContactPage = () => {
                     client: "",
                     date: "",
                     link: "",
-                    overView: "",});
+                    overView: "",
+                });
                 ;
             })
             .catch((error) => {
-                console.error("에러 발생" , error);
+                console.error("에러 발생", error);
             })
     }
     useEffect(() => {
         let checkedCategory = document.getElementById("Entertainment");
         checkedCategory.checked = true;
 
-      }, []);
+    }, []);
 
     return (
         <Body>
             <LetterAnimation contact text="CONTACT US!"></LetterAnimation>
             <FormBlock onSubmit={handleSubmit}>
-            <FormBlock_1>
-                <RadioTitle>프로젝트 카테고리</RadioTitle>
-                <RadioBlock>
-                    <RadioBlock_1>
-                        {categories_1.map((category,index) => (
-                            <CLabel key={index}>
-                                <Category 
-                                    type="radio"
-                                    name="category"
-                                    id={category}
-                                    value={category}
-                                    onChange={handleCategoryChange}
-                                />
-                                <CName>{category}</CName>
-                            </CLabel>
-                        ))}
-                    </RadioBlock_1>
-                    <RadioBlock_2>
-                        {categories_2.map((category,index) => (
+                <FormBlock_1>
+                    <RadioTitle>프로젝트 카테고리</RadioTitle>
+                    <RadioBlock>
+                        <RadioBlock_1>
+                            {categories_1.map((category, index) => (
                                 <CLabel key={index}>
-                                    <Category 
+                                    <Category
                                         type="radio"
                                         name="category"
                                         id={category}
@@ -342,42 +309,56 @@ const ContactPage = () => {
                                     <CName>{category}</CName>
                                 </CLabel>
                             ))}
-                    </RadioBlock_2>
-                </RadioBlock>
-                <InputFileContainer>
-                    <FileText ref= {FileTextRef} type="text" readOnly="readonly"></FileText>
-                    <FileUploadInput id = "uploadfile" type="file" accept="*/*" multiple onChange={handleFileChange}/>
-                    <FileLabel htmlFor="uploadfile" className="file-label">upload</FileLabel>
-                </InputFileContainer>
-                <InputBlock>
-                    <TextAreaField type="text" name="description" id="description" required spellCheck={false} onChange={handleDataChange}/>
-                    <Placeholder>프로젝트 정보</Placeholder>
-                </InputBlock>
+                        </RadioBlock_1>
+                        <RadioBlock_2>
+                            {categories_2.map((category, index) => (
+                                <CLabel key={index}>
+                                    <Category
+                                        type="radio"
+                                        name="category"
+                                        id={category}
+                                        value={category}
+                                        onChange={handleCategoryChange}
+                                    />
+                                    <CName>{category}</CName>
+                                </CLabel>
+                            ))}
+                        </RadioBlock_2>
+                    </RadioBlock>
+                    <InputFileContainer>
+                        <FileText ref={FileTextRef} type="text" readOnly="readonly"></FileText>
+                        <FileUploadInput id="uploadfile" type="file" accept="*/*" multiple onChange={handleFileChange} />
+                        <FileLabel htmlFor="uploadfile" className="file-label">upload</FileLabel>
+                    </InputFileContainer>
+                    <InputBlock>
+                        <TextAreaField type="text" name="description" id="description" required spellCheck={false} onChange={handleDataChange} />
+                        <Placeholder>프로젝트 정보</Placeholder>
+                    </InputBlock>
 
-            </FormBlock_1>
-            <FormBlock_2>
-                <InputBlock>
-                    <InputField type="text" name="clientName" id="clientName" required spellCheck={false} onChange={handleDataChange}/>
-                    <Placeholder>성함</Placeholder>
-                </InputBlock>
-                <InputBlock>
-                    <InputField type="text" name="organization" id="organization" required spellCheck={false} onChange={handleDataChange}/>
-                    <Placeholder>기관 혹은 기업명</Placeholder>
-                </InputBlock>
-                <InputBlock>
-                    <InputField type="text" name="contact" id="contact" required spellCheck={false} onChange={handleDataChange}/>
-                    <Placeholder>연락처</Placeholder>
-                </InputBlock>
-                <InputBlock>
-                    <InputField type="text" name="email" id="email" required spellCheck={false} onChange={handleDataChange}/>
-                    <Placeholder>이메일주소</Placeholder>
-                </InputBlock>
-                <InputBlock>
-                    <InputField type="text" name="position" id="position" required spellCheck={false} onChange={handleDataChange}/>
-                    <Placeholder>직책</Placeholder>
-                </InputBlock>
-                
-            </FormBlock_2>
+                </FormBlock_1>
+                <FormBlock_2>
+                    <InputBlock>
+                        <InputField type="text" name="clientName" id="clientName" required spellCheck={false} onChange={handleDataChange} />
+                        <Placeholder>성함</Placeholder>
+                    </InputBlock>
+                    <InputBlock>
+                        <InputField type="text" name="organization" id="organization" required spellCheck={false} onChange={handleDataChange} />
+                        <Placeholder>기관 혹은 기업명</Placeholder>
+                    </InputBlock>
+                    <InputBlock>
+                        <InputField type="text" name="contact" id="contact" required spellCheck={false} onChange={handleDataChange} />
+                        <Placeholder>연락처</Placeholder>
+                    </InputBlock>
+                    <InputBlock>
+                        <InputField type="text" name="email" id="email" required spellCheck={false} onChange={handleDataChange} />
+                        <Placeholder>이메일주소</Placeholder>
+                    </InputBlock>
+                    <InputBlock>
+                        <InputField type="text" name="position" id="position" required spellCheck={false} onChange={handleDataChange} />
+                        <Placeholder>직책</Placeholder>
+                    </InputBlock>
+
+                </FormBlock_2>
             </FormBlock>
             <CButton type="submit" onClick={handleSubmit}>문의하기</CButton>
 
