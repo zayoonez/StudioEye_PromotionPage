@@ -3,6 +3,7 @@ import styled from "styled-components";
 import axios from "axios";
 import Data from "bootstrap/js/src/dom/data";
 import Body from "../../Components/Common/Body";
+import ShowContactModal from "./Component/ShowContactModal";
 
 const StyledTable = styled.table`
   width: 100%;
@@ -45,7 +46,7 @@ function DataTable({data, onEdit}){
             </thead>
             <tbody>
             {data.map((item) => (
-                <tr key={item.id}>
+                <tr key={item.id} onClick={() => onEdit(item)}>
                     <td>{item.id}</td>
                     <td>{item.category}</td>
                     <td>{item.clientName}</td>
@@ -63,21 +64,20 @@ function DataTable({data, onEdit}){
 
 const ContactEditPage = () => {
     const [data, setData] = useState([]);
-    const [isEditing, setIsEditing] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태 추가
     const [editingItem, setEditingItem] = useState(null);
+
 
     const handleEdit = (item) => {
         setEditingItem(item);
-        setIsEditing(true);
+        setIsModalOpen(true); // 모달 열기
     };
 
-    const handleSave = (editedItem) => {
-        setIsEditing(false);
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
     };
 
-    const handleCancel = () => {
-        setIsEditing(false);
-    };
+
 
     useEffect(() => {
         axios
@@ -99,6 +99,7 @@ const ContactEditPage = () => {
                         email: data.data[i].email,
                         position: data.data[i].position,
                         description: data.data[i].description,
+                        fileUrlList: data.data[i].fileUrlList,
                     };
 
                     objects.push(obj);
@@ -112,11 +113,14 @@ const ContactEditPage = () => {
 
     return(
         <Body>
-        <div>
-            <DataTable data={data} onEdit={handleEdit}></DataTable>
-        </div>
+            <div>
+                <DataTable data={data} onEdit={handleEdit}></DataTable>
+                {isModalOpen && (
+                    <ShowContactModal item={editingItem} onClose={handleCloseModal} />
+                )}
+            </div>
         </Body>
-    )
+    );
 
 }
 
