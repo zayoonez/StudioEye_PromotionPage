@@ -57,7 +57,7 @@ const ArtworkMainpage = () => {
 
         useEffect(() => {
 
-            axios.get('https://port-0-promoationpage-server-12fhqa2blnlum4de.sel5.cloudtype.app/api/projects')
+            axios.get(`/api/projects`)
 
                 .then(response => {
                     const data = response.data;

@@ -79,7 +79,7 @@ function AdminModal({onCancel}) {
 
         const handleLogin = () => {
             axios
-                .post("http://13.125.181.139:8000/user-service/login", formData)
+                .post("/user-service/login", formData)
                 .then((response) => {
                     const accessToken = response.data.accessToken;
                     axios.defaults.headers.common["Authorization"] =
@@ -97,7 +97,7 @@ function AdminModal({onCancel}) {
 
     useEffect(() => {
 
-        axios.get('http://13.125.181.139:8000/user-service/health_check')
+        axios.get('/user-service/health_check')
             .then(response => {
                 console.log(response.data);
             })
