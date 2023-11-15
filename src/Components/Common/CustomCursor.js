@@ -20,7 +20,6 @@ const CustomCursor = () => {
         x:0, 
         y:0
     });
-    console.log(mousePosition);
     useEffect(()=> {
         const mouseMove = e => {
             setMousePosition({
