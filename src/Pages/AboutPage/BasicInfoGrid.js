@@ -33,7 +33,7 @@ const TextWelcome = styled(motion.div)`
   font-size: 2rem;
   font-weight: 600;
   width: 60%;
-  text-align: right:
+  text-align: right;
   
    @media(max-width: 390px){
     font-size: 1rem;

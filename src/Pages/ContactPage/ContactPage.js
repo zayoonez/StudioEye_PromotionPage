@@ -4,6 +4,10 @@ import Body from "../../Components/Common/Body";
 import { motion } from "framer-motion";
 import axios from "axios";
 import LetterAnimation from "../../Components/Common/LetterAnimation";
+import Modal from "./Components/Modal";
+// entertainment default 값 설정
+// 성공 시 알림
+// 이메일이랑 번호
 
 const FormBlock = styled.form`
     display: flex;
@@ -12,7 +16,7 @@ const FormBlock = styled.form`
     align-items: center;
 
 `;
-const FormBlock_1 = styled.div`
+const FormBlockLeft = styled.div`
     display: flex;
     flex-direction : column;
     justify-content: center;
@@ -20,7 +24,7 @@ const FormBlock_1 = styled.div`
     margin-right: 50px;
 `;
 
-const FormBlock_2 = styled.div`
+const FormBlockRight = styled.div`
     display: flex;
     flex-direction : column;
     justify-content: center;
@@ -86,12 +90,12 @@ const RadioTitle = styled.div`
     margin-left: 15px;
     margin-bottom: 10px;
 `;
-const RadioBlock_1 = styled.div`
+const RadioBlockLeft = styled.div`
     display: flex;
     flex-direction: column;
     margin-right: 10px;
 `;
-const RadioBlock_2 = styled.div`
+const RadioBlockRight = styled.div`
     display: flex;
     flex-direction: column;
     margin-left: 20px;
@@ -190,7 +194,8 @@ const Placeholder = styled.span`
     background: none;
     pointer-events: none;
 `;
-const CButton = styled.button`
+
+const CButton = styled(motion.button)`
     width: 130px;
     height: 70px;
     border-radius: 50px;
@@ -224,10 +229,13 @@ const categories_2 = [
 ];
 
 const ContactPage = () => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const closeModal = () => setIsModalOpen(false);
+    const [isSuccess, setSuccess] = useState(false);
     const [fileList, setFileList] = useState([]);
     const FileTextRef = useRef(null);
     const [formData, setFormData] = useState({
-        category: '',
+        category: 'Entertainment',
         description: '',
         clientName: '',
         organization: '',
@@ -237,15 +245,11 @@ const ContactPage = () => {
     });
 
     const handleDataChange = (e) => {
-        const { name, value } = e.target;
+        const {name, value } = e.target;
         setFormData({
             ...formData,
             [name]: value,
         });
-    };
-
-    const handleCategoryChange = (e) => {
-        setFormData({ ...formData, category: e.target.value });
     };
 
     const handleFileChange = (e) => {
@@ -260,6 +264,15 @@ const ContactPage = () => {
     };
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        for (const key in formData) {
+            console.log(formData, key);
+            if (formData[key] === "") {
+              alert(`${key}을(를) 작성해주세요!`);
+              return;
+            }
+          }
+      
         const requestData = new FormData();
         requestData.append("request", new Blob([JSON.stringify(formData)], { type: "application/json" }));
         fileList.forEach(file => {
@@ -268,35 +281,23 @@ const ContactPage = () => {
         axios.post('https://port-0-promoationpage-server-12fhqa2blnlum4de.sel5.cloudtype.app/api/requests', requestData)
             .then((response) => {
                 console.log(response.data, "임다. ");
-                setFormData({
-                    department: "",
-                    category: "",
-                    name: "",
-                    client: "",
-                    date: "",
-                    link: "",
-                    overView: "",
-                });
-                ;
+                setIsModalOpen(true);
+                setSuccess(true);
             })
             .catch((error) => {
                 console.error("에러 발생", error);
+                // setIsOpen(true);
+                // setSuccess(false);
             })
     }
-    useEffect(() => {
-        let checkedCategory = document.getElementById("Entertainment");
-        checkedCategory.checked = true;
-
-    }, []);
-
     return (
         <Body>
             <LetterAnimation contact text="CONTACT US!"></LetterAnimation>
             <FormBlock onSubmit={handleSubmit}>
-                <FormBlock_1>
+                <FormBlockLeft>
                     <RadioTitle>프로젝트 카테고리</RadioTitle>
                     <RadioBlock>
-                        <RadioBlock_1>
+                        <RadioBlockLeft>
                             {categories_1.map((category, index) => (
                                 <CLabel key={index}>
                                     <Category
@@ -304,13 +305,14 @@ const ContactPage = () => {
                                         name="category"
                                         id={category}
                                         value={category}
-                                        onChange={handleCategoryChange}
+                                        onChange={handleDataChange}
+                                        checked={formData.category === category}
                                     />
                                     <CName>{category}</CName>
                                 </CLabel>
                             ))}
-                        </RadioBlock_1>
-                        <RadioBlock_2>
+                        </RadioBlockLeft>
+                        <RadioBlockRight>
                             {categories_2.map((category, index) => (
                                 <CLabel key={index}>
                                     <Category
@@ -318,12 +320,12 @@ const ContactPage = () => {
                                         name="category"
                                         id={category}
                                         value={category}
-                                        onChange={handleCategoryChange}
+                                        onChange={handleDataChange}
                                     />
                                     <CName>{category}</CName>
                                 </CLabel>
                             ))}
-                        </RadioBlock_2>
+                        </RadioBlockRight>
                     </RadioBlock>
                     <InputFileContainer>
                         <FileText ref={FileTextRef} type="text" readOnly="readonly"></FileText>
@@ -335,10 +337,10 @@ const ContactPage = () => {
                         <Placeholder>프로젝트 정보</Placeholder>
                     </InputBlock>
 
-                </FormBlock_1>
-                <FormBlock_2>
+                </FormBlockLeft>
+                <FormBlockRight>
                     <InputBlock>
-                        <InputField type="text" name="clientName" id="clientName" required spellCheck={false} onChange={handleDataChange} />
+                        <InputField type="text" name="clientName" id="성함" required spellCheck={false} onChange={handleDataChange}/>
                         <Placeholder>성함</Placeholder>
                     </InputBlock>
                     <InputBlock>
@@ -358,9 +360,16 @@ const ContactPage = () => {
                         <Placeholder>직책</Placeholder>
                     </InputBlock>
 
-                </FormBlock_2>
+                </FormBlockRight>
             </FormBlock>
-            <CButton type="submit" onClick={handleSubmit}>문의하기</CButton>
+            <CButton
+                type="submit"
+                onClick={handleSubmit}
+                whileHover={{ scale: 1.1 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}>
+                문의하기
+            </CButton>
+            <Modal isModalOpen={isModalOpen} success={isSuccess} closeModal={closeModal}></Modal>
 
         </Body>
     )
