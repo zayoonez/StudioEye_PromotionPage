@@ -42,44 +42,95 @@ const Button = styled.button`
 `;
 
 const Div = styled.div`
-    margin: 0.5rem 0;
+   margin: 0.25rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `;
+const Title = styled.div`
+    margin-right: 5%;
+    width: 25%;
+`;
+const Input = styled.input`
+    width: 70%;
+`;
+
 function AdminModal({onCancel}) {
 
-    const [inputValue, setInputValue] = useState('');
+        const navigate = useNavigate();
 
-    const handleInputChange = (event) => {
-        setInputValue(event.target.value);
-    };
-    const password = "admin1234";
+        const [formData, setFormData] = useState({
+            email: "",
+            pwd: "",
+        });
 
-    const navigate = useNavigate();
+        const handleChange = (e) => {
+            const { name, value } = e.target;
+            setFormData((prevData) => ({
+                ...prevData,
+                [name]: value,
+            }));
+        };
+        const handleKeyDown = (e) => {
+            if (e.key === "Enter") {
+                handleLogin();
+            }
+        };
 
-    const checkAdmin = () => {
-        if(inputValue === password){
-            navigate('/admin');
-        }
+        const handleLogin = () => {
+            axios
+                .post("http://13.125.181.139:8000/user-service/login", formData)
+                .then((response) => {
+                    const accessToken = response.data.accessToken;
+                    axios.defaults.headers.common["Authorization"] =
+                        "Bearer " + accessToken; // 토큰을 HTTP 헤더에 포함
+                    sessionStorage.setItem("login-token", accessToken);
 
-        else{
-            onCancel();
-        }
-    };
+                    alert("로그인 성공");
+                    navigate("/admin");
+                })
+                .catch((error) => {
+                    alert("로그인 실패");
+                    console.error("API 요청 중 오류 발생:", error);
+                });
+        };
 
+    useEffect(() => {
+
+        axios.get('http://13.125.181.139:8000/user-service/health_check')
+            .then(response => {
+                console.log(response.data);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+    }, [])
 
 
     return (
         <ModalContainer>
             <Modal>
-                <Text>비밀번호를 입력하세요</Text>
+                <Text>정보를 입력하세요</Text>
                 <Div>
-                    <input
-                        type="text"
-                        value={inputValue}
-                        onChange={handleInputChange}
+                    <Title>ID</Title>
+                    <Input
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                    />
+                </Div>
+                <Div>
+                    <Title>PW</Title>
+                    <Input
+                        name="pwd"
+                        value={formData.pwd}
+                        onChange={handleChange}
+                        type="password"
                     />
                 </Div>
                 <div>
-                <Button onClick={checkAdmin}>확인</Button>
+                <Button onClick={() => handleLogin()}>확인</Button>
                 <Button onClick={onCancel}>취소</Button>
                 </div>
             </Modal>

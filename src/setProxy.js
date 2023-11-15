@@ -7,5 +7,11 @@ module.exports = function(app) {
     changeOrigin: true,
 })
 );
+    app.use(
+        createProxyMiddleware( '/user-service',{
+            target: 'http://52.78.155.253:8000',
+            changeOrigin: true
+        })
+    );
 
 };
