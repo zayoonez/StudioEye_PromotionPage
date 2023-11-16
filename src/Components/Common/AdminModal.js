@@ -78,13 +78,12 @@ function AdminModal({onCancel}) {
         };
 
         const handleLogin = () => {
-            axios
-                .post("/user-service/login", formData)
+            axios.post(`/user-service/login`, formData)
                 .then((response) => {
-                    const accessToken = response.data.accessToken;
-                    axios.defaults.headers.common["Authorization"] =
-                        "Bearer " + accessToken; // 토큰을 HTTP 헤더에 포함
-                    sessionStorage.setItem("login-token", accessToken);
+                    // const accessToken = response.data.accessToken;
+                    // axios.defaults.headers.common["Authorization"] =
+                    //     "Bearer " + accessToken; // 토큰을 HTTP 헤더에 포함
+                    // sessionStorage.setItem("login-token", accessToken);
 
                     alert("로그인 성공");
                     navigate("/admin");
