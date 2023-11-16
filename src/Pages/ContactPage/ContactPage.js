@@ -5,8 +5,6 @@ import { motion } from "framer-motion";
 import axios from "axios";
 import LetterAnimation from "../../Components/Common/LetterAnimation";
 import Modal from "./Components/Modal";
-// entertainment default 값 설정
-// 성공 시 알림
 // 이메일이랑 번호
 
 const FormBlock = styled.form`
@@ -231,7 +229,6 @@ const categories_2 = [
 const ContactPage = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const closeModal = () => setIsModalOpen(false);
-    const [isSuccess, setSuccess] = useState(false);
     const [fileList, setFileList] = useState([]);
     const FileTextRef = useRef(null);
     const [formData, setFormData] = useState({
@@ -265,13 +262,16 @@ const ContactPage = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        //빈값 제출 시 alert 
         for (const key in formData) {
-            console.log(formData, key);
             if (formData[key] === "") {
               alert(`${key}을(를) 작성해주세요!`);
               return;
             }
           }
+
+        //5초 후 홈으로 이동 setTimeout
+        
       
         const requestData = new FormData();
         requestData.append("request", new Blob([JSON.stringify(formData)], { type: "application/json" }));
@@ -282,13 +282,26 @@ const ContactPage = () => {
             .then((response) => {
                 console.log(response.data, "임다. ");
                 setIsModalOpen(true);
-                setSuccess(true);
+                setFormData({ // 폼 데이터 초기화
+                    category: 'Entertainment',
+                    //초기화 설정..
+                    description: '',
+                    clientName: '',
+                    organization: '',
+                    contact: '',
+                    email: '',
+                    position: '',
+                  });
+                  setFileList([]);
+                  FileTextRef.current.value = ''; // 파일 입력
+
             })
             .catch((error) => {
                 console.error("에러 발생", error);
                 // setIsOpen(true);
                 // setSuccess(false);
             })
+
     }
     return (
         <Body>
@@ -349,7 +362,7 @@ const ContactPage = () => {
                     </InputBlock>
                     <InputBlock>
                         <InputField type="text" name="contact" id="contact" required spellCheck={false} onChange={handleDataChange} />
-                        <Placeholder>연락처</Placeholder>
+                        <Placeholder>연락처(-포함)</Placeholder>
                     </InputBlock>
                     <InputBlock>
                         <InputField type="text" name="email" id="email" required spellCheck={false} onChange={handleDataChange} />
@@ -369,7 +382,7 @@ const ContactPage = () => {
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}>
                 문의하기
             </CButton>
-            <Modal isModalOpen={isModalOpen} success={isSuccess} closeModal={closeModal}></Modal>
+            <Modal isModalOpen={isModalOpen} closeModal={closeModal}></Modal>
 
         </Body>
     )

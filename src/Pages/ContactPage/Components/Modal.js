@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 // props로 받아서 성공 Modal, 실패 Modal 띄울 계획
 // 아 그럴 필요 없을 듯. . . . . . 성공만 띄우고 
@@ -43,7 +44,8 @@ const CloseModalButton = styled.button`
     font-size: 18px;
 `;
 
-const Modal = ({isModalOpen, closeModal}) => {
+const Modal = ({ isModalOpen, closeModal }) => {
+
 
     return (
         <>
@@ -51,9 +53,7 @@ const Modal = ({isModalOpen, closeModal}) => {
                 <ModalBack>
                     <Container>
                         <Content>문의가 완료되었습니다. </Content>
-                        <CloseModalButton onClick={closeModal}>닫기</CloseModalButton>
-                        <div>5초 후 홈으로 돌아갑니다.... </div>
-                    </Container>
+                        <CloseModalButton onClick={closeModal}>닫기</CloseModalButton>                    </Container>
                 </ModalBack>
             )}
         </>
