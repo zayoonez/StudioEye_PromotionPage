@@ -71,11 +71,6 @@ function AdminModal({onCancel}) {
                 [name]: value,
             }));
         };
-        const handleKeyDown = (e) => {
-            if (e.key === "Enter") {
-                handleLogin();
-            }
-        };
 
         const handleLogin = () => {
             axios.post(`/user-service/login`, formData)
@@ -90,21 +85,18 @@ function AdminModal({onCancel}) {
                 })
                 .catch((error) => {
                     alert("로그인 실패");
-                    console.error("API 요청 중 오류 발생:", error);
+                    if (error.response) {
+                        // 서버에서 응답을 받은 경우 (상태 코드가 설정된 경우)
+                        console.error('Response Error:', error.response.status, error.response.data);
+                    } else if (error.request) {
+                        // 서버로 요청이 전송되지 않은 경우
+                        console.error('Request Error:', error.request);
+                    } else {
+                        // 그 외의 에러
+                        console.error('Error:', error.message);
+                    }
                 });
         };
-
-    useEffect(() => {
-
-        axios.get('/user-service/health_check')
-            .then(response => {
-                console.log(response.data);
-            })
-            .catch(error => {
-                console.error(error);
-            });
-
-    }, [])
 
 
     return (
