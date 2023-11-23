@@ -5,6 +5,9 @@ import PortfolioGrid from "./PortfolioGrid"
 import { motion, useScroll, useSpring } from "framer-motion"
 import CustomCursor from "../../Components/Common/CustomCursor";
 import MainLogoAnimation from "./MainLogoAnimation";
+import MainCEO from "./MainCEO";
+import MainContents from "./MainContents";
+import MainLogoSlider from "./MainLogoSlider";
 
 const ProgressBar = styled(motion.div)`
     position: fixed;
@@ -37,11 +40,17 @@ const PromotionMainpage = () => {
     const PromotionMainpageContent = () => {
         return (
             <>
-                <LogoContainer>
+                {/* <LogoContainer>
                     <MainLogoAnimation />
                 </LogoContainer>
                 <PortfolioGrid />
-                <ProgressBar style={{ scaleX }}></ProgressBar>
+                <ProgressBar style={{ scaleX }}></ProgressBar> */}
+                <MainAbout/>
+                <MainContents/>
+                <MainCEO/>
+                <MainLogoSlider/>
+
+                
             </>
         )
     }
