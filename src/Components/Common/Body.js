@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
 import Header from "./header";
-import SideBar from "./SideBar";
+import Footer from "./Footer";
 import { motion, AnimatePresence } from "framer-motion";
 import ContactButton from './ContactButton';
 
@@ -125,17 +125,17 @@ const Body = function({children}) {
                 {children}
             </RealBody>
             </motion.div>
+            <SideDiv additionalWidth={additionalWidth}/>
+            <ContactButton/>
+        </PageBody>
             <motion.div
                 variants={sidebarmotion}
                 initial="initial"
                 animate="animate"
                 exit="out"
             >
-                <SideBar />
+                <Footer />
             </motion.div>
-            <SideDiv additionalWidth={additionalWidth}/>
-            <ContactButton/>
-        </PageBody>
         </ScrollDiv>
     </motion.div>
     </>
