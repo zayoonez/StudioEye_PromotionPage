@@ -2,37 +2,71 @@ import React, {useEffect, useRef, useState} from "react";
 import styled from "styled-components";
 import Body from "../../Components/Common/Body";
 import {motion} from "framer-motion";
-import {ReactComponent as LogoIcon} from "../../assets/logo/STUDIO-I.svg";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
-import MyAccordion from "../NoticePage/Components/MyAccordion";
+import studioi from '../../assets/logo/mainLogo.png'
 
 
 const BoxContainer = styled(motion.div)`
     display: flex;
-    justify-content: center;
     align-items: center;
     flex-direction: column;
     background-color: white;
+    height: 90vh;
+    transition: background 0.3s; /* 배경 전환에 트랜지션 적용 */   
+`;
+
+const Text = styled.text`
+    color: #ff530E;
+    font-size: 3.5rem;
+    font-weight: 600;
+    margin-top: 2rem;
+`;
+const Client = styled.text`
+    font-size: 1rem;
+`;
+const Title = styled.text`
+    margin-top: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+`;
+const Background= styled.div`
+    transition: background 0.6s; /* 배경 전환에 트랜지션 적용 */
+    position: absolute;
+    bottom: calc(10vh - 4rem);
+    width: ${props => props.mainWidth}px;
+    border: 1px solid red;
+    z-index: 1;
     
 `;
 
 const ContContainer = styled(motion.div)`
-    height: 85vh;
+    margin-top: 5vh;
+    height: 50vh;
     width: 100%;
     display: flex;
     flex-wrap: wrap; 
     overflow: auto;
+    z-index: 2;
 `;
-
-const Content = styled(motion.img)`
-    width: 45%;
-    aspect-ratio: 1024 / 720;
+const Div = styled.div`
+    width: 29%;
     margin-left: 2%;
     margin-right: 2%;
     margin-bottom: 5vh;
     margin-top: 2vh;
+`;
+const Content = styled(motion.img)`
+    width: 100%;
+    aspect-ratio: 1024 / 720;
     cursor: pointer;
+`;
+
+const Img = styled(motion.img)`
+    aspect-ratio: 1024 / 720;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.7) 100%);
+    pointer-events: none;
+    z-index: 1;
 `;
 
 const CategoryVariants =  {
@@ -43,11 +77,10 @@ const CategoryVariants =  {
 const ArtworkMainpage = () => {
 
     const ArtworkMainpageContent=()=>{
-        const [selectedCategory, setSelectedCategory] = useState("ALL");
-        const [contentToDisplay, setContentToDisplay] = useState([]);
         const [data, setData] = useState([]);
-        const [imgData, setImgData] = useState([]);
         const contContainerRef = useRef(null);
+        const [hoveredItemId, setHoveredItemId] = useState(studioi);
+        const [mainWidth, setMainWidth] = useState(0);
 
         const navigate = useNavigate();
 
@@ -66,24 +99,15 @@ const ArtworkMainpage = () => {
                     const objects = [];
                     const imgObjects = [];
 
-                    for(let i = 0; i < data.data.length; i++) {
+                    for(let i = data.data.length-1; i >= 0; i--) {
                         const obj = {
                             id: data.data[i].id,
-                            title: data.data[i].title,
+                            title: data.data[i].name,
+                            client: data.data[i].client,
                             img: data.data[i].imageUrlList[0]
                         };
-                        for(let j=0; j<data.data[i].imageUrlList.length;j++){
-                            const ImgObj = {
-                                ImgId: data.data[i].id,
-                                title: data.data[i].title
-                            };
-
-                            imgObjects.push(obj);
-                        }
-
                         objects.push(obj);
                     }
-                    setImgData(imgObjects);
                     setData(objects);
                 })
                 .catch(error => {
@@ -92,19 +116,56 @@ const ArtworkMainpage = () => {
 
         }, [])
 
+        useEffect(() => {
+            // 화면 크기확인
+            const handleResize = () => {
+                const screenWidth = window.innerWidth;
+                if (screenWidth > 1180) {
+                    setMainWidth(1180);
+
+                } else {
+                    // 1184px 이하일 경우 추가 너비를 0으로 설정
+                    setMainWidth(screenWidth);
+                }
+            };
+
+            // 초기 로드와 화면 크기 변경 시에도 적용
+            handleResize();
+            window.addEventListener('resize', handleResize);
+
+            // 컴포넌트 언마운트 시 리스너 해제
+            return () => {
+                window.removeEventListener('resize', handleResize);
+            };
+
+        }, []);
+
         return (
             <>
                 <BoxContainer>
+                    <Text>Contents</Text>
                     <ContContainer
                         variants={CategoryVariants}
                         initial="initial"
                         animate="animate"
                         ref={contContainerRef}>
                         {data.map((item, i) => (
-                            <Content onClick={() => goToDetail(item.id)} key={item.id} src={item.img} />
+                            <Div>
+                                <Content onClick={() => goToDetail(item.id)}
+                                         onMouseOver={() => setHoveredItemId(item.img)}
+                                         onMouseOut={() => setHoveredItemId(studioi)}
+                                         key={item.id} src={item.img} />
+                                <div>
+                                <Client>{item.client}</Client>
+                                </div>
+                                <Title>{item.title}</Title>
+                            </Div>
                         ))}
                         {/*{contentToDisplay}*/}
                     </ContContainer>
+                    <Background>
+                        <Img src={hoveredItemId}/>
+                    </Background>
                 </BoxContainer>
             </>
         )
