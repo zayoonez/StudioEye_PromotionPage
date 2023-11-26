@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import Slider from "./Components/Slider";
 import axios from "axios";
 
+
 const MainAbout = () => {
     const [images, setImages] = useState([]);
 
@@ -16,6 +17,7 @@ const MainAbout = () => {
                 const urlList = [];
 
                 for(let i = 0; i < data.data.length; i++){
+                    //썸네일만 가져오기
                     urlList.push(data.data[i].imageUrlList[0]);
                 }
 
@@ -27,7 +29,10 @@ const MainAbout = () => {
     }
 
     return (
+        <div>
         <Slider images={images}></Slider>
+
+        </div>
     );
 }
 

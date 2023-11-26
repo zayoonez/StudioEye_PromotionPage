@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const SliderContainer = styled.div`
   overflow: hidden;
-  position: relative; /* 부모 컨테이너에 position: relative; 설정 */
+  position: relative;
 `;
 
 const SliderWrapper = styled.div`
