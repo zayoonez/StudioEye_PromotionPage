@@ -60,7 +60,7 @@ function App() {
                         {/*/>*/}
                         <Route path="/" element={<PromotionMainpage />} />
                         <Route path="/About" element={<AboutMainpage />} />
-                        <Route path="/Artwork" element={<ArtworkMainpage />} />
+                        <Route path="/Contents" element={<ArtworkMainpage />} />
                         <Route path="/detail/:id" element={<DetailPages />} />
                         <Route path="/notice" element={<NoticeMainPage />} />
                         <Route path="/admin" element={<AdminMainPage />} />

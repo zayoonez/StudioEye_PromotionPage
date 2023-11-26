@@ -156,7 +156,7 @@ const Header = () => {
                     <div className="logo"><Img src={studioi} alt='logo image' className="SocoaLogo" onClick={goMain}/></div>
                     <div className="menu">
                         <MenuButtons>ABOUT</MenuButtons>
-                        <MenuButtons>ARTWORK</MenuButtons>
+                        <MenuButtons>CONTENTS</MenuButtons>
                         <MenuButtons>CONTACT</MenuButtons>
                     </div>
                 </Wrapper>
