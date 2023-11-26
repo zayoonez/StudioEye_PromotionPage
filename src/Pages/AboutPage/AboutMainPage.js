@@ -5,7 +5,6 @@ import BasicInfoGrid from "./BasicInfoGrid";
 import HistoryGrid from "./HistoryGrid";
 import CoOpInfoGrid from "./CoOpInfoGrid";
 import { motion } from "framer-motion";
-import { ReactComponent as LogoIcon } from "../../assets/logo/STUDIO-I.svg";
 import GreetingGrid from "./GreetingGrid";
 import NaverMapGrid from "./NaverMapGrid";
 

@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { motion, useAnimation } from "framer-motion";
 
 import AboutTitle from "./Components/AboutTitle";
-import studioi from "../../assets/studioi.png";
 import {useInView} from "react-intersection-observer";
 import axios from "axios";
 
