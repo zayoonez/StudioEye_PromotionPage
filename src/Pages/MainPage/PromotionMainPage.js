@@ -8,6 +8,7 @@ import MainLogoAnimation from "./MainLogoAnimation";
 import MainCEO from "./MainCEO";
 import MainContents from "./MainContents";
 import MainLogoSlider from "./MainLogoSlider";
+import MainAbout from "./MainAbout";
 
 const ProgressBar = styled(motion.div)`
     position: fixed;

@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import caricature from "../../assets/images/Caricature.png"
 
 const Wrapper = styled.div`
     display: flex;
@@ -18,12 +19,12 @@ const AboutCEO = styled.div`
     align-items: center;
     justify-content: center;
     margin: 40px;
+    width: 100%;
 `;
 
 const About = styled.div`
     display: flex;
     flex-direction: column;
-
 `;
 
 const CEOName = styled.h1`
@@ -37,30 +38,40 @@ const CEOInfo = styled.div`
     font-size: 20px;
     white-space: pre-line;
     text-align: right;
+    margin-bottom: 10px;
 `;
 
 const InfoText = " CJ ENM 디지털 제작 팀장 출신 \n TV 예능, 웹드라마, 디지털 다큐멘터리, 게임 콘텐츠 연출 \n 기업 및 정부기관 콘텐츠 제작 및 SNS 운영 \n 엔터테인먼트 아티스트 콘텐츠 제작 \n "
 
 const DividingLine = styled.div`
-    height: 100%;
+    height: 210px;
     border-left : thick solid #FFA900;
     margin: 20px;
 `;
 
-const CImage = styled.div`
-    /* height: 60px;
-    width: 60px;
-    background-color: #FFA900; */
+const Caricature = styled.div`
+    background: url(${caricature});
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 300px;
+    height: 300px;
+    background-size: contain; 
+    margin-left: 50px;
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
 `;
 
 const SMain = styled.div`
     color: #FFA900;
     font-size: 110px;
     font-weight: bold;
+    margin-bottom: 20px;
 `;
+
 const SSub = styled.div`
     font-size: 20px;
-    margin-bottom: 30px;
+    margin-bottom: 100px;
 `;
 
 const MainCEO = () => {
@@ -74,15 +85,13 @@ const MainCEO = () => {
                     </CEOInfo>
                 </About>
                 <DividingLine />
-                <CImage>
-
-                </CImage>
+                <Caricature/>
             </AboutCEO>
             <SMain>
                 ENJOY YOUR EYES
             </SMain>
             <SSub>
-                고객의 목적에 맞춘 최적이 콘텐츠로 재미와 감동을 드리겠습니다.
+                고객의 목적에 맞춘 최적의 콘텐츠로 재미와 감동을 드리겠습니다
             </SSub>
         </Wrapper>
     )
