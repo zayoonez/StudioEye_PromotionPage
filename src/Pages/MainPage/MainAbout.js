@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
-import Slider from "./Components/Slider";
+import Carousel from "./Components/Carousel";
 import axios from "axios";
+import styled from "styled-components";
 
 
 const MainAbout = () => {
@@ -29,10 +30,9 @@ const MainAbout = () => {
     }
 
     return (
-        <div>
-        <Slider images={images}></Slider>
 
-        </div>
+        <Carousel images={images}></Carousel>
+
     );
 }
 
