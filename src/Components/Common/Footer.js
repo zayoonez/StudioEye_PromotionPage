@@ -56,7 +56,7 @@ const Text = styled.text`
     color: white;
     white-space: nowrap;
     margin-bottom: 1rem;
-    cursor: pointer;
+    cursor: default;
     
      @media(max-width: 970px){
     font-size: 1rem;
