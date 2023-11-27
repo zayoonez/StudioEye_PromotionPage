@@ -15,24 +15,43 @@ const Wrapper = styled.div`
 
 const ScrollAnimation = keyframes`
     0% { transform: translateX(0); }
-    100% { transform: translateX(-1000%); }
+    100% { transform: translateX(-100%); }
+`;
+
+const ScrollAnimation2 = keyframes`
+    0% {
+    transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(0);
+    }
 `;
 
 const SliderContainer = styled.div`
+    width: 100%;
     overflow: hidden; // 여기로 overflow 이동
 `;
 
 const SlideTrack = styled.div`
     margin-top: 20px;
     width: 100%;
+    justify-content: space-around;
     display: flex;
     gap: 3em;
     overflow: hidden;
 `;
 
-const SlideImg = styled.image`
-    height: 100px;
-    animation: ${ScrollAnimation} 30s linear infinite;
+const SlideImg = styled.img`
+    height: 100%;
+    animation: ${ScrollAnimation} 25s linear infinite;
+    transition: transform 1s ease-in-out;
+
+`;
+const SlideImg2 = styled.img`
+    height: 100%;
+    animation: ${ScrollAnimation2} 25s linear infinite;
+    transition: transform 1s ease-in-out;
+
 `;
 
 const MainLogoSlider = () => {
@@ -40,33 +59,23 @@ const MainLogoSlider = () => {
         <Wrapper>
             <SliderContainer>
                 <SlideTrack>
-                    <SlideImg src={corpLogo} alt="">
-                    </SlideImg>
-                    <SlideImg>
-                        <img src={corpLogo} alt="" />
-                    </SlideImg>
-                    <SlideImg>
-                        <img src={corpLogo} alt="" />
-                    </SlideImg>
-                    <SlideImg>
-                        <img src={corpLogo} alt="" />
-                    </SlideImg>                    
+                    <SlideImg src={corpLogo} alt="" />
+                    <SlideImg src={corpLogo} alt="" />
+                    <SlideImg src={corpLogo} alt="" />
+                    <SlideImg src={corpLogo} alt="" />
+                    <SlideImg src={corpLogo} alt="" />
+
+
                 </SlideTrack>
-            </SliderContainer>
-            <SliderContainer>
                 <SlideTrack>
-                    <SlideImg>
-                        <img src={corpLogo} alt="" />
-                    </SlideImg>
-                    <SlideImg>
-                        <img src={corpLogo} alt="" />
-                    </SlideImg>
-                    <SlideImg>
-                        <img src={corpLogo} alt="" />
-                    </SlideImg>
-                    <SlideImg>
-                        <img src={corpLogo} alt="" />
-                    </SlideImg>                    
+                    <SlideImg2 src={corpLogo} alt="" />
+                    <SlideImg2 src={corpLogo} alt="" />
+                    <SlideImg2 src={corpLogo} alt="" />
+                    <SlideImg2 src={corpLogo} alt="" />
+                    <SlideImg2 src={corpLogo} alt="" />
+                    <SlideImg2 src={corpLogo} alt="" />
+                    <SlideImg2 src={corpLogo} alt="" />
+
                 </SlideTrack>
             </SliderContainer>
         </Wrapper>
