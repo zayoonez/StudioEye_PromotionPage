@@ -4,7 +4,7 @@ import Body from "../../Components/Common/Body";
 import {motion} from "framer-motion";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
-import studioi from '../../assets/logo/mainLogo.png'
+import MainIMG from '../../assets/images/MainIMG.png'
 
 
 const BoxContainer = styled(motion.div)`
@@ -12,10 +12,18 @@ const BoxContainer = styled(motion.div)`
     align-items: center;
     flex-direction: column;
     background-color: white;
-    height: 90vh;
-    transition: background 0.3s; /* 배경 전환에 트랜지션 적용 */   
+    height: 90vh; 
 `;
-
+const Background= styled.div`
+    position: absolute;
+    bottom: calc(10vh - 4rem);
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.5)), url(${MainIMG});
+    background-position: bottom center;
+    background-size: cover;
+    width: ${props => props.mainWidth}px;
+    aspect-ratio: 1442 / 450;  
+    z-index: 1;    
+`;
 const Text = styled.text`
     color: #ff530E;
     font-size: 3.5rem;
@@ -29,15 +37,6 @@ const Title = styled.text`
     margin-top: 0.5rem;
     font-size: 1.5rem;
     font-weight: 600;
-`;
-const Background= styled.div`
-    transition: background 0.6s; /* 배경 전환에 트랜지션 적용 */
-    position: absolute;
-    bottom: calc(10vh - 4rem);
-    width: ${props => props.mainWidth}px;
-    border: 1px solid red;
-    z-index: 1;
-    
 `;
 
 const ContContainer = styled(motion.div)`
@@ -62,13 +61,6 @@ const Content = styled(motion.img)`
     cursor: pointer;
 `;
 
-const Img = styled(motion.img)`
-    aspect-ratio: 1024 / 720;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.7) 100%);
-    pointer-events: none;
-    z-index: 1;
-`;
-
 const CategoryVariants =  {
     animate: { opacity: 1, transition: { duration: 2}},
     initial: { opacity: 0,},
@@ -79,8 +71,8 @@ const ArtworkMainpage = () => {
     const ArtworkMainpageContent=()=>{
         const [data, setData] = useState([]);
         const contContainerRef = useRef(null);
-        const [hoveredItemId, setHoveredItemId] = useState(studioi);
         const [mainWidth, setMainWidth] = useState(0);
+
 
         const navigate = useNavigate();
 
@@ -115,7 +107,6 @@ const ArtworkMainpage = () => {
                 });
 
         }, [])
-
         useEffect(() => {
             // 화면 크기확인
             const handleResize = () => {
@@ -152,8 +143,6 @@ const ArtworkMainpage = () => {
                         {data.map((item, i) => (
                             <Div>
                                 <Content onClick={() => goToDetail(item.id)}
-                                         onMouseOver={() => setHoveredItemId(item.img)}
-                                         onMouseOut={() => setHoveredItemId(studioi)}
                                          key={item.id} src={item.img} />
                                 <div>
                                 <Client>{item.client}</Client>
@@ -163,9 +152,7 @@ const ArtworkMainpage = () => {
                         ))}
                         {/*{contentToDisplay}*/}
                     </ContContainer>
-                    <Background>
-                        <Img src={hoveredItemId}/>
-                    </Background>
+                    <Background mainWidth={mainWidth}/>
                 </BoxContainer>
             </>
         )
