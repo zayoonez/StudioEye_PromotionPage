@@ -11,14 +11,13 @@ import { FaArrowAltCircleLeft } from "react-icons/fa";
 
 
 
-
 const Wrapper = styled.div`
-    height: 60vh;
-    background-color: white;
+    background-color: #F3F4F8;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    white-space: pre-line;
 `;
 
 const Contents = styled.div`
@@ -53,8 +52,15 @@ const ContentsSlider = styled(Slider)`
         /* pointer-events: none; */
     }
 `;
+
+const TextInfo = styled.h3`
+  font-weight: bold;
+  text-align: center;
+`;
 const MainContents = () => {
 
+    const Text1 = "스튜디오 아이는 OTT, Youtube를 기반으로 한 콘텐츠 제작과 \n SNS 운영을 전문으로 하는 뉴미디어 제작사입니다";
+    const Text2 = "예능, 드라마, 다큐멘터리, 게임, 애니메이션까지 \n 전 장르의 콘텐츠를 제작하고 Youtube, Instagram 운영을 대행합니다"
     const [dragging, setDragging] = useState(false);
 
     const handleBeforeChange = () => {
@@ -66,7 +72,7 @@ const MainContents = () => {
     };
 
     const settings = {
-        dots: true,
+        dots: false,
         infinite: true,
         speed: 500,
         slidesToShow: 3,
@@ -149,6 +155,9 @@ const MainContents = () => {
 
     return (
         <Wrapper>
+            <Contents>WHAT WE DO</Contents>
+            <TextInfo>{Text1}</TextInfo>
+            <TextInfo>{Text2}</TextInfo>
             <Contents>CONTENTS</Contents>
             <ContentsSlider {...settings}>
                 {data.map((item) => (
