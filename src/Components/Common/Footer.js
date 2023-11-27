@@ -10,6 +10,7 @@ const Block = styled.div`
   height: 12rem;
   background-color: #FFA900;
   z-index: 999;
+  border-top: 1px solid white;
   
   @media(max-width: 970px){
   padding-top: 2rem;
