@@ -11,6 +11,7 @@ import { FaArrowAltCircleLeft } from "react-icons/fa";
 
 
 
+
 const Wrapper = styled.div`
     height: 60vh;
     background-color: white;
@@ -53,6 +54,7 @@ const ContentsSlider = styled(Slider)`
     }
 `;
 const MainContents = () => {
+
     const [dragging, setDragging] = useState(false);
 
     const handleBeforeChange = () => {
@@ -160,7 +162,6 @@ const MainContents = () => {
             </ContentsSlider>
 
         </Wrapper>
-
     )
 }
 
