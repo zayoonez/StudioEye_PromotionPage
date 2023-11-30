@@ -4,14 +4,12 @@ import Body from "../../Components/Common/Body";
 import { motion } from "framer-motion";
 import axios from "axios";
 import Modal from "./Components/Modal";
-// 이메일이랑 번호
 
 const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /* margin: 60px; */
 `;
 const Title = styled.div`
     font-size: 54px;
@@ -20,8 +18,8 @@ const Title = styled.div`
     letter-spacing: 2px;
     margin-top: 100px;
     margin-bottom: 50px;
+    text-align: center;
 `;
-
 const SubTitle = styled.div`
     font-size: 25px;
     font-weight: bold;
@@ -36,9 +34,7 @@ const SubContent = styled.div`
     text-align: center;
     margin-bottom: 20px;
 `;
-
 const address = "서울시 성동구 광나루로 162 BS성수타워 5F \n 5F, 162, Gwangnaru-ro, Seondong-gu, Seoul, Korea";
-
 const MapButton = styled.button`
     color: #FF530E;
     border: none;
@@ -48,6 +44,10 @@ const MapButton = styled.button`
     cursor: pointer;
     background: transparent;
     margin-left: 20px;
+    margin-top: 12px;
+`;
+const MapLink = styled.a`
+
 `;
 const categories = [
     'Entertainment',
@@ -59,19 +59,17 @@ const categories = [
     'Animation',
     'Live Commerce',
 ];
-
 const FormContainer = styled.form`
     display: flex;
     flex-direction: column;
     /* max-width: 900px;  */
     margin: 0 auto; // 가운데 정렬을 위한 마진 추가
 `;
-
 const RowWrapper = styled.div`
     display: flex;
     ${(props) => (props.map ?
-        'gap: 0px;' : 'gap: 80px;')}
-
+        'gap: 0px;' : 'gap: 80px;' )};
+   align-items: center;
 `;
 const StyledSelect = styled.select`
     border: none;
@@ -92,8 +90,8 @@ const UnderlinedInput = styled.input`
     width: 250px;
     font-size: 18px;
     font-weight: 500;
-
 `;
+
 const InputWrapper = styled.div`
     margin-bottom: 16px;
     display: flex;
@@ -112,7 +110,6 @@ const UnderlinedTextarea = styled.textarea`
     border: none;
     border-bottom: 1px solid #C8C9CC;
     outline: none;
-    /* padding-bottom: 3px; */
     margin-bottom: 16px;
     width: 100%;
     height: 30px;
@@ -120,12 +117,9 @@ const UnderlinedTextarea = styled.textarea`
     overflow: hidden;
     line-height: 30px;
     font-weight: 500;
-    /* letter-spacing: 0px; */
     display: block;
     padding-left: 10px;
     overflow-wrap: break-word;
-    /* word-break: break-all; */
-    /* white-space: pre-wrap; */
 `;
 const SubmitButton = styled(motion.button)`
     border: 1.5px solid #FFA900; 
@@ -138,14 +132,12 @@ const SubmitButton = styled(motion.button)`
     margin-left: auto; 
     margin-bottom: 100px;
     cursor: pointer;
-    /* transition: all 0.3s ease; */
-
     &:hover {
         background-color: #FFA900;
         color: #ffffff; 
     }
 `;
-const ContactPage = () => {
+const ContactPage = (e) => {
     const textareaRef = useRef(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const closeModal = () => setIsModalOpen(false);
@@ -158,7 +150,17 @@ const ContactPage = () => {
         email: '',
         contact: '',
         description: '',
+        position: 'default',
     });
+    const emailCheck = (email) => {
+        const emailRegEx = /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/;
+        console.log(emailRegEx.test(email), "어떤데");
+        if (!emailRegEx.test(email)) {
+            alert("이메일 형식이 올바르지 않습니다. 다시 입력해주세요.");
+            return false;
+        }
+        return true; //형식에 맞을 경우, true 리턴
+      }
 
     const handleDataChange = (e) => {
         const { name, value } = e.target;
@@ -184,7 +186,6 @@ const ContactPage = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
         const emptyData = {
             organization: "소속",
             email: "이메일 주소",
@@ -199,12 +200,16 @@ const ContactPage = () => {
                 return;
             }
         }
-        //5초 후 홈으로 이동 setTimeout
+        const isValidEmail = emailCheck(formData.email);
+
+        // 이메일 형식이 올바르지 않으면 더 이상 처리하지 않고 종료
+        if (!isValidEmail) {
+            return;
+        }
+    
+        //5초 후 홈으로 이동 setTimeout할지말지
         const requestData = new FormData();
         requestData.append("request", new Blob([JSON.stringify(formData)], { type: "application/json" }));
-        fileList.forEach(file => {
-            requestData.append('files', file);
-        });
         axios.post('https://port-0-promoationpage-server-12fhqa2blnlum4de.sel5.cloudtype.app/api/requests', requestData)
             .then((response) => {
                 console.log(response.data, "임다. ");
@@ -217,17 +222,12 @@ const ContactPage = () => {
                     email: '',
                     contact: '',
                     description: '',
+                    position: 'default',
                 });
-                setFileList([]);
-                FileTextRef.current.value = ''; // 파일 입력
-
             })
             .catch((error) => {
                 console.error("에러 발생", error);
-                // setIsOpen(true);
-                // setSuccess(false);
             })
-
     }
     return (
         <Body>
@@ -236,7 +236,7 @@ const ContactPage = () => {
                 <SubTitle>ADDRESS</SubTitle>
                 <RowWrapper map>
                     <SubContent>{address}</SubContent>
-                    <MapButton>MAP</MapButton>
+                    <MapLink href="https://naver.me/xJqS8qd3" target="_blank"><MapButton>MAP</MapButton></MapLink>
                 </RowWrapper>
                 <SubTitle>TEL</SubTitle>
                 <SubContent>02-2038-2663</SubContent>
@@ -252,7 +252,7 @@ const ContactPage = () => {
                                     key={index}
                                     name="category"
                                     id={category}
-                                    value={category}
+                                    value={formData.category}
                                     onChange={handleDataChange}
                                 >{category}</option>
                             ))}
@@ -261,21 +261,21 @@ const ContactPage = () => {
                     <RowWrapper>
                         <InputWrapper>
                             <Label>이름</Label>
-                            <UnderlinedInput type="text" name="clientName" onChange={handleDataChange} />
+                            <UnderlinedInput type="text" value={formData.clientName} name="clientName" onChange={handleDataChange} />
                         </InputWrapper>
                         <InputWrapper>
                             <Label>소속</Label>
-                            <UnderlinedInput type="text" name="organization" onChange={handleDataChange} />
+                            <UnderlinedInput type="text" value={formData.organization} name="organization" onChange={handleDataChange} />
                         </InputWrapper>
                     </RowWrapper>
                     <RowWrapper>
                         <InputWrapper>
                             <Label>이메일</Label>
-                            <UnderlinedInput type="email" name="email" onChange={handleDataChange} />
+                            <UnderlinedInput type="email" value={formData.email} name="email" onChange={handleDataChange} />
                         </InputWrapper>
                         <InputWrapper>
                             <Label>연락처</Label>
-                            <UnderlinedInput type="tel" name="contact" onChange={handleDataChange} />
+                            <UnderlinedInput type="text" placeholder="ex) 010-1234-5678" value={formData.contact} name="contact" onChange={handleDataChange} />
                         </InputWrapper>
                     </RowWrapper>
                     <InputWrapper>
@@ -283,6 +283,7 @@ const ContactPage = () => {
                         <UnderlinedTextarea
                             ref={textareaRef}
                             autoComplete="off"
+                            value={formData.description}
                             name="description"
                             onChange={handleTextAreaDataChange}
                         />
@@ -294,6 +295,7 @@ const ContactPage = () => {
                         transition={{ ease: "easeInOut", stiffness: 200, damping: 5 }}
                     >문의하기</SubmitButton>
                 </FormContainer>
+                <Modal isModalOpen={isModalOpen} closeModal={closeModal}></Modal>
             </Wrapper>
         </Body>
     )
