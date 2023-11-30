@@ -5,35 +5,34 @@ import {motion} from "framer-motion"
 
 const ButtonSection = styled(motion(Link))`
     position: fixed;
-    width: 75px;
-    height: 75px;
-    bottom: 3rem;
-    text-align: center;
-    margin-right: 15px;
-    right:2rem;
+    width: 25px;
+    height: 120px;
+    top: 22%;
+    right:0px;
     background-color: #000;
-    border-radius: 50px;
-    border: 2px solid #000; /* 검은색 테두리 */
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+    border-radius: 15px 0 0 15px;
     display: flex;
-    justify-content: center; /* 수평 가운데 정렬 */
-    align-items: center; /* 수직 가운데 정렬 */
+    justify-content: center; 
+    align-items: center; 
     text-decoration: none;
+    white-space: nowrap;
 `;
 
 const ButtonText = styled.div`
-    font-size: 18px;
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+    font-size: 15px;
+    font-weight: bold;
     color: white;
 
 `;
 
 const ContactButton = () => {
     return (
-        <ButtonSection to="/Contact" 
-            animate={{ scale: [1, 1.12, 1], 
-                transition: { repeat: Infinity, duration: 1.8 } }}>
+        <ButtonSection to="/Contact" >
             <ButtonText>
-                Contact Us!
+                CONTACT US
             </ButtonText>
         </ButtonSection>
     );
