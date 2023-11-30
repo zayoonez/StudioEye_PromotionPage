@@ -4,6 +4,7 @@ import Body from "../../Components/Common/Body";
 import { motion } from "framer-motion";
 import axios from "axios";
 import Modal from "./Components/Modal";
+import Select from 'react-select';
 
 const Wrapper = styled.div`
     display: flex;
@@ -49,16 +50,84 @@ const MapButton = styled.button`
 const MapLink = styled.a`
 
 `;
+// const categories = [
+//     'Entertainment',
+//     'Drama',
+//     'Documentary',
+//     'Channel Operating',
+//     'Branded',
+//     'Motion Graphic',
+//     'Animation',
+//     'Live Commerce',
+// ];
+
 const categories = [
-    'Entertainment',
-    'Drama',
-    'Documentary',
-    'Channel Operating',
-    'Branded',
-    'Motion Graphic',
-    'Animation',
-    'Live Commerce',
+    { value: 'Entertainment', label: 'Entertainment' },
+    { value: 'Drama', label: 'Drama' },
+    { value: 'Documentary', label: 'Documentary' },
+    { value: 'Channel Operating', label: 'Channel Operating' },
+    { value: 'Branded', label: 'Branded' },
+    { value: 'Motion Graphic', label: 'Motion Graphic' },
+    { value: 'Animation', label: 'Animation' },
+    { value: 'Live Commerce', label: 'Live Commerce' },
 ];
+
+const StyledSelect = styled(Select)`
+  .Select__control {
+    height: 40px;
+    width: 260px;
+    border: none;
+    border-bottom: 1px solid #C8C9CC; 
+    border-radius: 0;
+    outline: none;
+    font-weight: bold;
+    font-size: 19px; 
+    /* padding-left: 15px;  */
+    cursor: pointer;
+  }
+
+  .Select__control:hover {
+    border-color: #a1a1a1;
+
+  }
+
+  .Select__control--is-focused {
+    /* box-shadow: 0 0 0 1px black; */
+    border: none;
+  }
+  .Select__menu--is-open {
+    border-color: transparent;
+        box-shadow: none;
+  }
+
+  .Select__indicator-separator {
+    display: none;
+  }
+
+  .Select__menu {
+    /* color: rgb(255, 169, 0, 0.8); */
+    /* background-color: rgb(255, 169, 0, 0.8); */
+    width: 260px;
+  }
+  .Select__option {
+    height: 40px;
+    display: "flex";
+    align-items: "center";
+    padding: 9px 0px 9px 15px;
+    /* background-color: rgb(255, 169, 0, 1); */
+
+    &--is-selected {
+        color: black;
+        background-color: rgb(255, 169, 0, 1);
+        font-weight: bold;
+      }
+      &--is-focused {
+        box-shadow: none;
+        background-color: rgb(255, 169, 0, 0.4);
+      }
+  }
+  
+`;
 const FormContainer = styled.form`
     display: flex;
     flex-direction: column;
@@ -68,18 +137,18 @@ const FormContainer = styled.form`
 const RowWrapper = styled.div`
     display: flex;
     ${(props) => (props.map ?
-        'gap: 0px;' : 'gap: 80px;' )};
+        'gap: 0px;' : 'gap: 80px;')};
    align-items: center;
 `;
-const StyledSelect = styled.select`
-    border: none;
-    border-bottom: 1px solid #C8C9CC; 
-    outline: none;
-    padding: 10px; 
-    width: 250px;
-    font-weight: bold;
-    font-size: 18px;
-`;
+// const StyledSelect = styled.select`
+//     border: none;
+//     border-bottom: 1px solid #C8C9CC; 
+//     outline: none;
+//     padding: 10px; 
+//     width: 250px;
+//     font-weight: bold;
+//     font-size: 18px;
+// `;
 const UnderlinedInput = styled.input`
     border: none;
     border-bottom: 1px solid #C8C9CC;
@@ -154,19 +223,25 @@ const ContactPage = (e) => {
     });
     const emailCheck = (email) => {
         const emailRegEx = /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/;
-        console.log(emailRegEx.test(email), "어떤데");
         if (!emailRegEx.test(email)) {
             alert("이메일 형식이 올바르지 않습니다. 다시 입력해주세요.");
             return false;
         }
         return true; //형식에 맞을 경우, true 리턴
-      }
+    }
 
     const handleDataChange = (e) => {
         const { name, value } = e.target;
         setFormData({
             ...formData,
             [name]: value,
+        });
+    };
+
+    const handleCategoryChange = (e) => {
+        setFormData({
+            ...formData,
+            "category": e.value,
         });
     };
 
@@ -206,7 +281,7 @@ const ContactPage = (e) => {
         if (!isValidEmail) {
             return;
         }
-    
+
         //5초 후 홈으로 이동 setTimeout할지말지
         const requestData = new FormData();
         requestData.append("request", new Blob([JSON.stringify(formData)], { type: "application/json" }));
@@ -246,17 +321,25 @@ const ContactPage = (e) => {
                 <FormContainer>
                     <InputWrapper>
                         <Label>문의 종류</Label>
-                        <StyledSelect>
+                        {/* <StyledSelect
+                            name="category"
+                            onChange={handleDataChange}
+                        >
                             {categories.map((category, index) => (
                                 <option
                                     key={index}
                                     name="category"
                                     id={category}
-                                    value={formData.category}
-                                    onChange={handleDataChange}
+                                    value={category}
                                 >{category}</option>
                             ))}
-                        </StyledSelect>
+                        </StyledSelect> */}
+                        <StyledSelect
+                            classNamePrefix="Select"
+                            options={categories}
+                            defaultValue={categories[0]}
+                            onChange={(e) => handleCategoryChange(e)}
+                        />
                     </InputWrapper>
                     <RowWrapper>
                         <InputWrapper>
