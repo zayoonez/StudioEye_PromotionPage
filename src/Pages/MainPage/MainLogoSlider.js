@@ -45,6 +45,8 @@ const SlideImg = styled.img`
     height: 100%;
     animation: ${ScrollAnimation} 25s linear infinite;
     transition: transform 1s ease-in-out;
+    /* transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1); */
+
 
 `;
 const SlideImg2 = styled.img`
