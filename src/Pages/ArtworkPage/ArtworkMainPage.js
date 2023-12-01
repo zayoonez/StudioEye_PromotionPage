@@ -25,10 +25,13 @@ const Background= styled.div`
     z-index: 1;    
 `;
 const Text = styled.text`
-    color: #ff530E;
     font-size: 54px;
-    font-weight: 600;
-    margin-top: 2rem;
+    font-weight: 750;
+    color: #FF530E;
+    letter-spacing: 2px;
+    margin-top: 100px;
+    margin-bottom: 50px;
+    text-align: center;
 `;
 const Client = styled.text`
     font-size: 1rem;

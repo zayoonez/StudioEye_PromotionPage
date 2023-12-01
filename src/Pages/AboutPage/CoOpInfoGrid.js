@@ -1,10 +1,14 @@
 import React, {useEffect, useState} from "react";
 import styled from "styled-components";
 import { motion, useAnimation } from "framer-motion";
-
-import AboutTitle from "./Components/AboutTitle";
 import {useInView} from "react-intersection-observer";
 import axios from "axios";
+import Pladi from "../../assets/images/Pladi.png"
+import Eye from "../../assets/logo/logo_yellow.png"
+import PD from "../../assets/images/PDRoom.png"
+import See from "../../assets/images/See.png"
+import Urban from "../../assets/images/UrbanPladi.png"
+import Locomo from "../../assets/images/Locomo.png"
 
 const BoxContainer = styled(motion.div)`
     display: flex;
@@ -12,12 +16,7 @@ const BoxContainer = styled(motion.div)`
     align-items: center;
     flex-direction: column;
     width: 100%;
-    height: 30rem;
-    
-    @media(max-width: 390px){
-    height: 40rem;
-    width: 90%;
-    }
+    margin-bottom: 5vh;
 `;
 const Title = styled.text`
     font-size: 54px;
@@ -30,66 +29,20 @@ const Title = styled.text`
 `;
 
 const LogoDiv = styled(motion.div)`
+    display: flex;
     height: 10rem;
-    width: 60%;
+    width: 70%;
     font-size: 4rem;
     font-weight: 600;
-    margin-bottom: 1rem;
-    border: 1px solid red;
 
 `;
-
-const MainLogoDiv = styled(motion.div)`
-  justify-content: center;
-  align-items: center;
-  width: 90%;
-  // height: 20rem;
-  display: flex;
-  padding: 2%;
-  margin-bottom: 2rem;
-  word-wrap: break-word;
-  
-
-`;
-const MainLogo = styled(motion.div)`
-  // width: 16rem;
-  height: 9rem;
-  display: flex;
-  margin-left: 2%;
-  margin-right: 2%;
-  cursor: pointer;
-  
-  @media(max-width: 700px){
-    height: 4.5rem;
-    }
-`;
-
-const SubLogoDiv = styled(motion.div)`
-  justify-content: center;
-  align-items: center;
-  width: 90%;
-  word-wrap: break-word;
-  display: flex;
-  padding: 2%;
- 
-`;
-
-const SubLogo = styled(motion.div)`
-  // width: 8rem;
-  height: 4.5rem;
-  display: flex;
-  margin-left: 2%;
-  margin-right: 2%;
-  
-  @media(max-width: 390px){
-    height: 2.25rem;
-    }
-  
-`;
-
-
 const Img = styled(motion.img)`
-    width: 100%;
+    width: 25%;
+    height: 70%;
+`;
+
+const Space = styled.div`
+    width: 12.5%;
 `;
 
 const boxVariant = {
@@ -178,7 +131,18 @@ export default function CoOpInfoGrid() {
       <BoxContainer>
           <Title>CORP.</Title>
           <LogoDiv>
-
+              <Img src={Pladi}></Img>
+              <Space />
+              <Img src={Eye}></Img>
+              <Space />
+              <Img src={PD}></Img>
+          </LogoDiv>
+          <LogoDiv>
+              <Img src={See}></Img>
+              <Space />
+              <Img src={Urban}></Img>
+              <Space />
+              <Img src={Locomo}></Img>
           </LogoDiv>
       </BoxContainer>
   );
