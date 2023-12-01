@@ -26,7 +26,7 @@ const Background= styled.div`
 `;
 const Text = styled.text`
     color: #ff530E;
-    font-size: 3.5rem;
+    font-size: 54px;
     font-weight: 600;
     margin-top: 2rem;
 `;
@@ -134,7 +134,7 @@ const ArtworkMainpage = () => {
         return (
             <>
                 <BoxContainer>
-                    <Text>Contents</Text>
+                    <Text>CONTENTS</Text>
                     <ContContainer
                         variants={CategoryVariants}
                         initial="initial"
