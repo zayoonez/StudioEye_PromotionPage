@@ -14,9 +14,7 @@ const DetailContainer = styled.div`
   display: flex;
 `;
 
-const YoutubeContainer = styled.div`
-  
-`;
+const YoutubeContainer = styled.div``;
 
 const InfoContainer = styled.div`
   display: flex;
@@ -40,7 +38,6 @@ const ContentDetailPage = () => {
             .get(`https://port-0-promoationpage-server-12fhqa2blnlum4de.sel5.cloudtype.app/api/projects/${id}`)
             .then((response) => {
                 const data = response.data;
-
                 const content = {
                     category: data.data.category,
                     client: data.data.client,
@@ -72,6 +69,56 @@ const ContentDetailPage = () => {
         setYoutubePlayer(event.target);
     };
 
+    const renderVideoPlayer = () => {
+        if (youtubePlayer && youtubePlayer.internalPlayer && detail.link) {
+            youtubePlayer.internalPlayer.loadVideoById(detail.link);
+        }
+    };
+
+    useEffect(() => {
+        renderVideoPlayer();
+    }, [detail.link, youtubePlayer]);
+
+
+    useEffect(() => {
+        const determineVideoType = async () => {
+            try {
+                if (detail.link) {
+                    if (detail.link.includes("/@")) {
+                        // 채널의 가장 최근 영상
+                        const channelUsername = detail.link.split("/@")[1];
+                        const channelIdResponse = await axios.get(`https://www.googleapis.com/youtube/v3/channels?key=YOUR_YOUTUBE_API_KEY&forUsername=${channelUsername}&part=id`);
+                        const channelId = channelIdResponse.data.items[0].id;
+                        const latestVideoResponse = await axios.get(`https://www.googleapis.com/youtube/v3/search?key=YOUR_YOUTUBE_API_KEY&channelId=${channelId}&part=id&order=date&type=video`);
+                        const latestVideoId = latestVideoResponse.data.items[0].id.videoId;
+                        setDetail({ ...detail, link: latestVideoId });
+                    } else if (detail.link.includes("/playlist?list=")) {
+                        // 재생목록의 첫 번째 영상
+                        const playlistId = detail.link.split("list=")[1];
+                        const playlistResponse = await axios.get(`https://www.googleapis.com/youtube/v3/playlistItems?key=YOUR_YOUTUBE_API_KEY&playlistId=${playlistId}&part=snippet&maxResults=1`);
+                        const firstVideoId = playlistResponse.data.items[0].snippet.resourceId.videoId;
+                        setDetail({ ...detail, link: firstVideoId });
+                    } else if (detail.link.includes("/user/")) {
+                        // 채널의 가장 최근 영상
+                        const channelUsername = detail.link.split("/user/")[1];
+                        const channelIdResponse = await axios.get(`https://www.googleapis.com/youtube/v3/channels?key=YOUR_YOUTUBE_API_KEY&forUsername=${channelUsername}&part=id`);
+                        const channelId = channelIdResponse.data.items[0].id;
+                        const latestVideoResponse = await axios.get(`https://www.googleapis.com/youtube/v3/search?key=YOUR_YOUTUBE_API_KEY&channelId=${channelId}&part=id&order=date&type=video`);
+                        const latestVideoId = latestVideoResponse.data.items[0].id.videoId;
+                        setDetail({ ...detail, link: latestVideoId });
+                    } else if (detail.link.includes("youtu.be")) {
+                        // 동영상 주소
+                        const videoId = detail.link.split("youtu.be/")[1];
+                        setDetail({ ...detail, link: videoId });
+                    }
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+    }, [detail.link]);
+
     return (
         <Body>
             <ImageBanner>
@@ -79,9 +126,7 @@ const ContentDetailPage = () => {
             </ImageBanner>
             <DetailContainer>
                 <YoutubeContainer>
-                {detail.link && (
-                    <YouTube videoId={detail.link} opts={{ width: "640", height: "390" }} onReady={onReady} />
-                )}
+                    {detail.link && <YouTube videoId={detail.link} opts={{ width: "640", height: "390" }} onReady={onReady} />}
                 </YoutubeContainer>
                 <InfoContainer>
                     {detail.overView}
