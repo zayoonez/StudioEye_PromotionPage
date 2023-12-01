@@ -14,6 +14,7 @@ import ContactEditPage from "./Pages/AdminPage/ContactEditPage";
 import NoticeEditPage from "./Pages/AdminPage/NoticeEditPage";
 import NoticeMainPage from "./Pages/NoticePage/NoticeMainPage";
 import ContactPage from './Pages/ContactPage/ContactPage';
+import ContentDetailPage from "./Pages/DetailPage/ContentDetailPage";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -63,7 +64,7 @@ function App() {
                         <Route path="/" element={<PromotionMainpage />} />
                         <Route path="/About" element={<AboutMainpage />} />
                         <Route path="/Contents" element={<ArtworkMainpage />} />
-                        <Route path="/detail/:id" element={<DetailPages />} />
+                        <Route path="/detail/:id" element={<ContentDetailPage />} />
                         <Route path="/notice" element={<NoticeMainPage />} />
                         <Route path="/admin" element={<AdminMainPage />} />
                         <Route path="/admin/about" element={<AboutEditPage />} />
