@@ -10,7 +10,7 @@ const BoxContainer = styled(motion.div)`
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: white;    
+    height: 90vh;   
 `;
 
 const Div = styled(motion.div)`
@@ -32,17 +32,17 @@ const AboutLogo = styled(motion(BsFillInfoCircleFill))`
   cursor: pointer;
 `;
 const ContactLogo = styled(motion(GrContact))`
-width: 100%;
+  width: 100%;
   font-size: 2.25rem; 
   cursor: pointer;
 `;
 const ArtworkLogo = styled(motion(AiFillYoutube))`
-width: 100%;
+  width: 100%;
   font-size: 2.25rem; 
   cursor: pointer;
 `;
 const NoticeLogo = styled(motion(BsFillPatchQuestionFill))`
-width: 100%;
+  width: 100%;
   font-size: 2.25rem; 
   cursor: pointer;
 `;
@@ -57,10 +57,10 @@ const AdminMainPage = () => {
     return(
         <Body>
             <BoxContainer>
-                <Div onClick={() => moveToEditPage('about')}><AboutLogo/>about</Div>
-                <Div onClick={() => moveToEditPage('artwork')}><ArtworkLogo/>artwork</Div>
-                <Div onClick={() => moveToEditPage('contact')}><ContactLogo/>contact</Div>
-                <Div onClick={() => moveToEditPage('notice')}><NoticeLogo/>notice</Div>
+                <Div onClick={() => moveToEditPage('about')}><AboutLogo/>ABOUT</Div>
+                <Div onClick={() => moveToEditPage('artwork')}><ArtworkLogo/>CONTENTS</Div>
+                <Div onClick={() => moveToEditPage('mainpage')}><NoticeLogo/>MAINPAGE</Div>
+                <Div onClick={() => moveToEditPage('contact')}><ContactLogo/>CONTACT</Div>
             </BoxContainer>
         </Body>
     )

@@ -11,7 +11,7 @@ const BoxContainer = styled(motion.div)`
     display: flex;
     align-items: center;
     flex-direction: column;
-    background-color: white;
+    background-color: #F3F4F8;
     height: 90vh; 
 `;
 const Background= styled.div`
@@ -25,10 +25,13 @@ const Background= styled.div`
     z-index: 1;    
 `;
 const Text = styled.text`
-    color: #ff530E;
-    font-size: 3.5rem;
-    font-weight: 600;
-    margin-top: 2rem;
+    font-size: 54px;
+    font-weight: 750;
+    color: #FF530E;
+    letter-spacing: 2px;
+    margin-top: 100px;
+    margin-bottom: 50px;
+    text-align: center;
 `;
 const Client = styled.text`
     font-size: 1rem;
@@ -111,8 +114,8 @@ const ArtworkMainpage = () => {
             // 화면 크기확인
             const handleResize = () => {
                 const screenWidth = window.innerWidth;
-                if (screenWidth > 1180) {
-                    setMainWidth(1180);
+                if (screenWidth > 1440) {
+                    setMainWidth(1440);
 
                 } else {
                     // 1184px 이하일 경우 추가 너비를 0으로 설정
@@ -134,7 +137,7 @@ const ArtworkMainpage = () => {
         return (
             <>
                 <BoxContainer>
-                    <Text>Contents</Text>
+                    <Text>CONTENTS</Text>
                     <ContContainer
                         variants={CategoryVariants}
                         initial="initial"

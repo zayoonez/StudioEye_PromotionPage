@@ -125,21 +125,6 @@ function PlusAboutModal({onCancel}) {
             <Modal>
                 <Text>협력사 추가</Text>
                 <Div>
-                    <Title>링크</Title>
-                    <Input
-                        type="text"
-                        onChange={(e) => setItem({ ...item, link: e.target.value })}
-                    />
-                </Div>
-                <Div>
-                    <Label htmlFor="dropdown">옵션 선택</Label>
-                    <Select id="dropdown" value={selectedOption} onChange={handleOptionChange}>
-                        <option value="">선택하세요</option>
-                        <option value="Main">Main CoOp.</option>
-                        <option value="Sub">Sub CoOp.</option>
-                    </Select>
-                </Div>
-                <Div>
                     <Title>이미지</Title>
                     <Input type="file" accept='image/*' onChange={onImageHandler} />
                 </Div>

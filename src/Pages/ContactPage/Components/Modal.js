@@ -2,14 +2,8 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-// props로 받아서 성공 Modal, 실패 Modal 띄울 계획
-// 아 그럴 필요 없을 듯. . . . . . 성공만 띄우고 
-//나머지는 유효성 검사랑, 필수 작성 안된 부분 모달 alert로 해주면 될 듯 합니다 !!
-
-
-
 const ModalBack = styled.div`
-    background: rgba(43, 43, 43, 0.8); 
+    background: rgba(43, 43, 43, 0.7); 
     width: 100vw;
     height: 100vh;
     display: grid;
@@ -19,10 +13,9 @@ const ModalBack = styled.div`
     left: 0;
 `;
 const Container = styled.div`
-    width: 25rem;
-    height: 20rem;
-    background-color: whitesmoke;
-    /* border-radius: 20px; */
+    width: 22rem;
+    height: 15rem;
+    background-color: #F3F4F8;
     display: flex;
     flex-direction: column;
     padding: 3rem;
@@ -31,22 +24,28 @@ const Container = styled.div`
     position: relative;
 `;
 const Content = styled.div`
-    font-size: 40px;
+    font-size: 33px;
+    padding-bottom: 50px;
 `;
 const CloseModalButton = styled.button`
     position: absolute;
-    height: 2.7rem;
+    height: 2.5rem;
     width: 12rem;
-    bottom : 30px;
+    bottom : 60px;
+    background-color: rgb(255, 169, 0, 0.8);
     border-radius: 20px;
-    border-color : black;
+    /* border-color : black; */
+    border: none;
     cursor: pointer;
     font-size: 18px;
+    &:hover {
+        background-color: rgb(255, 169, 0, 1);
+        color: black; 
+        border: black;
+    }
 `;
 
 const Modal = ({ isModalOpen, closeModal }) => {
-
-
     return (
         <>
             {isModalOpen && (

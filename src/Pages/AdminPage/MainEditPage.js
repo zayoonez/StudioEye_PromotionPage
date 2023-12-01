@@ -2,11 +2,10 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import Body from "../../Components/Common/Body";
-import PlusArtworkModal from "./Component/PlusArtworkModal";
-import EditArtWorkModal from "./Component/EditArtWorkModal";
 import {motion} from "framer-motion";
 import {useNavigate} from "react-router-dom";
 import {FaRegEdit} from "react-icons/fa";
+import EditMainModal from "./Component/EditMainModal";
 
 const StyledTable = styled.table`
   width: 1440px;
@@ -44,13 +43,7 @@ const Button = styled(motion.button)`
     position: absolute;
     left: 0;
 `;
-const Buttong = styled(motion.button)`
-    font-size: 1rem;
-    font-weight: 400;
-    margin: 0.25rem 0;
-    position: absolute;
-    right: 0;
-`;
+
 const Text = styled(motion.text)`
     font-size: 54px;
     font-weight: 750;
@@ -59,74 +52,63 @@ const Text = styled(motion.text)`
     text-align: center;
 `;
 
-function DataTable({ data, onEdit, deleteProject }) {
+function DataTable({ data, onEdit}) {
     return (
         <div>
-
-        <StyledTable>
-            <thead>
-            <tr>
-                <th>번호</th>
-                <th>제작부서</th>
-                <th>카테고리</th>
-                <th>프로젝트 이름</th>
-                <th>고객사</th>
-                <th>연도</th>
-                {/*<th>상세 설명</th>*/}
-                <th>동영상 링크</th>
-                <th>편집</th>
-            </tr>
-            </thead>
-            <tbody>
-            {data.map((item) => (
-                <tr key={item.id}>
-                    <td>{item.id}</td>
-                    <td>{item.department}</td>
-                    <td>{item.category}</td>
-                    <td>{item.name}</td>
-                    <td>{item.client}</td>
-                    <td>{item.date}</td>
-                    {/*<td>{item.overView}</td>*/}
-                    <td>{item.link}</td>
-                    <td>
-                        <button onClick={() => onEdit(item)}><FaRegEdit/></button>
-                    </td>
+            <StyledTable>
+                <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>프로젝트 이름</th>
+                    <th>고객사</th>
+                    <th>상세 설명</th>
+                    <th>게시여부</th>
+                    <th>편집</th>
                 </tr>
-            ))}
-            </tbody>
-        </StyledTable>
+                </thead>
+                <tbody>
+                {data.map((item) => (
+                    <tr key={item.id}>
+                        <td>{item.id}</td>
+                        <td>{item.name}</td>
+                        <td>{item.client}</td>
+                        <td>{item.overView}</td>
+                        <td>{item.isPosted ? "O" : "X"}</td>
+                        <td>
+                            <button onClick={() => onEdit(item)}><FaRegEdit/></button>
+                        </td>
+                    </tr>
+                ))}
+                </tbody>
+            </StyledTable>
         </div>
     );
 }
 
-const ArtworkEditPage = () => {
+const MainEditPage = () => {
+
     const navigate = useNavigate();
     const [data, setData] = useState([]);
-    const [imgData, setImgData] = useState([]);
-    const [isCreating, setIsCreating] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
     const [editingItem, setEditingItem] = useState(null);
+    const [editingItemId, setEditingItemId] = useState(null);
 
-    const handleCreate = () => {
-        setIsCreating(true);
-    };
 
     const handleEdit = (item) => {
         console.log(item);
         setEditingItem(item);
+        setEditingItemId(item.id);
         setIsEditing(true);
     };
 
     const handleSave = () => {
         fetchData();
         setIsEditing(false);
-        setIsCreating(false);
     };
 
     const handleCancel = () => {
         fetchData();
         setIsEditing(false);
-        setIsCreating(false);
     };
 
     const Back = () => {
@@ -136,6 +118,7 @@ const ArtworkEditPage = () => {
     useEffect(() => {
         fetchData();
     }, []);
+
     const fetchData = () => {
         axios
             .get('https://port-0-promoationpage-server-12fhqa2blnlum4de.sel5.cloudtype.app/api/projects')
@@ -169,18 +152,14 @@ const ArtworkEditPage = () => {
         <Body>
             <AdminDiv>
                 <Button onClick={Back}>뒤로가기</Button>
-                <Text>CONTENTS</Text>
-                <Buttong onClick={handleCreate}>생성</Buttong>
+                <Text>CONTENTS 목록</Text>
             </AdminDiv>
             <DataTable data={data} onEdit={handleEdit}/>
             {isEditing && (
-                <EditArtWorkModal item={editingItem} onSave={handleSave} onCancel={handleCancel}/>
-            )}
-            {isCreating && (
-                <PlusArtworkModal onSave={handleSave} onCancel={handleCancel}/>
+                <EditMainModal item={editingItem} id={editingItemId} onSave={handleSave} onCancel={handleCancel}/>
             )}
         </Body>
     );
 };
 
-export default ArtworkEditPage;
+export default MainEditPage;

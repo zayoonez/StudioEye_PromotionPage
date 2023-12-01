@@ -21,6 +21,7 @@
     "react-scroll": "^1.9.0",
     "react-scroll-horizontal": "^1.6.6",
     "react-scroll-percentage": "^4.3.0",
+    "react-select": "^5.8.0",
     "react-slick": "^0.29.0",
     "react-transition-group": "^4.4.5",
     "react-youtube": "^10.1.0",
