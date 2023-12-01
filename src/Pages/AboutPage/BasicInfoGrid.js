@@ -22,6 +22,14 @@ const Title = styled.text`
 const TextInfo = styled.h3`
   font-weight: bold;
   text-align: center;
+  
+  @media(max-width: 670px){
+    font-size: 0.75rem;
+    }
+    
+    @media(max-width: 670px){
+    font-size: 0.6rem;
+    }
 `;
   
   export default function BasicInfoGrid() {
