@@ -35,7 +35,18 @@ const LogoDiv = styled(motion.div)`
     width: 70%;
     font-size: 4rem;
     font-weight: 600;
+    
+     @media(max-width: 950px){
+    height: 6rem;
+    }
+    
+    @media(max-width: 950px){
+    height: 4rem;
+    }
 
+    @media(max-width: 390px){
+    height: 2.5rem;
+    }
 `;
 const ImgClick = styled(motion.img)`
     width: 25%;
