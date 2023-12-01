@@ -74,6 +74,7 @@ const TextInfoContainer = styled.div`
   padding-right: 100px;
   text-align: center;
   margin: 10px;
+  font-size: 1.5rem;
 `;
 
 const ContentDetailPage = () => {
@@ -85,7 +86,7 @@ const ContentDetailPage = () => {
     const [youtubePlayer, setYoutubePlayer] = useState(null);
     const [youtubeId, setYoutubeId] = useState("");
 
-    const APIKey = "";
+    const APIKey = "AIzaSyATe0kMwS3Z5fMM01lAA5kfR2olHS9EK44";
 
     useEffect(() => {
         getDetails(id);
