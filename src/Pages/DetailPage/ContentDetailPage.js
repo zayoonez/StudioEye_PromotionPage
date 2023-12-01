@@ -4,30 +4,86 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import YouTube from "react-youtube";
 import styled from "styled-components";
+import youtubeLogo from "../../assets/logo/youtubeLogo.png";
 
 const ImageBanner = styled.div`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+
+  img {
+    width: 100%;
+    height: auto;
+    filter: brightness(50%); // 여기서 값을 조절하여 어두움 정도를 조절할 수 있습니다.
+  }
+`;
+
+const Title = styled.h1`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -140%);
+  color: white;
+  font-size: 128px;
+`;
+
+const DetailsOverlay = styled.div`
+  position: absolute;
+  bottom: 20px;
+  left: 40px;
+  color: white;
+  font-size: 2rem;
 `;
 
 const DetailContainer = styled.div`
   display: flex;
 `;
 
-const YoutubeContainer = styled.div``;
+const YoutubeContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-right: 10px;
+`;
 
 const InfoContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  min-height: 600px;
+  background-color: #FFE9D2;
+`;
+
+const LinkButton = styled.a`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  text-decoration: none;
+  color: red;
+
+  img {
+    width: 50px; /* 이미지 크기 조절 */
+  }
+`;
+
+const TextInfoContainer = styled.div`
+  padding-left: 100px;
+  padding-right: 100px;
+  text-align: center;
+  margin: 10px;
 `;
 
 const ContentDetailPage = () => {
     const { id } = useParams();
-    const [detail, setDetail] = useState([]);
+    const [detail, setDetail] = useState({
+        imageUrlList: [], // 초기값으로 빈 배열 설정
+    });
     const [imageList, setImageList] = useState([]);
     const [youtubePlayer, setYoutubePlayer] = useState(null);
+    const [youtubeId, setYoutubeId] = useState("");
 
     const APIKey = "";
 
@@ -66,6 +122,7 @@ const ContentDetailPage = () => {
         </div>
     ));
 
+
     const onReady = (event) => {
         // event.target is the YouTube player that gets passed by react-youtube
         setYoutubePlayer(event.target);
@@ -91,13 +148,13 @@ const ContentDetailPage = () => {
                     const channelId = channelIdResponse.data.items[0].id;
                     const latestVideoResponse = await axios.get(`https://www.googleapis.com/youtube/v3/search?key=${APIKey}&channelId=${channelId}&part=id&order=date&type=video`);
                     const latestVideoId = latestVideoResponse.data.items[0].id.videoId;
-                    setDetail({ ...detail, link: latestVideoId });
+                    setYoutubeId(latestVideoId);
                 } else if (detail.link.includes("/playlist?list=")) {
                     // 재생목록의 첫 번째 영상
                     const playlistId = detail.link.split("list=")[1];
                     const playlistResponse = await axios.get(`https://www.googleapis.com/youtube/v3/playlistItems?key=${APIKey}&playlistId=${playlistId}&part=snippet&maxResults=1`);
                     const firstVideoId = playlistResponse.data.items[0].snippet.resourceId.videoId;
-                    setDetail({ ...detail, link: firstVideoId });
+                    setYoutubeId(firstVideoId);
                 } else if (detail.link.includes("/user/")) {
                     // 채널의 가장 최근 영상
                     const channelUsername = detail.link.split("/user/")[1];
@@ -105,12 +162,11 @@ const ContentDetailPage = () => {
                     const channelId = channelIdResponse.data.items[0].id;
                     const latestVideoResponse = await axios.get(`https://www.googleapis.com/youtube/v3/search?key=${APIKey}&channelId=${channelId}&part=id&order=date&type=video`);
                     const latestVideoId = latestVideoResponse.data.items[0].id.videoId;
-                    setDetail({ ...detail, link: latestVideoId });
+                    setYoutubeId(latestVideoId);
                 } else if (detail.link.includes("youtu.be")) {
                     // 동영상 주소
                     const videoId = detail.link.split("youtu.be/")[1];
-                    console.log(videoId)
-                    setDetail({ ...detail, link: videoId });
+                    setYoutubeId(videoId);
                 }
             }
         } catch (error) {
@@ -121,14 +177,28 @@ const ContentDetailPage = () => {
     return (
         <Body>
             <ImageBanner>
-                <div>{imageBanner}</div>
+                <img src={detail.imageUrlList[0]} alt="Banner" />
+                <Title>{detail.name}</Title>
+                <DetailsOverlay>
+                    <p>Date: {detail.date}</p>
+                    <p>Client: {detail.client}</p>
+                    <p>Category: {detail.category}</p>
+                </DetailsOverlay>
             </ImageBanner>
             <DetailContainer>
                 <YoutubeContainer>
-                    {detail.link && <YouTube videoId={detail.link} opts={{ width: "640", height: "390" }} onReady={onReady} />}
+                    {detail.link && (
+                        <YouTube videoId={youtubeId} opts={{ width: "640", height: "390" }} onReady={onReady} />
+                    )}
                 </YoutubeContainer>
                 <InfoContainer>
+                    <TextInfoContainer>
                     {detail.overView}
+                    </TextInfoContainer>
+                    <LinkButton href={detail.link} target="_blank">
+                        <img src={youtubeLogo} alt="YouTube Logo" />
+                        MORE
+                    </LinkButton>
                 </InfoContainer>
             </DetailContainer>
         </Body>
