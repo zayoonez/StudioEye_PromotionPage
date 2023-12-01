@@ -6,7 +6,6 @@ import Mission from "../../assets/images/Mission.png"
 
 const BoxContainer = styled(motion.div)`
     display: flex;
-    background-color: white;
     height: 30rem;
      justify-content: center;
     align-items: center;

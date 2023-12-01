@@ -16,7 +16,7 @@ const ScrollDiv = styled.div`
 `;
 const PageBody = styled.div`
   display: flex;
-  background-color: white;
+  background-color: #F3F4F8;
 `;
 
 const SideDiv = styled.div`

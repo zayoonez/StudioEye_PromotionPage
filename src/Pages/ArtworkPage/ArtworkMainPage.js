@@ -11,7 +11,7 @@ const BoxContainer = styled(motion.div)`
     display: flex;
     align-items: center;
     flex-direction: column;
-    background-color: white;
+    background-color: #F3F4F8;
     height: 90vh; 
 `;
 const Background= styled.div`
@@ -111,8 +111,8 @@ const ArtworkMainpage = () => {
             // 화면 크기확인
             const handleResize = () => {
                 const screenWidth = window.innerWidth;
-                if (screenWidth > 1180) {
-                    setMainWidth(1180);
+                if (screenWidth > 1440) {
+                    setMainWidth(1440);
 
                 } else {
                     // 1184px 이하일 경우 추가 너비를 0으로 설정
