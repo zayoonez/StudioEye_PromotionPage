@@ -12,29 +12,31 @@ const BoxContainer = styled(motion.div)`
     align-items: center;
     flex-direction: column;
     width: 100%;
-    height: 65rem;
+    height: 30rem;
     
     @media(max-width: 390px){
     height: 40rem;
     width: 90%;
     }
 `;
+const Title = styled.text`
+    font-size: 54px;
+    font-weight: 750;
+    color: #FF530E;
+    letter-spacing: 2px;
+    margin-top: 100px;
+    margin-bottom: 50px;
+    text-align: center;
+`;
 
-const SubTitle = styled(motion.div)`
+const LogoDiv = styled(motion.div)`
     height: 10rem;
+    width: 60%;
     font-size: 4rem;
     font-weight: 600;
     margin-bottom: 1rem;
-    
-    @media(max-width: 700px){
-    font-size: 1.75rem;
-    height: 5rem;
-    }
-    
-    @media(max-width: 390px){
-    font-size: 1.75rem;
-    height: 5rem;
-    }
+    border: 1px solid red;
+
 `;
 
 const MainLogoDiv = styled(motion.div)`
@@ -174,55 +176,10 @@ export default function CoOpInfoGrid() {
 
   return (
       <BoxContainer>
-        <AboutTitle title={"CoOp.Company"}/>
-          <SubTitle
-              ref = {ref}
-              variants={boxVariant}
-              initial="hidden"
-              animate={control}>Main CoOp.</SubTitle>
-          <MainLogoDiv
-                  ref = {ref}
-                  variants={boxVariant}
-                  initial="hidden"
-                  animate={control}>
-              {mainData.map((item) => (
-                  <MainLogo><Img src={item.logoImageUrl} alt='logo image' onClick={() => goManagement(item.link)}/></MainLogo>
-              ))}
-              {/*<MainLogo><Img src={studioi} alt='logo image' /></MainLogo>*/}
-          </MainLogoDiv>
-          <SubTitle
-              ref = {ref2}
-              variants={boxVariant}
-              initial="hidden"
-              animate={control2}>Else CoOp.</SubTitle>
-          <SubLogoDiv
-              ref = {ref2}
-              variants={boxVariant}
-              initial="hidden"
-              animate={control2}>
-              {subData.map((item) => (
-                  <SubLogo><Img src={item.logoImageUrl} alt='logo image' /></SubLogo>
-              ))}
-          </SubLogoDiv>
-        {/*<TableWidth*/}
-        {/*    ref = {ref}*/}
-        {/*    variants={boxVariant}*/}
-        {/*    initial="hidden"*/}
-        {/*    animate={control}>*/}
-        {/*  <TableVertical><Img src={studioi} alt='logo image' /></TableVertical>*/}
-        {/*  <TableVertical><Img src={studioi} alt='logo image' /></TableVertical>*/}
-        {/*  <TableVertical><Img src={studioi} alt='logo image' /></TableVertical>*/}
-        {/*</TableWidth>*/}
-        {/*<TableWidth*/}
-        {/*    ref = {ref2}*/}
-        {/*    variants={boxVariant}*/}
-        {/*    initial="hidden"*/}
-        {/*    animate={control2}>*/}
-        {/*  <TableVertical><Img src={studioi} alt='logo image' /></TableVertical>*/}
-        {/*  <TableVertical><Img src={studioi} alt='logo image' /></TableVertical>*/}
-        {/*  <TableVertical><Img src={studioi} alt='logo image' /></TableVertical>*/}
-        {/*</TableWidth>*/}
+          <Title>CORP.</Title>
+          <LogoDiv>
 
+          </LogoDiv>
       </BoxContainer>
   );
 }

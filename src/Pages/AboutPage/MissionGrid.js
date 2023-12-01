@@ -2,23 +2,35 @@ import React, {useEffect} from "react";
 import styled from "styled-components";
 import {motion, useAnimation, Variants} from "framer-motion";
 import {useInView} from "react-intersection-observer";
+import Mission from "../../assets/images/Mission.png"
 
 const BoxContainer = styled(motion.div)`
     display: flex;
     background-color: white;
-    height: 80rem;
+    height: 30rem;
+     justify-content: center;
+    align-items: center;
+    flex-direction: column;
     position: relative;
     
     @media(max-width: 390px){
         height: 50rem;
     }
 `;
+const Title = styled.text`
+    font-size: 54px;
+    font-weight: 750;
+    color: #FF530E;
+    letter-spacing: 2px;
+    margin-top: 100px;
+    margin-bottom: 50px;
+    text-align: center;
+`;
 const Img = styled(motion.img)`
+    aspect-ratio: 1051 / 140;  
     position: absolute;
-    left: 5%;
-    top: 2rem;
-    width: 90%;
-    height: 20rem;
+    top: 20rem;
+    width: 70%;
     
     @media(max-width: 390px){
     left: 0%;
@@ -128,7 +140,7 @@ const SubVariant =  {
 };
 
 
-  export default function GreetingGrid() {
+  export default function MissionGrid() {
       const control = useAnimation();
       const [ref, inView] = useInView();
 
@@ -143,48 +155,8 @@ const SubVariant =  {
 
     return (
       <BoxContainer>
-        <Img src="/agile.png"/>
-
-        <TitleText
-            ref = {ref}
-            variants={TitleVariant}
-            initial="initial"
-            animate={control}
-            transition={{
-                duration: 1,
-            }}
-        > 기획&제작&편집</TitleText>
-          <BackText
-              ref = {ref}
-              variants={BackVariant}
-              initial="initial"
-              animate={control}
-              transition={{
-                  duration: 1,
-                  delay: 1,
-              }}>
-              Slogan
-          </BackText>
-        <SubText
-            ref = {ref}
-            variants={SubVariant}
-            initial="initial"
-            animate={control}
-            transition={{
-                duration: 1,
-                delay: 1,
-            }}> 회사 슬로건을 입력하세요</SubText>
-        <Text
-            ref = {ref}
-            variants={SubVariant}
-            initial="initial"
-            animate={control}
-            transition={{
-                duration: 1,
-                delay: 1,
-            }}>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </Text>
+          <Title>MISSION</Title>
+          <Img src={Mission}></Img>
       </BoxContainer>
     );
   }

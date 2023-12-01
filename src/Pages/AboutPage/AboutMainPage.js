@@ -2,11 +2,8 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import Body from "../../Components/Common/Body";
 import BasicInfoGrid from "./BasicInfoGrid";
-import HistoryGrid from "./HistoryGrid";
 import CoOpInfoGrid from "./CoOpInfoGrid";
-import { motion } from "framer-motion";
-import GreetingGrid from "./GreetingGrid";
-import NaverMapGrid from "./NaverMapGrid";
+import MissionGrid from "./MissionGrid";
 
 
 const AboutMainpage = () => {
@@ -19,9 +16,8 @@ const AboutMainpage = () => {
         return (
             <>
                 <BasicInfoGrid />
-                <GreetingGrid />
+                <MissionGrid />
                 <CoOpInfoGrid />
-                <NaverMapGrid />
             </>
         )
     }
