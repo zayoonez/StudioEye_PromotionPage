@@ -19,11 +19,24 @@ const ModalContent = styled.div`
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  max-width: 80%;
-  max-height: 80%;
+  width: 80%;
+  height: 80%;
   overflow-y: auto;
 `;
-
+const Div = styled.div`
+    height: 40%;
+    padding: 2%;
+    overflow: auto;
+    margin: 1% 0;
+    border: 0.5px solid black;
+`;
+const FileDiv = styled.div`
+    height: 20%;
+    padding: 2%;
+    overflow: auto;
+    margin: 1% 0;
+    border: 0.5px solid black;
+`;
 const ImagePreviewContainer = styled.div`
   max-height: 300px;
   overflow-y: auto;
@@ -59,8 +72,10 @@ function ShowContactModal({ item, onClose }) {
         <ModalBackground>
             <ModalContent>
                 <h2>문의사항</h2>
+                <Div>
                 <p>{item.description}</p>
-                <div>
+                </Div>
+                <FileDiv>
                     {fileList.map((file, index) => (
                         <div key={index}>
                             {file.toLowerCase().endsWith('.png') && (
@@ -77,7 +92,7 @@ function ShowContactModal({ item, onClose }) {
 
                         </div>
                     ))}
-                </div>
+                </FileDiv>
                 <button onClick={onClose}>Close</button>
             </ModalContent>
         </ModalBackground>

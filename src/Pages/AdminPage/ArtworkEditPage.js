@@ -4,9 +4,12 @@ import axios from "axios";
 import Body from "../../Components/Common/Body";
 import PlusArtworkModal from "./Component/PlusArtworkModal";
 import EditArtWorkModal from "./Component/EditArtWorkModal";
+import {motion} from "framer-motion";
+import {useNavigate} from "react-router-dom";
+import {FaRegEdit} from "react-icons/fa";
 
 const StyledTable = styled.table`
-  width: 1180px;
+  width: 1440px;
   border-collapse: separate;
   border-spacing: 0 16px;
 
@@ -26,10 +29,40 @@ const StyledTable = styled.table`
   }
 `;
 
-function DataTable({ data, onCreate, onEdit, deleteProject }) {
+const AdminDiv = styled(motion.div)`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    position: relative;
+`;
+const Button = styled(motion.button)`
+    font-size: 1rem;
+    font-weight: 400;
+    margin: 0.25rem 0;
+    position: absolute;
+    left: 0;
+`;
+const Buttong = styled(motion.button)`
+    font-size: 1rem;
+    font-weight: 400;
+    margin: 0.25rem 0;
+    position: absolute;
+    right: 0;
+`;
+const Text = styled(motion.text)`
+    font-size: 54px;
+    font-weight: 750;
+    color: #FF530E;
+    letter-spacing: 2px;
+    text-align: center;
+`;
+
+function DataTable({ data, onEdit, deleteProject }) {
     return (
         <div>
-            <button onClick={() => onCreate()}>생성</button>
+
         <StyledTable>
             <thead>
             <tr>
@@ -39,9 +72,8 @@ function DataTable({ data, onCreate, onEdit, deleteProject }) {
                 <th>프로젝트 이름</th>
                 <th>고객사</th>
                 <th>연도</th>
-                <th>게시여부</th>
                 {/*<th>상세 설명</th>*/}
-                {/*<th>동영상 링크</th>*/}
+                <th>동영상 링크</th>
                 <th>편집</th>
             </tr>
             </thead>
@@ -54,11 +86,10 @@ function DataTable({ data, onCreate, onEdit, deleteProject }) {
                     <td>{item.name}</td>
                     <td>{item.client}</td>
                     <td>{item.date}</td>
-                    <td>{item.isPosted ? "O" : "X"}</td>
                     {/*<td>{item.overView}</td>*/}
-                    {/*<td>{item.link}</td>*/}
+                    <td>{item.link}</td>
                     <td>
-                        <button onClick={() => onEdit(item)}>편집</button>
+                        <button onClick={() => onEdit(item)}><FaRegEdit/></button>
                     </td>
                 </tr>
             ))}
@@ -69,6 +100,7 @@ function DataTable({ data, onCreate, onEdit, deleteProject }) {
 }
 
 const ArtworkEditPage = () => {
+    const navigate = useNavigate();
     const [data, setData] = useState([]);
     const [imgData, setImgData] = useState([]);
     const [isCreating, setIsCreating] = useState(false);
@@ -95,6 +127,10 @@ const ArtworkEditPage = () => {
         fetchData();
         setIsEditing(false);
         setIsCreating(false);
+    };
+
+    const Back = () => {
+        navigate(`/admin`);
     };
 
     useEffect(() => {
@@ -131,7 +167,12 @@ const ArtworkEditPage = () => {
     };
     return (
         <Body>
-            <DataTable data={data} onCreate={handleCreate} onEdit={handleEdit}/>
+            <AdminDiv>
+                <Button onClick={Back}>뒤로가기</Button>
+                <Text>CONTENTS</Text>
+                <Buttong onClick={handleCreate}>생성</Buttong>
+            </AdminDiv>
+            <DataTable data={data} onEdit={handleEdit}/>
             {isEditing && (
                 <EditArtWorkModal item={editingItem} onSave={handleSave} onCancel={handleCancel}/>
             )}
