@@ -85,14 +85,12 @@ const ArtworkMainpage = () => {
 
         useEffect(() => {
 
-            axios.get(`/api/projects`)
+            axios.get(`https://port-0-promoationpage-server-12fhqa2blnlum4de.sel5.cloudtype.app/api/projects`)
 
                 .then(response => {
                     const data = response.data;
                     console.log(data);
-                    console.log(data.data[0]);
                     const objects = [];
-                    const imgObjects = [];
 
                     for(let i = data.data.length-1; i >= 0; i--) {
                         const obj = {
