@@ -8,7 +8,7 @@ import {FaRegEdit} from "react-icons/fa";
 import EditMainModal from "./Component/EditMainModal";
 
 const StyledTable = styled.table`
-  width: 1440px;
+  width: 100%;
   border-collapse: separate;
   border-spacing: 0 16px;
 
@@ -41,7 +41,7 @@ const Button = styled(motion.button)`
     font-weight: 400;
     margin: 0.25rem 0;
     position: absolute;
-    left: 0;
+    left: 1rem;
 `;
 
 const Text = styled(motion.text)`
