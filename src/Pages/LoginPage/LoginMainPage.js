@@ -105,7 +105,7 @@ function LoginPage() {
 
     const handleLogin = () => {
         axios
-            .post("http://13.125.181.139:8000/user-service/login", formData)
+            .post("/user-service/login", formData)
             .then((response) => {
                 const accessToken = response.data.accessToken;
                 axios.defaults.headers.common["Authorization"] =
