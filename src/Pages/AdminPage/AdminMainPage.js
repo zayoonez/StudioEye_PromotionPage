@@ -5,6 +5,7 @@ import {motion} from "framer-motion";
 import { GrContact } from "react-icons/gr";
 import {AiFillYoutube} from "react-icons/ai";
 import {BsFillInfoCircleFill,BsFillPatchQuestionFill} from "react-icons/bs";
+import {useEffect, useState} from "react";
 
 const BoxContainer = styled(motion.div)`
     display: flex;
@@ -49,12 +50,22 @@ const NoticeLogo = styled(motion(BsFillPatchQuestionFill))`
 
 const AdminMainPage = () => {
 
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const navigate = useNavigate();
     function moveToEditPage(moveTo) {
         navigate('/admin/'+moveTo);
     }
 
+    useEffect(() => {
+        const token = sessionStorage.getItem("login-token");
+        if (token) {
+            setIsLoggedIn(true);
+        }
+    }, []);
+
     return(
+        <>
+        {isLoggedIn ? (
         <Body>
             <BoxContainer>
                 <Div onClick={() => moveToEditPage('about')}><AboutLogo/>ABOUT</Div>
@@ -63,6 +74,9 @@ const AdminMainPage = () => {
                 <Div onClick={() => moveToEditPage('contact')}><ContactLogo/>CONTACT</Div>
             </BoxContainer>
         </Body>
+                )
+                :(<></>)}
+        </>
     )
 }
 

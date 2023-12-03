@@ -95,10 +95,18 @@ function DataTable({data, onEdit}){
 }
 
 const ContactEditPage = () => {
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const navigate = useNavigate();
     const [data, setData] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태 추가
     const [editingItem, setEditingItem] = useState(null);
+
+    useEffect(() => {
+        const token = sessionStorage.getItem("login-token");
+        if (token) {
+            setIsLoggedIn(true);
+        }
+    }, []);
 
     const Back = () => {
         navigate(`/admin`);
@@ -148,6 +156,8 @@ const ContactEditPage = () => {
     }, []);
 
     return(
+        <>
+            {isLoggedIn ? (
         <Body>
             <div>
                 <AdminDiv>
@@ -160,6 +170,9 @@ const ContactEditPage = () => {
                 )}
             </div>
         </Body>
+                )
+                :(<></>)}
+        </>
     );
 
 }

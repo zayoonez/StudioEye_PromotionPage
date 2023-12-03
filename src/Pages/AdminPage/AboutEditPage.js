@@ -112,6 +112,7 @@ function DataTable({ data, onEdit, deleteProject }) {
 const AdminEditPage = () => {
 
     const AdminEditPageContent=()=>{
+        const [isLoggedIn, setIsLoggedIn] = useState(false);
         const navigate = useNavigate();
         const [data, setData] = useState([]);
         const [isEditing, setIsEditing] = useState(false);
@@ -138,6 +139,13 @@ const AdminEditPage = () => {
 
         useEffect(() => {
             fetchData();
+        }, []);
+
+        useEffect(() => {
+            const token = sessionStorage.getItem("login-token");
+            if (token) {
+                setIsLoggedIn(true);
+            }
         }, []);
 
         const fetchData = () => {
@@ -186,6 +194,7 @@ const AdminEditPage = () => {
 
         return (
             <>
+                {isLoggedIn ? (
                 <BoxContainer>
                     <AdminDiv>
                         <Button onClick={BackAbout}>뒤로가기</Button>
@@ -200,7 +209,8 @@ const AdminEditPage = () => {
                         <PlusAboutModal onCancel={handleCancel}/>
                     )}
 
-                </BoxContainer>
+                </BoxContainer>)
+                    :(<></>)}
             </>
         )
     }

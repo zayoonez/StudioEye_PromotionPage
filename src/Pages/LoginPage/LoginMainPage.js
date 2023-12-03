@@ -97,11 +97,6 @@ function LoginPage() {
             [name]: value,
         }));
     };
-    const handleKeyDown = (e) => {
-        if (e.key === "Enter") {
-            handleLogin();
-        }
-    };
 
     const handleLogin = () => {
         axios
@@ -125,7 +120,7 @@ function LoginPage() {
         <LoginContainer>
             <WhiteBoxContainer>
                 <LoginBox>
-                    <LoginForm onKeyDown={handleKeyDown}>
+                    <LoginForm >
                         <AlignLeft>
                             <text>Email</text>
                         </AlignLeft>

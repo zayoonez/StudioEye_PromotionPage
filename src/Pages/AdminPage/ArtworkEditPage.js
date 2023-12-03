@@ -100,12 +100,20 @@ function DataTable({ data, onEdit, deleteProject }) {
 }
 
 const ArtworkEditPage = () => {
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const navigate = useNavigate();
     const [data, setData] = useState([]);
     const [imgData, setImgData] = useState([]);
     const [isCreating, setIsCreating] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
     const [editingItem, setEditingItem] = useState(null);
+
+    useEffect(() => {
+        const token = sessionStorage.getItem("login-token");
+        if (token) {
+            setIsLoggedIn(true);
+        }
+    }, []);
 
     const handleCreate = () => {
         setIsCreating(true);
@@ -166,6 +174,8 @@ const ArtworkEditPage = () => {
             });
     };
     return (
+        <>
+            {isLoggedIn ? (
         <Body>
             <AdminDiv>
                 <Button onClick={Back}>뒤로가기</Button>
@@ -179,7 +189,9 @@ const ArtworkEditPage = () => {
             {isCreating && (
                 <PlusArtworkModal onSave={handleSave} onCancel={handleCancel}/>
             )}
-        </Body>
+        </Body>)
+                :(<></>)}
+        </>
     );
 };
 

@@ -86,13 +86,19 @@ function DataTable({ data, onEdit}) {
 }
 
 const MainEditPage = () => {
-
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const navigate = useNavigate();
     const [data, setData] = useState([]);
     const [isEditing, setIsEditing] = useState(false);
     const [editingItem, setEditingItem] = useState(null);
     const [editingItemId, setEditingItemId] = useState(null);
 
+    useEffect(() => {
+        const token = sessionStorage.getItem("login-token");
+        if (token) {
+            setIsLoggedIn(true);
+        }
+    }, []);
 
     const handleEdit = (item) => {
         console.log(item);
@@ -149,6 +155,8 @@ const MainEditPage = () => {
             });
     };
     return (
+        <>
+            {isLoggedIn ? (
         <Body>
             <AdminDiv>
                 <Button onClick={Back}>뒤로가기</Button>
@@ -158,7 +166,9 @@ const MainEditPage = () => {
             {isEditing && (
                 <EditMainModal item={editingItem} id={editingItemId} onSave={handleSave} onCancel={handleCancel}/>
             )}
-        </Body>
+        </Body>)
+                :(<></>)}
+        </>
     );
 };
 
