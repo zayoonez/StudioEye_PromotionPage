@@ -14,7 +14,7 @@ const BoxContainer = styled(motion.div)`
     justify-content: center;
     align-items: center;
     flex-direction: column; 
-    width: 90%; 
+    width: 100%; 
 `;
 
 const AdminDiv = styled(motion.div)`
@@ -35,14 +35,14 @@ const Button = styled(motion.button)`
     font-weight: 400;
     margin: 0.25rem 0;
     position: absolute;
-    left: 0;
+    left: 1rem;
 `;
 const Buttong = styled(motion.button)`
     font-size: 1rem;
     font-weight: 400;
     margin: 0.25rem 0;
     position: absolute;
-    right: 0;
+    right: 1rem;
 `;
 
 const Text = styled(motion.text)`
@@ -54,10 +54,11 @@ const Text = styled(motion.text)`
 `;
 
 const StyledTable = styled.table`
-  width: 1440px;
+  width: 100%;
   border-collapse: separate;
   border-spacing: 0 16px;
   text-align: center;
+  
 
   th,
   td {

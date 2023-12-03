@@ -9,7 +9,7 @@ import {useNavigate} from "react-router-dom";
 import {FaRegEdit} from "react-icons/fa";
 
 const StyledTable = styled.table`
-  width: 1440px;
+  width: 100%;
   border-collapse: separate;
   border-spacing: 0 16px;
 
@@ -42,14 +42,14 @@ const Button = styled(motion.button)`
     font-weight: 400;
     margin: 0.25rem 0;
     position: absolute;
-    left: 0;
+    left: 1rem;
 `;
 const Buttong = styled(motion.button)`
     font-size: 1rem;
     font-weight: 400;
     margin: 0.25rem 0;
     position: absolute;
-    right: 0;
+    right: 1rem;
 `;
 const Text = styled(motion.text)`
     font-size: 54px;

@@ -45,14 +45,14 @@ const Button = styled(motion.button)`
     font-weight: 400;
     margin: 0.25rem 0;
     position: absolute;
-    left: 0;
+    left: 1rem;
 `;
 const Buttong = styled(motion.button)`
     font-size: 1rem;
     font-weight: 400;
     margin: 0.25rem 0;
     position: absolute;
-    right: 0;
+    right: 1rem;
 `;
 const Text = styled(motion.text)`
     font-size: 54px;
