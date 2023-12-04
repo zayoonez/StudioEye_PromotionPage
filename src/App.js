@@ -14,8 +14,6 @@ import ContactEditPage from "./Pages/AdminPage/ContactEditPage";
 import MainEditPage from "./Pages/AdminPage/MainEditPage";
 import ContactPage from './Pages/ContactPage/ContactPage';
 import ContentDetailPage from "./Pages/DetailPage/ContentDetailPage";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 
 function App() {
     const [showInsertPage, setShowInsertPage] = React.useState(true);
