@@ -6,15 +6,15 @@ import {motion} from "framer-motion";
 import EditAboutModal from "./Component/EditAboutModal";
 import PlusAboutModal from "./Component/PlusAboutModal";
 import {AiFillDelete} from "react-icons/ai";
+import {useNavigate} from "react-router-dom";
 
 
 const BoxContainer = styled(motion.div)`
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    background-color: white;  
-    width: 90%; 
+    flex-direction: column; 
+    width: 100%; 
 `;
 
 const AdminDiv = styled(motion.div)`
@@ -35,19 +35,30 @@ const Button = styled(motion.button)`
     font-weight: 400;
     margin: 0.25rem 0;
     position: absolute;
-    right: 0;
+    left: 1rem;
+`;
+const Buttong = styled(motion.button)`
+    font-size: 1rem;
+    font-weight: 400;
+    margin: 0.25rem 0;
+    position: absolute;
+    right: 1rem;
 `;
 
 const Text = styled(motion.text)`
-    font-size: 3rem;
-    font-weight: 600;
-    margin-bottom: 2rem;
+    font-size: 54px;
+    font-weight: 750;
+    color: #FF530E;
+    letter-spacing: 2px;
+    text-align: center;
 `;
 
 const StyledTable = styled.table`
-  width: 1180px;
+  width: 100%;
   border-collapse: separate;
   border-spacing: 0 16px;
+  text-align: center;
+  
 
   th,
   td {
@@ -78,10 +89,8 @@ function DataTable({ data, onEdit, deleteProject }) {
         <StyledTable>
             <thead>
             <tr>
-                <th>-</th>
-                <th>분류</th>
+                <th>번호</th>
                 <th>이미지</th>
-                <th>링크</th>
                 <th>삭제</th>
             </tr>
             </thead>
@@ -89,9 +98,7 @@ function DataTable({ data, onEdit, deleteProject }) {
             {data.map((item) => (
                 <tr key={item.id}>
                     <td>{item.id}</td>
-                    <td>{item.is_main}</td>
                     <td><Img src={item.logoImageUrl} /></td>
-                    <td>{item.link}</td>
                     <td>
                         <Delete onClick={() => onEdit(item)}></Delete>
                     </td>
@@ -105,7 +112,8 @@ function DataTable({ data, onEdit, deleteProject }) {
 const AdminEditPage = () => {
 
     const AdminEditPageContent=()=>{
-
+        const [isLoggedIn, setIsLoggedIn] = useState(false);
+        const navigate = useNavigate();
         const [data, setData] = useState([]);
         const [isEditing, setIsEditing] = useState(false);
         const [editingItem, setEditingItem] = useState(null);
@@ -116,6 +124,9 @@ const AdminEditPage = () => {
             setIsEditing(true);
         };
 
+        const BackAbout = () => {
+            navigate(`/admin`);
+        };
         const AddAbout = () => {
             setIsPlus(true);
         };
@@ -126,7 +137,18 @@ const AdminEditPage = () => {
             setIsPlus(false);
         };
 
-        useEffect(()=>{
+        useEffect(() => {
+            fetchData();
+        }, []);
+
+        useEffect(() => {
+            const token = sessionStorage.getItem("login-token");
+            if (token) {
+                setIsLoggedIn(true);
+            }
+        }, []);
+
+        const fetchData = () => {
 
             axios.get('https://port-0-promoationpage-server-12fhqa2blnlum4de.sel5.cloudtype.app/api/partners')
 
@@ -168,14 +190,16 @@ const AdminEditPage = () => {
                 .catch(error => {
                     console.error(error);
                 });
-        },[]);
+        };
 
         return (
             <>
+                {isLoggedIn ? (
                 <BoxContainer>
                     <AdminDiv>
+                        <Button onClick={BackAbout}>뒤로가기</Button>
                         <Text>협력사 목록</Text>
-                        <Button onClick={AddAbout}>등록하기</Button>
+                        <Buttong onClick={AddAbout}>등록하기</Buttong>
                     </AdminDiv>
                     <DataTable data={data} onEdit={handleEdit}/>
                     {isEditing && (
@@ -185,7 +209,8 @@ const AdminEditPage = () => {
                         <PlusAboutModal onCancel={handleCancel}/>
                     )}
 
-                </BoxContainer>
+                </BoxContainer>)
+                    :(<></>)}
             </>
         )
     }

@@ -4,6 +4,8 @@ import axios from "axios";
 import Data from "bootstrap/js/src/dom/data";
 import Body from "../../Components/Common/Body";
 import ShowContactModal from "./Component/ShowContactModal";
+import {motion} from "framer-motion";
+import {useNavigate} from "react-router-dom";
 
 const StyledTable = styled.table`
   width: 100%;
@@ -30,18 +32,48 @@ const StyledTable = styled.table`
   }
 `;
 
+const AdminDiv = styled(motion.div)`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    position: relative;
+`;
+const Button = styled(motion.button)`
+    font-size: 1rem;
+    font-weight: 400;
+    margin: 0.25rem 0;
+    position: absolute;
+    left: 1rem;
+`;
+const Buttong = styled(motion.button)`
+    font-size: 1rem;
+    font-weight: 400;
+    margin: 0.25rem 0;
+    position: absolute;
+    right: 1rem;
+`;
+const Text = styled(motion.text)`
+    font-size: 54px;
+    font-weight: 750;
+    color: #FF530E;
+    letter-spacing: 2px;
+    text-align: center;
+`;
+
 function DataTable({data, onEdit}){
     return(
         <StyledTable>
             <thead>
             <tr>
-                <th>contactId</th>
-                <th>category</th>
-                <th>clientName</th>
-                <th>organization</th>
-                <th>contact</th>
-                <th>email</th>
-                <th>position</th>
+                <th>번호</th>
+                <th>카테고리</th>
+                <th>고객이름</th>
+                <th>소속</th>
+                <th>연락처</th>
+                <th>이메일</th>
+                <th>지위</th>
             </tr>
             </thead>
             <tbody>
@@ -63,10 +95,22 @@ function DataTable({data, onEdit}){
 }
 
 const ContactEditPage = () => {
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const navigate = useNavigate();
     const [data, setData] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태 추가
     const [editingItem, setEditingItem] = useState(null);
 
+    useEffect(() => {
+        const token = sessionStorage.getItem("login-token");
+        if (token) {
+            setIsLoggedIn(true);
+        }
+    }, []);
+
+    const Back = () => {
+        navigate(`/admin`);
+    };
 
     const handleEdit = (item) => {
         setEditingItem(item);
@@ -112,14 +156,23 @@ const ContactEditPage = () => {
     }, []);
 
     return(
+        <>
+            {isLoggedIn ? (
         <Body>
             <div>
+                <AdminDiv>
+                    <Button onClick={Back}>뒤로가기</Button>
+                    <Text>문의 목록</Text>
+                </AdminDiv>
                 <DataTable data={data} onEdit={handleEdit}></DataTable>
                 {isModalOpen && (
                     <ShowContactModal item={editingItem} onClose={handleCloseModal} />
                 )}
             </div>
         </Body>
+                )
+                :(<></>)}
+        </>
     );
 
 }

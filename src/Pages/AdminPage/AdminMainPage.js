@@ -5,12 +5,13 @@ import {motion} from "framer-motion";
 import { GrContact } from "react-icons/gr";
 import {AiFillYoutube} from "react-icons/ai";
 import {BsFillInfoCircleFill,BsFillPatchQuestionFill} from "react-icons/bs";
+import {useEffect, useState} from "react";
 
 const BoxContainer = styled(motion.div)`
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: white;    
+    height: 90vh;   
 `;
 
 const Div = styled(motion.div)`
@@ -32,37 +33,50 @@ const AboutLogo = styled(motion(BsFillInfoCircleFill))`
   cursor: pointer;
 `;
 const ContactLogo = styled(motion(GrContact))`
-width: 100%;
+  width: 100%;
   font-size: 2.25rem; 
   cursor: pointer;
 `;
 const ArtworkLogo = styled(motion(AiFillYoutube))`
-width: 100%;
+  width: 100%;
   font-size: 2.25rem; 
   cursor: pointer;
 `;
 const NoticeLogo = styled(motion(BsFillPatchQuestionFill))`
-width: 100%;
+  width: 100%;
   font-size: 2.25rem; 
   cursor: pointer;
 `;
 
 const AdminMainPage = () => {
 
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const navigate = useNavigate();
     function moveToEditPage(moveTo) {
         navigate('/admin/'+moveTo);
     }
 
+    useEffect(() => {
+        const token = sessionStorage.getItem("login-token");
+        if (token) {
+            setIsLoggedIn(true);
+        }
+    }, []);
+
     return(
+        <>
+        {isLoggedIn ? (
         <Body>
             <BoxContainer>
-                <Div onClick={() => moveToEditPage('about')}><AboutLogo/>about</Div>
-                <Div onClick={() => moveToEditPage('artwork')}><ArtworkLogo/>artwork</Div>
-                <Div onClick={() => moveToEditPage('contact')}><ContactLogo/>contact</Div>
-                <Div onClick={() => moveToEditPage('notice')}><NoticeLogo/>notice</Div>
+                <Div onClick={() => moveToEditPage('about')}><AboutLogo/>ABOUT</Div>
+                <Div onClick={() => moveToEditPage('artwork')}><ArtworkLogo/>CONTENTS</Div>
+                <Div onClick={() => moveToEditPage('mainpage')}><NoticeLogo/>MAINPAGE</Div>
+                <Div onClick={() => moveToEditPage('contact')}><ContactLogo/>CONTACT</Div>
             </BoxContainer>
         </Body>
+                )
+                :(<></>)}
+        </>
     )
 }
 
