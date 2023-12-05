@@ -12,17 +12,17 @@ const BoxContainer = styled(motion.div)`
     align-items: center;
     flex-direction: column;
     background-color: #F3F4F8;
-    height: 90vh; 
+    position: relative;
 `;
 const Background= styled.div`
     position: absolute;
-    bottom: calc(10vh - 4rem);
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.5)), url(${MainIMG});
+    bottom:0;
+    background: linear-gradient(to bottom, rgba(243, 244, 248, 1), rgba(243, 244, 248, 0.5)), url(${MainIMG});
     background-position: bottom center;
     background-size: cover;
     width: ${props => props.mainWidth}px;
     aspect-ratio: 1442 / 450;  
-    z-index: 1;    
+    z-index: 0;    
 `;
 const Text = styled.text`
     font-size: 54px;
@@ -35,21 +35,24 @@ const Text = styled.text`
 `;
 const Client = styled.text`
     font-size: 1rem;
+     white-space: nowrap; /* 텍스트를 한 줄로 제한합니다. */
+  overflow: hidden; /* 넘치는 부분을 감춥니다. */
+  text-overflow: ellipsis; /* 넘치는 부분에 '...'을 표시합니다. */
 `;
 const Title = styled.text`
     margin-top: 0.5rem;
     font-size: 1.5rem;
     font-weight: 600;
+    
 `;
 
 const ContContainer = styled(motion.div)`
+  justify-content: center;
     margin-top: 5vh;
-    height: 50vh;
     width: 100%;
     display: flex;
     flex-wrap: wrap; 
-    overflow: auto;
-    z-index: 2;
+    z-index: 2; 
 `;
 const Div = styled.div`
     width: 29%;
@@ -57,6 +60,7 @@ const Div = styled.div`
     margin-right: 2%;
     margin-bottom: 5vh;
     margin-top: 2vh;
+    min-width: 300px;
 `;
 const Content = styled(motion.img)`
     width: 100%;
@@ -116,7 +120,6 @@ const ArtworkMainpage = () => {
                     setMainWidth(1440);
 
                 } else {
-                    // 1184px 이하일 경우 추가 너비를 0으로 설정
                     setMainWidth(screenWidth);
                 }
             };
@@ -155,6 +158,7 @@ const ArtworkMainpage = () => {
                     </ContContainer>
                     <Background mainWidth={mainWidth}/>
                 </BoxContainer>
+
             </>
         )
     }
