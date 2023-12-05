@@ -119,12 +119,15 @@ const ContactEditPage = () => {
     };
 
     const handleCloseModal = () => {
+        fecthData();
         setIsModalOpen(false);
     };
 
-
-
     useEffect(() => {
+        fecthData();
+    }, []);
+
+    const fecthData = () => {
         axios
             .get('https://port-0-promoationpage-server-12fhqa2blnlum4de.sel5.cloudtype.app/api/requests')
             .then((response) => {
@@ -154,7 +157,12 @@ const ContactEditPage = () => {
             .catch((error) => {
                 console.error(error);
             });
-    }, []);
+    }
+
+    const handleDeleteContact = (deletedContactId) => {
+        // Update the data state by filtering out the deleted contact
+        setData((prevData) => prevData.filter((contact) => contact.id !== deletedContactId));
+    };
 
     return(
         <>
@@ -167,7 +175,11 @@ const ContactEditPage = () => {
                 </AdminDiv>
                 <DataTable data={data} onEdit={handleEdit}></DataTable>
                 {isModalOpen && (
-                    <ShowContactModal item={editingItem} onClose={handleCloseModal} />
+                    <ShowContactModal
+                        item={editingItem}
+                        onClose={handleCloseModal}
+                        onDelete={handleDeleteContact}
+                    />
                 )}
             </div>
         </Body>

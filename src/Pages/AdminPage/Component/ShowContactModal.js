@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 
 const ModalBackground = styled.div`
   position: fixed;
@@ -23,6 +24,7 @@ const ModalContent = styled.div`
   height: 80%;
   overflow-y: auto;
 `;
+
 const Div = styled.div`
     height: 40%;
     padding: 2%;
@@ -30,6 +32,7 @@ const Div = styled.div`
     margin: 1% 0;
     border: 0.5px solid black;
 `;
+
 const FileDiv = styled.div`
     height: 20%;
     padding: 2%;
@@ -37,12 +40,28 @@ const FileDiv = styled.div`
     margin: 1% 0;
     border: 0.5px solid black;
 `;
-const ImagePreviewContainer = styled.div`
-  max-height: 300px;
-  overflow-y: auto;
+
+const StyledButton = styled.button`
+    background-color: #FFA900;
+    color: #fff;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+
+    &:hover {
+        background-color: #FFD500;
+    }
 `;
 
-function ShowContactModal({ item, onClose }) {
+const ButtonContainer = styled.div`
+    text-align: right;
+    margin-top: 10px;  // 버튼과의 간격 조절을 위해 추가
+`;
+
+function ShowContactModal({ item, onClose, onDelete }) {
     const [fileList, setFileList] = useState([]);
 
     useEffect(() => {
@@ -60,12 +79,25 @@ function ShowContactModal({ item, onClose }) {
 
         anchor.download = fileName;
 
-        // 화면에 보이지는 않지만 클릭 이벤트를 발생하기 위해 추가
         document.body.appendChild(anchor);
-        // 클릭 이벤트 발생
         anchor.click();
-        //다운로드 후 앵커 요소 삭제
         document.body.removeChild(anchor);
+    };
+
+    const deleteContact = () => {
+        const shouldDelete = window.confirm("정말 삭제하시겠습니까?");
+
+        if (shouldDelete) {
+            axios.delete(`https://port-0-promoationpage-server-12fhqa2blnlum4de.sel5.cloudtype.app/api/requests/${item.id}`)
+                .then((response) => {
+                    onDelete(item.id);
+                    onClose();
+                    alert("삭제되었습니다.");
+                })
+                .catch((error) => {
+                    console.error('Error deleting contact:', error);
+                });
+        }
     };
 
     return (
@@ -73,7 +105,7 @@ function ShowContactModal({ item, onClose }) {
             <ModalContent>
                 <h2>문의사항</h2>
                 <Div>
-                <p>{item.description}</p>
+                    <p>{item.description}</p>
                 </Div>
                 <FileDiv>
                     {fileList.map((file, index) => (
@@ -89,11 +121,13 @@ function ShowContactModal({ item, onClose }) {
                                 </a>
                                 <button onClick={() => downloadFile(file)}>Download</button>
                             </div>
-
                         </div>
                     ))}
                 </FileDiv>
-                <button onClick={onClose}>Close</button>
+                <ButtonContainer>
+                    <StyledButton onClick={deleteContact}>삭제</StyledButton>
+                    <StyledButton onClick={onClose}>닫기</StyledButton>
+                </ButtonContainer>
             </ModalContent>
         </ModalBackground>
     );
