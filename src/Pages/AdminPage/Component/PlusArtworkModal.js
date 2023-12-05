@@ -75,7 +75,7 @@ function PlusArtworkModal({ onSave, onCancel }) {
 
     const [data, setData] = useState({
         department: "",
-        category: "",
+        category: "Entertainment",
         name: "",
         client: "",
         date: "",
