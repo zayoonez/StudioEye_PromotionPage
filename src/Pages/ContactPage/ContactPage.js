@@ -84,10 +84,11 @@ const StyledSelect = styled(Select)`
     font-size: 19px; 
     /* padding-left: 15px;  */
     cursor: pointer;
+    background-color: #F3F4F8;
     
   }
   .Select__value-container {
-
+    /* background-color: #F3F4F8; */
   }
   .Select__control:hover {
     /* border-color: #a1a1a1; */
@@ -118,7 +119,7 @@ const StyledSelect = styled(Select)`
     width: 260px;
   }
   .select__menu-list {
-    background-color: red;
+    /* background-color: red; */
   }
   .Select__option {
     height: 40px;
@@ -143,6 +144,7 @@ const FormContainer = styled.form`
     flex-direction: column;
     /* max-width: 900px;  */
     margin: 0 auto; // 가운데 정렬을 위한 마진 추가
+
 `;
 const RowWrapper = styled.div`
     display: flex;
@@ -169,6 +171,7 @@ const UnderlinedInput = styled.input`
     width: 250px;
     font-size: 18px;
     font-weight: 500;
+    background-color: #F3F4F8;
 `;
 
 const InputWrapper = styled.div`
@@ -197,7 +200,7 @@ const UnderlinedTextarea = styled.textarea`
     line-height: 30px;
     font-weight: 500;
     display: block;
-    padding-left: 10px;
+    /* padding-left: 10px; */
     overflow-wrap: break-word;
 `;
 const SubmitButton = styled(motion.button)`
@@ -216,6 +219,7 @@ const SubmitButton = styled(motion.button)`
         color: #ffffff; 
     }
 `;
+
 const ContactPage = (e) => {
     const textareaRef = useRef(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -254,7 +258,16 @@ const ContactPage = (e) => {
             "category": e.value,
         });
     };
-
+    const handleFileChange = (e) => {
+        const selectedFiles = e.target.files;
+        if (selectedFiles.length > 0) { // 선택된 파일 multiple 일 경우
+            const fileNames = Array.from(selectedFiles).map((file) => file.name).join(', ');
+            FileTextRef.current.value = fileNames;
+        } else {
+            FileTextRef.current.value = ''; //파일 선택되지 않았을 경우 입력 내용 지우기
+        }
+        setFileList([...fileList, ...selectedFiles]);
+    };
     // textarea 입력값에 따른 높이 조절
     const handleTextAreaDataChange = (e) => {
         if (textareaRef && textareaRef.current) {
@@ -275,7 +288,6 @@ const ContactPage = (e) => {
             organization: "소속",
             email: "이메일 주소",
             clientName: "이름",
-            organization: "조직",
             contact: "연락처",
             description: "프로젝트 내용",
         };
@@ -309,6 +321,8 @@ const ContactPage = (e) => {
                     description: '',
                     position: 'default',
                 });
+                setFileList([]);
+                FileTextRef.current.value = ''; // 파일 입력
             })
             .catch((error) => {
                 console.error("에러 발생", error);
@@ -371,8 +385,10 @@ const ContactPage = (e) => {
                             <UnderlinedInput type="text" placeholder="ex) 010-1234-5678" value={formData.contact} name="contact" onChange={handleDataChange} />
                         </InputWrapper>
                     </RowWrapper>
+
                     <InputWrapper>
                         <Label>프로젝트 내용</Label>
+
                         <UnderlinedTextarea
                             ref={textareaRef}
                             autoComplete="off"
@@ -381,6 +397,10 @@ const ContactPage = (e) => {
                             onChange={handleTextAreaDataChange}
                         />
                     </InputWrapper>
+
+
+
+
                     <SubmitButton
                         type="submit"
                         onClick={handleSubmit}

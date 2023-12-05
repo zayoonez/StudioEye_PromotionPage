@@ -3,7 +3,6 @@ import styled, { keyframes } from "styled-components";
 import Body from "../../Components/Common/Body";
 import PortfolioGrid from "./PortfolioGrid"
 import { motion, useScroll, useSpring } from "framer-motion"
-import CustomCursor from "../../Components/Common/CustomCursor";
 import MainLogoAnimation from "./MainLogoAnimation";
 import MainCEO from "./MainCEO";
 import MainContents from "./MainContents";
@@ -60,7 +59,6 @@ const PromotionMainpage = () => {
     return (
         <Body>
             <PromotionMainpageContent />
-            <CustomCursor />
         </Body>
     )
 }

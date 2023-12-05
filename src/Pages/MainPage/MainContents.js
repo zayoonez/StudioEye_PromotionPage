@@ -6,8 +6,6 @@ import { useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { FaArrowAltCircleRight } from "react-icons/fa";
-import { FaArrowAltCircleLeft } from "react-icons/fa";
 
 
 
@@ -39,6 +37,7 @@ const ContentsSlider = styled(Slider)`
     width: 100%;
     /* display: flex;
     flex-direction: row; */
+    margin-bottom: 100px;
     
     .slick-list {
         /* height: 100%;
@@ -47,21 +46,21 @@ const ContentsSlider = styled(Slider)`
         align-items: center; */
     }
     .slick-slide {
-        padding-left: 5px;
+        /* padding-left: 5px; */
         /* padding-right: 5px; */
         /* pointer-events: none; */
     }
 `;
 
 const TextInfo = styled.h3`
-  font-weight: bold;
-  text-align: center;
+    font-weight: bold;
+    text-align: center;
 `;
 const MainContents = () => {
 
     const Text1 = "스튜디오 아이는 OTT, Youtube를 기반으로 한 콘텐츠 제작과 \n SNS 운영을 전문으로 하는 뉴미디어 제작사입니다";
     const Text2 = "예능, 드라마, 다큐멘터리, 게임, 애니메이션까지 \n 전 장르의 콘텐츠를 제작하고 Youtube, Instagram 운영을 대행합니다"
-    const [dragging, setDragging] = useState(false);
+    const [dragging, setDragging] = useState(true);
 
     const handleBeforeChange = () => {
         setDragging(true);
@@ -75,10 +74,10 @@ const MainContents = () => {
         dots: false,
         infinite: true,
         speed: 500,
-        slidesToShow: 3,
+        slidesToShow: 2.999,
         slidesToScroll: 1,
         arrows: true,
-        touchThreshold: 100,
+        touchThreshold: 200,
         beforeChange: handleBeforeChange,
         afterChange: handleAfterChange,
 
@@ -101,7 +100,7 @@ const MainContents = () => {
             {
                 breakpoint: 700,
                 settings: {
-                    slidesToShow: 2,
+                    slidesToShow: 2.999,
                     slidesToScroll: 2,
                     // initialSlide: 2,
                 },
@@ -109,7 +108,7 @@ const MainContents = () => {
             {
                 breakpoint: 480,
                 settings: {
-                    slidesToShow: 1,
+                    slidesToShow: 2,
                     slidesToScroll: 1,
                 },
             },
@@ -121,9 +120,9 @@ const MainContents = () => {
 
     const navigate = useNavigate();
 
-    const goToDetail = (id) => {
+    const goToYoutube = (link) => {
         if (!dragging) {
-            navigate(`/detail/${id}`);
+            window.open(link);
           }
     };
 
@@ -136,11 +135,14 @@ const MainContents = () => {
                 const objects = [];
                 const imgObjects = [];
 
-                for (let i = 0; i < data.data.length; i++) {
+                const filteredData = data.data.filter(item => item.isPosted);
+
+                for (let i = 0; i < filteredData.length; i++) {
                     const obj = {
-                        id: data.data[i].id,
-                        title: data.data[i].title,
-                        img: data.data[i].imageUrlList[0],
+                        id: filteredData[i].id,
+                        title: filteredData[i].title,
+                        img: filteredData[i].imageUrlList[0],
+                        link : filteredData[i].link,
                     }
 
                     objects.push(obj);
@@ -165,7 +167,7 @@ const MainContents = () => {
                         src={item.img}
                         key={item.id}
                         alt={item.id}
-                        onClick={() => goToDetail(item.id)}
+                        onClick={() => goToYoutube(item.link)}
                     />
                 ))}
             </ContentsSlider>
