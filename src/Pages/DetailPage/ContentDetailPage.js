@@ -10,22 +10,22 @@ const ImageBanner = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   position: relative;
 
   img {
     width: 100%;
     height: auto;
-    filter: brightness(50%); // 여기서 값을 조절하여 어두움 정도를 조절할 수 있습니다.
+    filter: brightness(40%);
   }
 `;
 
 const Title = styled.h1`
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -140%);
   color: white;
-  font-size: 128px;
+  font-size: 8vw;
+  text-align: center;
+  max-width: 90%;
 `;
 
 const DetailsOverlay = styled.div`
@@ -34,10 +34,21 @@ const DetailsOverlay = styled.div`
   left: 40px;
   color: white;
   font-size: 2rem;
+  visibility: visible;
+
+  @media screen and (max-width: 768px) {
+    visibility: hidden;
+  }
 `;
+
 
 const DetailContainer = styled.div`
   display: flex;
+  flex-direction: column;
+
+  @media screen and (min-width: 920px) {
+    flex-direction: row;
+  }
 `;
 
 const YoutubeContainer = styled.div`
@@ -45,6 +56,10 @@ const YoutubeContainer = styled.div`
   align-items: center;
   justify-content: center;
   padding-right: 10px;
+
+  @media screen and (min-width: 768px) {
+    padding-right: 20px;
+  }
 `;
 
 const InfoContainer = styled.div`
@@ -65,18 +80,22 @@ const LinkButton = styled.a`
   color: red;
 
   img {
-    width: 50px; /* 이미지 크기 조절 */
+    width: 50px;
   }
 `;
 
 const TextInfoContainer = styled.div`
-  padding-left: 100px;
-  padding-right: 100px;
+  padding-left: 20px;
+  padding-right: 20px;
   text-align: center;
   margin: 10px;
   font-size: 1.5rem;
-`;
 
+  @media screen and (min-width: 768px) {
+    padding-left: 100px;
+    padding-right: 100px;
+  }
+`;
 const ContentDetailPage = () => {
     const { id } = useParams();
     const [detail, setDetail] = useState({
