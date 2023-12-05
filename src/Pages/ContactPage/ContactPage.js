@@ -219,6 +219,53 @@ const SubmitButton = styled(motion.button)`
         color: #ffffff; 
     }
 `;
+const InputFileContainer = styled.div`
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 50px;
+    justify-content: space-between;
+    
+`;
+const FileUploadContainer = styled.div`
+
+`;
+const FileText = styled.input`
+    
+    width: 370px;
+    background-color: #F3F4F8;
+    font-size: 18px;
+    height: 30px;
+    line-height: 26px;
+    text-indent: 5px;
+    border: none;
+    border-bottom: 1px solid #C8C9CC;
+`;
+const FileLabel = styled.label`
+    display: inline-block;
+    min-width: 48px;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 10px;
+    border-radius: 20px;
+    font-size: 16px;
+    background-color: #FFA900;
+    color: #fff;
+    text-align: center;
+    margin-left: 8px;
+    cursor: pointer;
+`;
+
+const FileUploadInput = styled.input.attrs({ type: 'file' })`
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0 none;
+`;
+
 
 const ContactPage = (e) => {
     const textareaRef = useRef(null);
@@ -399,7 +446,14 @@ const ContactPage = (e) => {
                     </InputWrapper>
 
 
-
+                    <InputFileContainer>
+                        <Label>파일 첨부</Label>
+                        <FileUploadContainer>
+                            <FileText ref={FileTextRef} type="text" readOnly="readonly"></FileText>
+                            <FileUploadInput id="uploadfile" type="file" accept="*/*" multiple onChange={handleFileChange} />
+                            <FileLabel htmlFor="uploadfile" >upload</FileLabel>
+                        </FileUploadContainer>
+                    </InputFileContainer>
 
                     <SubmitButton
                         type="submit"
