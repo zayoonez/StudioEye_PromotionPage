@@ -88,6 +88,7 @@ const TextInfoContainer = styled.div`
   padding-left: 20px;
   padding-right: 20px;
   text-align: center;
+  font-weight: 600;
   margin: 10px;
   font-size: 1.5rem;
 
