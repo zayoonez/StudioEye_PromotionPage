@@ -92,7 +92,9 @@ function PlusAboutModal({onCancel}) {
 
 
     const AddAbout = () => {
-
+        if(image==null){
+            alert(`이미지를 지정해주세요!`);
+        }else{
         console.log(item);
         console.log(image);
         const formData = new FormData();
@@ -115,7 +117,7 @@ function PlusAboutModal({onCancel}) {
                 .catch((error) => {
                     console.error('등록 중 오류가 발생했습니다.', error);
                 });
-
+        }
     };
 
 

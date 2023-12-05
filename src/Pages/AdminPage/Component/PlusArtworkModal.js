@@ -72,6 +72,18 @@ function PlusArtworkModal({ onSave, onCancel }) {
 
     const handleSubmit = () => {
 
+        for (const key in data) {
+            if (data[key].trim() === "") {
+                alert(`${key}을(를) 작성해주세요!`);
+                return;
+            }
+        }
+
+        if(imageList.length === 0){
+            alert(`이미지를 지정해주세요!`);
+            return;
+        }
+
         const formData = new FormData();
         formData.append("request", new Blob([JSON.stringify(data)], {type: "application/json"}));
         imageList.forEach(image => {
