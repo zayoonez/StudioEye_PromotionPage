@@ -58,12 +58,13 @@ const Carousel = ({images}) => {
         slidesToScroll: 1,
         autoplay: true,
         autoplaySpeed: 3000,
-        nextArrow: (
-            <NextTo>{'<'}</NextTo>
-        ),
-        prevArrow: (
-            <Pre>{'>'}</Pre>
-        )
+        arrows: false,
+        // nextArrow: (
+        //     <NextTo>{'<'}</NextTo>
+        // ),
+        // prevArrow: (
+        //     <Pre>{'>'}</Pre>
+        // )
     };
 
     return(
