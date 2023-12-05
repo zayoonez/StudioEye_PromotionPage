@@ -4,7 +4,6 @@ import { Routes, Route, BrowserRouter } from "react-router-dom";
 import PromotionMainpage from "./Pages/MainPage/PromotionMainPage";
 import AboutMainpage from "./Pages/AboutPage/AboutMainPage";
 import { AnimatePresence, motion } from 'framer-motion';
-import DetailPages from './Pages/DetailPage/DetailPages';
 import ArtworkMainpage from "./Pages/ArtworkPage/ArtworkMainPage";
 import AdminLoginPage from "./Pages/LoginPage/LoginMainPage";
 import AdminMainPage from "./Pages/AdminPage/AdminMainPage";
