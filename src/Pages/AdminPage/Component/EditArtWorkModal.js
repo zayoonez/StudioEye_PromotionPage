@@ -61,7 +61,7 @@ const OverviewTextArea = styled.textarea`
   height: 100px; /* Adjust the height as needed */
 `;
 
-const StyledButton = styled.button`
+const StyledImageDeleteButton = styled.button`
   background-color: #363636;
   color: #fff;
   border: none;
@@ -71,10 +71,27 @@ const StyledButton = styled.button`
   margin-right: 10px; 
 `;
 
+const StyledButton = styled.button`
+    background-color: #FFA900;
+    color: #fff;
+    padding: 4px 8px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+
+    &:hover {
+        background-color: #FFD500;
+    }
+`;
+
 const CategorySelect = styled.select`
   width: 100%;
   padding: 5px;
 `;
+
+
 
 function EditArtWorkModal({ item, onSave, onCancel }) {
     const navigate = useNavigate();
@@ -167,14 +184,14 @@ function EditArtWorkModal({ item, onSave, onCancel }) {
     const selectedImageComponents = selectedImages.map((image, index) => (
         <div key={index}>
             <img src={URL.createObjectURL(image)} alt={`Image ${index}`} width="200" />
-            <StyledButton onClick={() => handleRemoveImage(index)}>X</StyledButton>
+            <StyledImageDeleteButton onClick={() => handleRemoveImage(index)}>X</StyledImageDeleteButton>
         </div>
     ));
 
     const imagePreviewComponents = existingImageUrlList.map((imagePreview, index) => (
         <div key={index}>
             <img src={imagePreview} alt={`Image ${index}`} width="200" />
-            <StyledButton onClick={() => handleRemoveExistingImage(index)}>X</StyledButton>
+            <StyledImageDeleteButton onClick={() => handleRemoveExistingImage(index)}>X</StyledImageDeleteButton>
         </div>
     ));
 
@@ -260,9 +277,9 @@ function EditArtWorkModal({ item, onSave, onCancel }) {
                 </div>
                 <ImagePreviewContainer>{imagePreviewComponents}</ImagePreviewContainer>
 
-                <button onClick={handleSave}>저장</button>
-                <button onClick={onCancel}>취소</button>
-                <button onClick={deleteProject}>삭제</button>
+                <StyledButton onClick={handleSave}>저장</StyledButton>
+                <StyledButton onClick={deleteProject}>삭제</StyledButton>
+                <StyledButton onClick={onCancel}>취소</StyledButton>
             </Modal>
         </ModalContainer>
     );

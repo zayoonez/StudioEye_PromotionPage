@@ -35,11 +35,6 @@ const Text = styled.text`
     font-weight: 600;
 `;
 
-const Button = styled.button`
-    font-size: 1rem;
-    font-weight: 400;
-    margin: 1rem 0.25rem;
-`;
 const Label = styled.label`
     margin-right: 5%;
     width: 60%;
@@ -55,6 +50,23 @@ const Div = styled.div`
     align-items: center;
     justify-content: center;
 `;
+
+const StyledButton = styled.button`
+    background-color: #FFA900;
+    color: #fff;
+    padding: 4px 8px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+
+    &:hover {
+        background-color: #FFD500;
+    }
+`;
+
+
 
 function EditNoticeModal({ item, onCancel}) {
 
@@ -111,8 +123,8 @@ function EditNoticeModal({ item, onCancel}) {
                     </Select>
                 </Div>
                 <div>
-                    <Button onClick={postOverView}>변경</Button>
-                    <Button onClick={onCancel}>취소</Button>
+                    <StyledButton onClick={postOverView}>변경</StyledButton>
+                    <StyledButton onClick={onCancel}>취소</StyledButton>
                 </div>
             </Modal>
         </ModalContainer>

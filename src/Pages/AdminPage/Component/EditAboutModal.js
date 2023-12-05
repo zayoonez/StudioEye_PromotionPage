@@ -35,11 +35,18 @@ const Text = styled.text`
 `;
 
 const Button = styled.button`
-    font-size: 1rem;
+  background-color: #FFA900;
+  color: #fff;
+  font-size: 1rem;
+  padding: 4px 8px;
     font-weight: 400;
     margin: 1rem 0.25rem;
+  border: none;
+  border-radius: 5px;
+  &:hover {
+    background-color: #FFD500;
+  }
 `;
-
 
 function EditAboutModal({ item, onCancel}) {
 

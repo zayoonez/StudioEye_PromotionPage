@@ -55,11 +55,22 @@ const Label = styled.label`
 const Select = styled.select`
     width: 70%;
 `;
-const Button = styled.button`
-    font-size: 1rem;
-    font-weight: 400;
-    margin: 0.5rem 0.25rem;
+
+const StyledButton = styled.button`
+  background-color: #FFA900;
+  color: #fff;
+  padding: 4px 8px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px;
+
+  &:hover {
+    background-color: #FFD500;
+  }
 `;
+
 
 function PlusAboutModal({onCancel}) {
 
@@ -131,8 +142,8 @@ function PlusAboutModal({onCancel}) {
                     <Input type="file" accept='image/*' onChange={onImageHandler} />
                 </Div>
                 <div>
-                <Button onClick={AddAbout}>저장</Button>
-                <Button onClick={onCancel}>취소</Button>
+                <StyledButton onClick={AddAbout}>저장</StyledButton>
+                <StyledButton onClick={onCancel}>취소</StyledButton>
                 </div>
             </Modal>
         </ModalContainer>

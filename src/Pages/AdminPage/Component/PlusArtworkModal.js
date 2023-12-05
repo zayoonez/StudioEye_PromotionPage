@@ -50,6 +50,21 @@ const CategorySelect = styled.select`
   padding: 5px;
 `;
 
+const StyledButton = styled.button`
+  background-color: #FFA900;
+  color: #fff;
+  padding: 4px 8px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 10px;
+
+  &:hover {
+    background-color: #FFD500;
+  }
+`;
+
 function PlusArtworkModal({ onSave, onCancel }) {
     const [imageList, setImageList] = useState([]);
 
@@ -209,8 +224,8 @@ function PlusArtworkModal({ onSave, onCancel }) {
                 <Title>이미지</Title>
                 <Input type="file" accept='image/*' multiple onChange={onImageHandler} />
             </Div>
-            <button onClick={handleSubmit}>저장</button>
-            <button onClick={onCancel}>취소</button>
+            <StyledButton onClick={handleSubmit}>저장</StyledButton>
+            <StyledButton onClick={onCancel}>취소</StyledButton>
         </Modal>
         </ModalContainer>
     );
