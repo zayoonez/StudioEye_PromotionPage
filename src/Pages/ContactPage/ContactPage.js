@@ -221,17 +221,16 @@ const SubmitButton = styled(motion.button)`
 `;
 const InputFileContainer = styled.div`
     display: flex;
-    margin-top: 10px;
+    /* margin-top: 5px; */
     margin-bottom: 50px;
-    justify-content: space-between;
-    
+    width: 100%;
 `;
+
 const FileUploadContainer = styled.div`
 
 `;
 const FileText = styled.input`
-    
-    width: 370px;
+    width: 250px;
     background-color: #F3F4F8;
     font-size: 18px;
     height: 30px;
@@ -240,6 +239,7 @@ const FileText = styled.input`
     border: none;
     border-bottom: 1px solid #C8C9CC;
 `;
+
 const FileLabel = styled.label`
     display: inline-block;
     min-width: 48px;
@@ -286,6 +286,14 @@ const ContactPage = (e) => {
         const emailRegEx = /^[A-Za-z0-9]([-_.]?[A-Za-z0-9])*@[A-Za-z0-9]([-_.]?[A-Za-z0-9])*\.[A-Za-z]{2,3}$/;
         if (!emailRegEx.test(email)) {
             alert("이메일 형식이 올바르지 않습니다. 다시 입력해주세요.");
+            return false;
+        }
+        return true; //형식에 맞을 경우, true 리턴
+    }
+    const telCheck = (tel) => {
+        const telRegEx = /^[0-9\b -]{0,13}$/;
+        if (!telRegEx.test(tel)) {
+            alert("연락처 형식이 올바르지 않습니다. 다시 입력해주세요.");
             return false;
         }
         return true; //형식에 맞을 경우, true 리턴
@@ -344,16 +352,24 @@ const ContactPage = (e) => {
                 return;
             }
         }
+        // 유효성 검사 
         const isValidEmail = emailCheck(formData.email);
+        const isValidTel = telCheck(formData.contact);
 
         // 이메일 형식이 올바르지 않으면 더 이상 처리하지 않고 종료
         if (!isValidEmail) {
+            return;
+        }
+        if (!isValidTel) {
             return;
         }
 
         //5초 후 홈으로 이동 setTimeout할지말지
         const requestData = new FormData();
         requestData.append("request", new Blob([JSON.stringify(formData)], { type: "application/json" }));
+        fileList.forEach(file => {
+            requestData.append('files', file);
+        });
         axios.post('https://port-0-promoationpage-server-12fhqa2blnlum4de.sel5.cloudtype.app/api/requests', requestData)
             .then((response) => {
                 console.log(response.data, "임다. ");
@@ -370,7 +386,10 @@ const ContactPage = (e) => {
                 });
                 setFileList([]);
                 FileTextRef.current.value = ''; // 파일 입력
+                console.log(formData , "제출");
+
             })
+
             .catch((error) => {
                 console.error("에러 발생", error);
             })
@@ -445,9 +464,8 @@ const ContactPage = (e) => {
                         />
                     </InputWrapper>
 
-
+                    <Label>파일 첨부</Label>
                     <InputFileContainer>
-                        <Label>파일 첨부</Label>
                         <FileUploadContainer>
                             <FileText ref={FileTextRef} type="text" readOnly="readonly"></FileText>
                             <FileUploadInput id="uploadfile" type="file" accept="*/*" multiple onChange={handleFileChange} />
