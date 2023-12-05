@@ -44,6 +44,12 @@ const Title = styled.div`
 const Input = styled.input`
     width: 60%;
 `;
+
+const CategorySelect = styled.select`
+  width: 60%;
+  padding: 5px;
+`;
+
 function PlusArtworkModal({ onSave, onCancel }) {
     const [imageList, setImageList] = useState([]);
 
@@ -115,6 +121,17 @@ function PlusArtworkModal({ onSave, onCancel }) {
 
     };
 
+    const [categories, setCategories] = useState([
+        "Entertainment",
+        "Drama",
+        "Documentary",
+        "Channel Operating",
+        "Branded",
+        "Motion Graphic",
+        "Animation",
+        "Live Commerce",
+    ]);
+
     return (
         <ModalContainer>
         <Modal>
@@ -130,12 +147,18 @@ function PlusArtworkModal({ onSave, onCancel }) {
             </Div>
             <Div>
                 <Title>카테고리</Title>
-                <Input
-                    type="text"
+                <CategorySelect
                     name="category"
                     value={data.category}
                     onChange={handleChange}
-                />
+                    defaultValue="Entertainment"
+                >
+                    {categories.map((category) => (
+                        <option key={category} value={category}>
+                            {category}
+                        </option>
+                    ))}
+                </CategorySelect>
             </Div>
             <Div>
                 <Title>프로젝트 이름</Title>

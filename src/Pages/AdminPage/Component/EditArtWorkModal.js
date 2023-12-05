@@ -71,7 +71,10 @@ const StyledButton = styled.button`
   margin-right: 10px; 
 `;
 
-
+const CategorySelect = styled.select`
+  width: 100%;
+  padding: 5px;
+`;
 
 function EditArtWorkModal({ item, onSave, onCancel }) {
     const navigate = useNavigate();
@@ -175,6 +178,17 @@ function EditArtWorkModal({ item, onSave, onCancel }) {
         </div>
     ));
 
+    const categories = [
+        "Entertainment",
+        "Drama",
+        "Documentary",
+        "Channel Operating",
+        "Branded",
+        "Motion Graphic",
+        "Animation",
+        "Live Commerce",
+    ];
+
     return (
         <ModalContainer>
             <Modal>
@@ -189,11 +203,16 @@ function EditArtWorkModal({ item, onSave, onCancel }) {
                 </InputDiv>
                 <InputDiv>
                     <InputLabel>카테고리</InputLabel>
-                    <InputElement
-                        type="text"
+                    <CategorySelect
                         value={editedItem.category}
                         onChange={(e) => setEditedItem({ ...editedItem, category: e.target.value })}
-                    />
+                    >
+                        {categories.map((category) => (
+                            <option key={category} value={category}>
+                                {category}
+                            </option>
+                        ))}
+                    </CategorySelect>
                 </InputDiv>
                 <InputDiv>
                     <InputLabel>프로젝트 이름</InputLabel>
