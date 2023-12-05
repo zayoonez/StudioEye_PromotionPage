@@ -1,11 +1,13 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import Body from "../../Components/Common/Body";
+import Body from "../../Components/Common/AdminBody";
 import styled from "styled-components";
 import {motion} from "framer-motion";
 import EditAboutModal from "./Component/EditAboutModal";
 import PlusAboutModal from "./Component/PlusAboutModal";
 import {AiFillDelete} from "react-icons/ai";
+import {IoMdArrowRoundBack} from "react-icons/io";
+import {IoMdAddCircleOutline} from "react-icons/io";
 import {useNavigate} from "react-router-dom";
 
 
@@ -30,14 +32,28 @@ const Delete = styled(motion(AiFillDelete))`
   cursor: pointer;
 `;
 
+const Back = styled(motion(IoMdArrowRoundBack))`
+  font-size: 40.5px; 
+  cursor: pointer;
+`;
+const Add = styled(motion(IoMdAddCircleOutline))`
+  font-size:  40.5px; 
+  cursor: pointer;
+`;
+
 const Button = styled(motion.button)`
+    background: none;
+    border: none;
     font-size: 1rem;
     font-weight: 400;
     margin: 0.25rem 0;
     position: absolute;
     left: 1rem;
+    
 `;
 const Buttong = styled(motion.button)`
+    background: none;
+    border: none;
     font-size: 1rem;
     font-weight: 400;
     margin: 0.25rem 0;
@@ -197,9 +213,9 @@ const AdminEditPage = () => {
                 {isLoggedIn ? (
                 <BoxContainer>
                     <AdminDiv>
-                        <Button onClick={BackAbout}>뒤로가기</Button>
+                        <Button onClick={BackAbout}><Back/></Button>
                         <Text>협력사 목록</Text>
-                        <Buttong onClick={AddAbout}>등록하기</Buttong>
+                        <Buttong onClick={AddAbout}><Add/></Buttong>
                     </AdminDiv>
                     <DataTable data={data} onEdit={handleEdit}/>
                     {isEditing && (

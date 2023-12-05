@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import Body from "../../Components/Common/Body";
+import Body from "../../Components/Common/AdminBody";
 import {motion} from "framer-motion";
 import {useNavigate} from "react-router-dom";
 import {FaRegEdit} from "react-icons/fa";
+import {IoMdArrowRoundBack} from "react-icons/io";
 import EditMainModal from "./Component/EditMainModal";
 
 const StyledTable = styled.table`
@@ -37,6 +38,8 @@ const AdminDiv = styled(motion.div)`
     position: relative;
 `;
 const Button = styled(motion.button)`
+    background: none;
+    border: none;
     font-size: 1rem;
     font-weight: 400;
     margin: 0.25rem 0;
@@ -50,6 +53,10 @@ const Text = styled(motion.text)`
     color: #FF530E;
     letter-spacing: 2px;
     text-align: center;
+`;
+const Back = styled(motion(IoMdArrowRoundBack))`
+  font-size: 40.5px; 
+  cursor: pointer;
 `;
 
 function DataTable({ data, onEdit}) {
@@ -117,7 +124,7 @@ const MainEditPage = () => {
         setIsEditing(false);
     };
 
-    const Back = () => {
+    const GoBack = () => {
         navigate(`/admin`);
     };
 
@@ -159,7 +166,7 @@ const MainEditPage = () => {
             {isLoggedIn ? (
         <Body>
             <AdminDiv>
-                <Button onClick={Back}>뒤로가기</Button>
+                <Button onClick={GoBack}><Back/></Button>
                 <Text>CONTENTS 목록</Text>
             </AdminDiv>
             <DataTable data={data} onEdit={handleEdit}/>

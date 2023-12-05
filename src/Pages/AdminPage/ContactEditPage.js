@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import Data from "bootstrap/js/src/dom/data";
-import Body from "../../Components/Common/Body";
+import Body from "../../Components/Common/AdminBody";
 import ShowContactModal from "./Component/ShowContactModal";
 import {motion} from "framer-motion";
 import {useNavigate} from "react-router-dom";
+import {IoMdArrowRoundBack} from "react-icons/io";
 
 const StyledTable = styled.table`
   width: 100%;
@@ -31,8 +32,13 @@ const StyledTable = styled.table`
     background-color: #f5f5f5;
   }
 `;
-
+const Back = styled(motion(IoMdArrowRoundBack))`
+  font-size: 40.5px; 
+  cursor: pointer;
+`;
 const AdminDiv = styled(motion.div)`
+    background: none;
+    border: none;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -41,18 +47,13 @@ const AdminDiv = styled(motion.div)`
     position: relative;
 `;
 const Button = styled(motion.button)`
+    background: none;
+    border: none;
     font-size: 1rem;
     font-weight: 400;
     margin: 0.25rem 0;
     position: absolute;
     left: 1rem;
-`;
-const Buttong = styled(motion.button)`
-    font-size: 1rem;
-    font-weight: 400;
-    margin: 0.25rem 0;
-    position: absolute;
-    right: 1rem;
 `;
 const Text = styled(motion.text)`
     font-size: 54px;
@@ -108,7 +109,7 @@ const ContactEditPage = () => {
         }
     }, []);
 
-    const Back = () => {
+    const GoBack = () => {
         navigate(`/admin`);
     };
 
@@ -161,7 +162,7 @@ const ContactEditPage = () => {
         <Body>
             <div>
                 <AdminDiv>
-                    <Button onClick={Back}>뒤로가기</Button>
+                    <Button onClick={GoBack}><Back/></Button>
                     <Text>문의 목록</Text>
                 </AdminDiv>
                 <DataTable data={data} onEdit={handleEdit}></DataTable>
