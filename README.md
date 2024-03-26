@@ -15,3 +15,6 @@ PP는 고객사의 포트폴리오 및 공지사항을 보여주기 위한 목�
 
 ## 기술 스택
   React, Javascript, Styled-components, AWS, Docker
+
+## What did i do 
+   
